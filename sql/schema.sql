@@ -20,17 +20,18 @@ CREATE TABLE autore (
     cognome VARCHAR(100) NOT NULL,
     data_nascita DATE NOT NULL,
     data_morte DATE,
-    biografia TEXT
+    biografia TEXT NOT NULL
 );
 
 -----------------------------------------------------------
 -- Tabella dei Libri
 -----------------------------------------------------------
 CREATE TABLE libro (
-    isbn VARCHAR(20) PRIMARY KEY,
+    id serial PRIMARY KEY, 
+    isbn VARCHAR(13) UNIQUE NOT NULL,
     titolo VARCHAR(200) NOT NULL,
-    trama TEXT,
-    casa_editrice VARCHAR(100)
+    trama TEXT NOT NULL,
+    casa_editrice VARCHAR(100) NOT NULL
 );
 
 -----------------------------------------------------------
@@ -49,7 +50,7 @@ CREATE TABLE libro_autore (
 -----------------------------------------------------------
 CREATE TABLE copia (
     id_copia serial PRIMARY KEY,
-    isbn VARCHAR(20) NOT NULL,
+    isbn VARCHAR(13) NOT NULL,
     id_sede INTEGER NOT NULL,
     disponibile BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (isbn) REFERENCES libro(isbn),
