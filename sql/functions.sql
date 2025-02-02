@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION check_prestito_conditions()
 RETURNS TRIGGER AS $$
 DECLARE
     cnt_ritardi INTEGER;
-    cat categoria_utente;
+    cat categoria_lettore;
     cnt_attivi INTEGER;
     available BOOLEAN;
 BEGIN

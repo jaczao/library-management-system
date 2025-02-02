@@ -1,5 +1,5 @@
 -- Creazione di un tipo ENUM per la categoria dei lettori
-CREATE TYPE categoria_utente AS ENUM ('base', 'premium');
+CREATE TYPE categoria_lettore AS ENUM ('base', 'premium');  --verifico se serve nelle funzioni o altro
 
 -----------------------------------------------------------
 -- Tabella delle Sedi della Biblioteca
@@ -52,7 +52,7 @@ CREATE TABLE copia (
     id_copia serial PRIMARY KEY,
     isbn VARCHAR(13) NOT NULL,
     id_sede INTEGER NOT NULL,
-    disponibile BOOLEAN DEFAULT TRUE,
+    disponibile BOOLEAN NOT NULL DEFAULT TRUE, --verifico se not null o meno in base alle funzioni
     FOREIGN KEY (isbn) REFERENCES libro(isbn),
     FOREIGN KEY (id_sede) REFERENCES sede(id_sede)
 );
@@ -65,8 +65,21 @@ CREATE TABLE lettore (
     codice_fiscale VARCHAR(20) UNIQUE NOT NULL,
     nome VARCHAR(100) NOT NULL,
     cognome VARCHAR(100) NOT NULL,
-    categoria categoria_utente NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    categoria categoria_lettore NOT NULL,
     ritardi INTEGER NOT NULL DEFAULT 0 --verifico se not null o meno in base alle funzioni
+);
+
+-----------------------------------------------------------
+-- Tabella dei Bibliotecari
+-----------------------------------------------------------
+CREATE TABLE bibliotecario (
+    id_bibliotecario serial PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cognome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
 );
 
 -----------------------------------------------------------
@@ -74,12 +87,11 @@ CREATE TABLE lettore (
 -----------------------------------------------------------
 CREATE TABLE prestito (
     id_prestito serial PRIMARY KEY,
-    codice_fiscale VARCHAR(16) NOT NULL,
-    id_copia INTEGER NOT NULL,
+    lettore INTEGER NOT NULL,
+    copia INTEGER NOT NULL,
     data_inizio DATE NOT NULL DEFAULT CURRENT_DATE,
-    -- Data di scadenza di default: 1 mese dalla data corrente
     data_scadenza DATE NOT NULL DEFAULT (CURRENT_DATE + INTERVAL '1 month')::date,
     data_restituzione DATE,
-    FOREIGN KEY (codice_fiscale) REFERENCES lettore(codice_fiscale),
-    FOREIGN KEY (id_copia) REFERENCES copia(id_copia)
+    FOREIGN KEY (codice_fiscale) REFERENCES lettore(id_lettore),
+    FOREIGN KEY (copia) REFERENCES copia(id_copia)
 );
