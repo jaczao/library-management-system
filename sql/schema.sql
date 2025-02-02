@@ -61,11 +61,12 @@ CREATE TABLE copia (
 -- Tabella dei Lettori
 -----------------------------------------------------------
 CREATE TABLE lettore (
-    codice_fiscale VARCHAR(16) PRIMARY KEY,
+    id_lettore serial PRIMARY KEY
+    codice_fiscale VARCHAR(20) UNIQUE NOT NULL,
     nome VARCHAR(100) NOT NULL,
     cognome VARCHAR(100) NOT NULL,
     categoria categoria_utente NOT NULL,
-    ritardi INTEGER DEFAULT 0
+    ritardi INTEGER NOT NULL DEFAULT 0 --verifico se not null o meno in base alle funzioni
 );
 
 -----------------------------------------------------------
