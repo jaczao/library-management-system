@@ -328,12 +328,12 @@
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-146" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="nS3IW-vCjwx6fC8YLQsf-145">
           <mxGeometry y="50" width="160" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="nS3IW-vCjwx6fC8YLQsf-149" value="Lettore" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="nS3IW-vCjwx6fC8YLQsf-149" value="Utente" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="445" y="240" width="160" height="100" as="geometry">
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="nS3IW-vCjwx6fC8YLQsf-150" value="&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;codice_fiscale&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;ritardi&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="nS3IW-vCjwx6fC8YLQsf-149">
+        <mxCell id="nS3IW-vCjwx6fC8YLQsf-150" value="&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;email&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;password&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="nS3IW-vCjwx6fC8YLQsf-149">
           <mxGeometry y="50" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-151" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
@@ -377,6 +377,12 @@
             <mxPoint x="220" y="560" as="sourcePoint" />
             <mxPoint x="270" y="510" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="nS3IW-vCjwx6fC8YLQsf-160" value="(T,O)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="491" y="375" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="nS3IW-vCjwx6fC8YLQsf-161" value="(T,O)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="295" y="196" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
