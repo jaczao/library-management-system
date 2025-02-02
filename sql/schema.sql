@@ -27,7 +27,7 @@ CREATE TABLE autore (
 -- Tabella dei Libri
 -----------------------------------------------------------
 CREATE TABLE libro (
-    id serial PRIMARY KEY, 
+    id_libro serial PRIMARY KEY, 
     isbn VARCHAR(13) UNIQUE NOT NULL,
     titolo VARCHAR(200) NOT NULL,
     trama TEXT NOT NULL,
@@ -38,11 +38,11 @@ CREATE TABLE libro (
 -- Tabella di Associazione tra Libri e Autori (relazione molti-a-molti)
 -----------------------------------------------------------
 CREATE TABLE libro_autore (
-    isbn VARCHAR(20) NOT NULL,
-    id_autore INTEGER NOT NULL,
-    PRIMARY KEY (isbn, id_autore),
-    FOREIGN KEY (isbn) REFERENCES libro(isbn),
-    FOREIGN KEY (id_autore) REFERENCES autore(id_autore)
+    libro INTEGER NOT NULL,
+    autore INTEGER NOT NULL,
+    PRIMARY KEY (libro, autore),
+    FOREIGN KEY (libro) REFERENCES libro(id_libro),
+    FOREIGN KEY (autore) REFERENCES autore(id_autore)
 );
 
 -----------------------------------------------------------
