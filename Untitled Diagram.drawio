@@ -1,11 +1,11 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15" version="26.0.10">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="795" dy="539" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="954" dy="647" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-34" value="Libro" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="300" y="370" width="160" height="140" as="geometry">
+          <mxGeometry x="180" y="460" width="160" height="140" as="geometry">
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -13,7 +13,7 @@
           <mxGeometry y="50" width="160" height="90" as="geometry" />
         </mxCell>
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-36" value="Autore" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="90" y="280" width="160" height="150" as="geometry">
+          <mxGeometry x="170" y="220" width="160" height="150" as="geometry">
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -21,7 +21,7 @@
           <mxGeometry y="50" width="160" height="100" as="geometry" />
         </mxCell>
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-38" value="Lettore" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="500" y="220" width="160" height="150" as="geometry">
+          <mxGeometry x="440" y="220" width="160" height="150" as="geometry">
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -29,7 +29,7 @@
           <mxGeometry y="50" width="160" height="100" as="geometry" />
         </mxCell>
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-40" value="Sede" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="130" y="60" width="160" height="120" as="geometry">
+          <mxGeometry x="490" y="460" width="160" height="120" as="geometry">
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -37,7 +37,7 @@
           <mxGeometry y="50" width="160" height="70" as="geometry" />
         </mxCell>
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-42" value="Persona" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="425" y="30" width="160" height="120" as="geometry">
+          <mxGeometry x="300" y="30" width="160" height="120" as="geometry">
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
