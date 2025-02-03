@@ -11,13 +11,13 @@ GROUP BY s.codice_sede;
 
 
 
-CREATE VIEW sede_ritardi AS
+CREATE MATERIALIZED VIEW sede_ritardi AS
 SELECT 
-    s.id_sede,
     s.codice_sede,
     lib.isbn,
     lib.titolo,
-    p.id_prestito,
+    aut.nome,
+    aut.cognome,
     p.data_inizio,
     p.data_scadenza,
     lett.codice_fiscale,
@@ -27,6 +27,8 @@ FROM prestito p
 JOIN copia c ON p.copia = c.id_copia
 JOIN sede s ON c.id_sede = s.id_sede
 JOIN libro lib ON c.isbn = lib.isbn
+JOIN libro_autore la ON la.libro = lib.id_libro
+JOIN autore aut ON aut.id_autore = la.autore
 JOIN lettore lett ON p.lettore = lett.id_lettore
 WHERE p.data_restituzione IS NULL
   AND CURRENT_DATE > p.data_scadenza;
