@@ -48,7 +48,7 @@ RETURNS TRIGGER AS $$
 BEGIN
     UPDATE copia 
        SET disponibile = FALSE 
-     WHERE id_copia = NEW.id_copia;
+     WHERE id_copia = NEW.copia;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
