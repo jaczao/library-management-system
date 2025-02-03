@@ -7,7 +7,7 @@ SELECT
     SUM(CASE WHEN p.data_restituzione IS NULL THEN 1 ELSE 0 END) AS prestiti_in_corso
 FROM sede s
 LEFT JOIN copia c ON s.id_sede = c.id_sede
-LEFT JOIN prestito p ON c.id_copia = p.id_copia
+LEFT JOIN prestito p ON c.id_copia = p.copia
 GROUP BY s.id_sede, s.codice_sede;
 
 
@@ -25,10 +25,10 @@ SELECT
     lett.nome,
     lett.cognome
 FROM prestito p
-JOIN copia c ON p.id_copia = c.id_copia
+JOIN copia c ON p.copia = c.id_copia
 JOIN sede s ON c.id_sede = s.id_sede
 JOIN libro lib ON c.isbn = lib.isbn
-JOIN lettore lett ON p.codice_fiscale = lett.codice_fiscale
+JOIN lettore lett ON p.lettore = lett.id_lettore
 WHERE p.data_restituzione IS NULL
   AND CURRENT_DATE > p.data_scadenza;
 

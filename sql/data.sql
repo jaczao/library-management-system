@@ -12,7 +12,7 @@ INSERT INTO autore (nome, cognome, data_nascita, data_morte, biografia) VALUES
 ('J.K.', 'Rowling', '1965-07-31', NULL, 'Scrittrice britannica, autrice di Harry Potter.'),
 ('George', 'Orwell', '1903-06-25', '1950-01-21', 'Scrittore britannico, autore di 1984 e La fattoria degli animali.'),
 ('Jane', 'Austen', '1775-12-16', '1817-07-18', 'Scrittrice britannica famosa per "Orgoglio e Pregiudizio".'),
-('Elena', 'Ferrante', 'Unknown', NULL, 'Autrice italiana della saga "L’amica geniale".'),
+('Elena', 'Ferrante', '1940-12-16', NULL, 'Autrice italiana della saga "L’amica geniale".'),
 ('F. Scott', 'Fitzgerald', '1896-09-24', '1940-12-21', 'Scrittore americano, autore de "Il grande Gatsby".'),
 ('Alessandro', 'Manzoni', '1785-03-07', '1873-05-22', 'Autore del romanzo storico "I Promessi Sposi".');
 

@@ -61,7 +61,7 @@ CREATE TABLE copia (
 -- Tabella dei Lettori
 -----------------------------------------------------------
 CREATE TABLE lettore (
-    id_lettore serial PRIMARY KEY
+    id_lettore serial PRIMARY KEY,
     codice_fiscale VARCHAR(20) UNIQUE NOT NULL,
     nome VARCHAR(100) NOT NULL,
     cognome VARCHAR(100) NOT NULL,
@@ -92,6 +92,6 @@ CREATE TABLE prestito (
     data_inizio DATE NOT NULL DEFAULT CURRENT_DATE,
     data_scadenza DATE NOT NULL DEFAULT (CURRENT_DATE + INTERVAL '1 month')::date,
     data_restituzione DATE,
-    FOREIGN KEY (codice_fiscale) REFERENCES lettore(id_lettore),
+    FOREIGN KEY (lettore) REFERENCES lettore(id_lettore),
     FOREIGN KEY (copia) REFERENCES copia(id_copia)
 );
