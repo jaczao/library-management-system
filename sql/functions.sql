@@ -9,26 +9,27 @@ BEGIN
     -- Verifica il contatore dei ritardi e la categoria del lettore
     SELECT ritardi, categoria INTO cnt_ritardi, cat 
       FROM lettore 
-     WHERE codice_fiscale = NEW.codice_fiscale;
+     WHERE id_lettore = NEW.lettore;
      
     IF cnt_ritardi >= 5 THEN
-        RAISE EXCEPTION 'Il lettore % ha % ritardi, non può richiedere nuovi prestiti', NEW.codice_fiscale, cnt_ritardi;
+        RAISE EXCEPTION 'Il lettore ha % ritardi, non può richiedere nuovi prestiti', cnt_ritardi;
     END IF;
     
     -- Conta i prestiti attivi (senza restituzione) per il lettore
     SELECT COUNT(*) INTO cnt_attivi FROM prestito
-     WHERE codice_fiscale = NEW.codice_fiscale AND data_restituzione IS NULL;
+     WHERE lettore = NEW.lettore AND data_restituzione IS NULL;
     
     IF cat = 'base' AND cnt_attivi >= 3 THEN
-        RAISE EXCEPTION 'Lettore di categoria base % ha già % prestiti attivi', NEW.codice_fiscale, cnt_attivi;
+        RAISE EXCEPTION 'Il lettore è di categoria base e ha già % prestiti attivi', cnt_attivi;
     ELSIF cat = 'premium' AND cnt_attivi >= 5 THEN
-        RAISE EXCEPTION 'Lettore di categoria premium % ha già % prestiti attivi', NEW.codice_fiscale, cnt_attivi;
+        RAISE EXCEPTION 'Il lettore è di categoria premium e ha già % prestiti attivi', cnt_attivi;
     END IF;
     
     -- Verifica che la copia richiesta sia disponibile
-    SELECT disponibile INTO available FROM copia WHERE id_copia = NEW.id_copia;
+    SELECT disponibile INTO available FROM copia WHERE id_copia = NEW.copia;
+
     IF NOT available THEN
-        RAISE EXCEPTION 'La copia % non è disponibile', NEW.id_copia;
+        RAISE EXCEPTION 'La copia % non è disponibile', NEW.copia;  --checko se giusto fare che disponibilita la vedo proprio su copia
     END IF;
     
     RETURN NEW;
