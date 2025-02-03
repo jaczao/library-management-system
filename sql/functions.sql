@@ -170,12 +170,12 @@ $$ LANGUAGE plpgsql;
 
 
 
-CREATE OR REPLACE FUNCTION azzera_ritardi(p_codice_fiscale VARCHAR)
+CREATE OR REPLACE FUNCTION azzera_ritardi(lettore_target INTEGER)
 RETURNS VOID AS $$
 BEGIN
     UPDATE lettore 
        SET ritardi = 0 
-     WHERE codice_fiscale = p_codice_fiscale;
+     WHERE id_lettore = lettore_target;
 END;
 $$ LANGUAGE plpgsql;
 
