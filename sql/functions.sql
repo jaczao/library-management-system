@@ -88,28 +88,33 @@ FOR EACH ROW EXECUTE FUNCTION process_restituzione();
 
 
 
-CREATE OR REPLACE FUNCTION proroga_prestito(p_id INTEGER, p_new_scadenza DATE)
-RETURNS VOID AS $$
+CREATE OR REPLACE PROCEDURE proroga_prestito(p_id INTEGER, p_new_scadenza DATE)
+LANGUAGE plpgsql
+AS $$
 DECLARE
     current_scadenza DATE;
 BEGIN
-    SELECT data_scadenza INTO current_scadenza 
-      FROM prestito 
+    -- Recupera la data di scadenza corrente per il prestito indicato
+    SELECT data_scadenza INTO current_scadenza
+      FROM prestito
      WHERE id_prestito = p_id;
      
     IF current_scadenza IS NULL THEN
         RAISE EXCEPTION 'Prestito % non trovato', p_id;
     END IF;
     
+    -- Se il prestito è già in ritardo, non è consentita la proroga
     IF CURRENT_DATE > current_scadenza THEN
         RAISE EXCEPTION 'Il prestito % è già in ritardo e non può essere prorogato', p_id;
     END IF;
     
-    UPDATE prestito 
-       SET data_scadenza = p_new_scadenza 
-     WHERE id_prestito = p_id;
+    -- Aggiorna la data di scadenza con il nuovo valore
+    UPDATE prestito
+       SET data_scadenza = p_new_scadenza
+     WHERE id_prestito = p_id;  --posso aggiungere alla fine COMMIT;
+     
 END;
-$$ LANGUAGE plpgsql;
+$$;
 
 
 
@@ -169,15 +174,16 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-
-CREATE OR REPLACE FUNCTION azzera_ritardi(lettore_target INTEGER)
-RETURNS VOID AS $$
+CREATE OR REPLACE PROCEDURE azzera_ritardi(lettore_target INTEGER)
+LANGUAGE plpgsql
+AS $$
 BEGIN
-    UPDATE lettore 
-       SET ritardi = 0 
+    UPDATE lettore
+       SET ritardi = 0
      WHERE id_lettore = lettore_target;
+     
+    -- Se necessario, COMMIT;
 END;
-$$ LANGUAGE plpgsql;
-
+$$;
 
 
