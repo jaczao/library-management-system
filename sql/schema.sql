@@ -50,11 +50,11 @@ CREATE TABLE libro_autore (
 -----------------------------------------------------------
 CREATE TABLE copia (
     id_copia serial PRIMARY KEY,
-    isbn VARCHAR(13) NOT NULL,
-    id_sede INTEGER NOT NULL,
+    libro INTEGER NOT NULL,
+    sede INTEGER NOT NULL,
     disponibile BOOLEAN NOT NULL DEFAULT TRUE, --verifico se not null o meno in base alle funzioni
-    FOREIGN KEY (isbn) REFERENCES libro(isbn),
-    FOREIGN KEY (id_sede) REFERENCES sede(id_sede)
+    FOREIGN KEY (libro) REFERENCES libro(id_libro),
+    FOREIGN KEY (sede) REFERENCES sede(id_sede)
 );
 
 -----------------------------------------------------------

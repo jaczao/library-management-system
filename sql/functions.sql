@@ -119,59 +119,55 @@ $$;
 
 
 CREATE OR REPLACE FUNCTION assegna_prestito(
-    p_codice_fiscale VARCHAR,
-    p_isbn VARCHAR,
-    p_id_sede INTEGER DEFAULT NULL,
-    p_data_scadenza DATE DEFAULT (CURRENT_DATE + INTERVAL '1 month')::date
-) 
+    p_id_lettore INTEGER,          -- Codice fiscale del lettore
+    p_id_libro INTEGER,                    -- ISBN del libro richiesto
+    p_id_sede INTEGER DEFAULT NULL,    -- Sede scelta (opzionale)
+)
 RETURNS INTEGER AS $$
 DECLARE
     v_id_copia INTEGER;
-    v_selected_sede INTEGER;
     v_id_prestito INTEGER;
+    available_sedi TEXT;
 BEGIN
-    IF p_id_sede IS NOT NULL THEN
-        -- Tenta di trovare una copia disponibile nella sede specificata
-        SELECT id_copia INTO v_id_copia 
-          FROM copia 
-         WHERE isbn = p_isbn 
-           AND id_sede = p_id_sede 
-           AND disponibile = TRUE
-         LIMIT 1;
-         
+    IF p_id_sede IS NULL THEN
+        -- Nessuna sede scelta: seleziona a caso una copia disponibile del libro
+        SELECT id_copia INTO v_id_copia
+        FROM copia
+        WHERE libro = p_id_libro AND disponibile = TRUE
+        LIMIT 1;
+        
         IF v_id_copia IS NULL THEN
-            -- Se non ci sono copie disponibili nella sede indicata, cerca in altre sedi
-            SELECT id_copia, id_sede INTO v_id_copia, v_selected_sede 
-              FROM copia 
-             WHERE isbn = p_isbn 
-               AND disponibile = TRUE
-             LIMIT 1;
-            IF v_id_copia IS NULL THEN
-                RAISE EXCEPTION 'Nessuna copia disponibile per il libro %', p_isbn;
-            ELSE
-                RAISE NOTICE 'Copia assegnata dalla sede % invece di quella richiesta %', v_selected_sede, p_id_sede;
-            END IF;
+           RAISE EXCEPTION 'Nessuna copia disponibile per il libro % in nessuna sede', p_isbn;
         END IF;
     ELSE
-        -- Nessuna sede specificata: cerca in qualsiasi sede
-        SELECT id_copia INTO v_id_copia 
-          FROM copia 
-         WHERE isbn = p_isbn 
-           AND disponibile = TRUE
-         LIMIT 1;
+        -- Sede scelta: cerca una copia disponibile in quella sede
+        SELECT id_copia INTO v_id_copia
+        FROM copia
+        WHERE libro = p_id_libro AND disponibile = TRUE AND sede = p_id_sede
+        LIMIT 1;
+        
         IF v_id_copia IS NULL THEN
-            RAISE EXCEPTION 'Nessuna copia disponibile per il libro %', p_isbn;
+            -- Se non c'è copia disponibile in quella sede, recupera l'elenco delle sedi dove il libro è disponibile
+            SELECT string_agg(s.codice_sede, ', ') INTO available_sedi
+            FROM copia c JOIN sede s ON c.sede = s.id_sede
+            WHERE c.libro = p_id_libro AND c.disponibile = TRUE;
+            
+            RAISE EXCEPTION 'Il libro non è disponibile nella sede scelta (%). Disponibile nelle sedi: %', p_id_sede, available_sedi;
         END IF;
     END IF;
-    
-    -- Inserisce il prestito (i trigger verificheranno i vincoli e aggiorneranno la disponibilità)
-    INSERT INTO prestito(codice_fiscale, id_copia, data_scadenza)
-    VALUES (p_codice_fiscale, v_id_copia, p_data_scadenza)
+
+    -- Inserimento del prestito:
+    INSERT INTO prestito (lettore, copia)
+    VALUES (p_id_lettore, v_id_copia)
     RETURNING id_prestito INTO v_id_prestito;
+    
+    -- Aggiornamento della disponibilità della copia assegnata
+    UPDATE copia SET disponibile = FALSE WHERE id_copia = v_id_copia;
     
     RETURN v_id_prestito;
 END;
 $$ LANGUAGE plpgsql;
+
 
 
 CREATE OR REPLACE PROCEDURE azzera_ritardi(lettore_target INTEGER)
