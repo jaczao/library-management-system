@@ -71,11 +71,11 @@ BEGIN
         scadenza := NEW.data_scadenza;
         
         -- Rende disponibile la copia
-        UPDATE copia SET disponibile = TRUE WHERE id_copia = NEW.id_copia;
+        UPDATE copia SET disponibile = TRUE WHERE id_copia = NEW.copia;
         
         -- Se la restituzione è in ritardo, incrementa il contatore dei ritardi
         IF actual_return > scadenza THEN
-            UPDATE lettore SET ritardi = ritardi + 1 WHERE codice_fiscale = NEW.codice_fiscale;
+            UPDATE lettore SET ritardi = ritardi + 1 WHERE id_lettore = NEW.lettore;
         END IF;
     END IF;
     RETURN NEW;
