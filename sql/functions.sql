@@ -118,7 +118,7 @@ $$;
 
 
 
-CREATE OR REPLACE FUNCTION assegna_prestito(
+CREATE OR REPLACE FUNCTION assegna_prestito( --posso mod in procedura se vedo che si puo
     p_id_lettore INTEGER,          -- Codice fiscale del lettore
     p_id_libro INTEGER,                    -- ISBN del libro richiesto
     p_id_sede INTEGER DEFAULT NULL,    -- Sede scelta (opzionale)
