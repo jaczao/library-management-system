@@ -33,11 +33,7 @@ if (isset($_GET['search'])) {
 <head>
     <meta charset="UTF-8">
     <title>Cerca Libri - BiblioStudio</title>
-    <style>
-        table { border-collapse: collapse; width: 100%; }
-        table, th, td { border: 1px solid #ccc; padding: 8px; }
-        th { background-color: #f4f4f4; }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Cerca Libri</h1>

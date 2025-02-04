@@ -11,6 +11,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
 <head>
     <meta charset="UTF-8">
     <title>Home Bibliotecario - BiblioStudio</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Benvenuto, <?php echo htmlspecialchars($_SESSION['user']['nome']); ?></h1>

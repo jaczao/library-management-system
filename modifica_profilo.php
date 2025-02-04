@@ -124,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Modifica Profilo - BiblioStudio</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Modifica Profilo</h1>

@@ -7,6 +7,7 @@ $role = isset($_GET['role']) ? $_GET['role'] : '';
 <head>
     <meta charset="UTF-8">
     <title>Password Dimenticata - BiblioStudio</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Password Dimenticata</h1>

@@ -76,12 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Dettaglio Libro - BiblioStudio</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .info { margin-bottom: 20px; }
-        .message { color: green; }
-        .error { color: red; }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Dettaglio Libro</h1>
