@@ -57,10 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Usiamo il fetch in modalità numerica per avere indice 0
         $result = $stmtPrenota->fetch(PDO::FETCH_NUM);
         $prestito_id = $result[0] ?? '';
-        $message = "Prenotazione effettuata con successo. ID prestito: " . htmlspecialchars($prestito_id ?? '');
+        $message = "Prenotazione effettuata con successo. ID prestito: " . htmlspecialchars($prestito_id);
     } catch (PDOException $e) {
-        // Visualizziamo a schermo il messaggio dell'eccezione
-        $error = "Errore nella prenotazione: " . ($e->getMessage() ?? '');
+        // Estrae solo il messaggio d'errore utile, eliminando le parti tecniche
+        $rawMessage = $e->getMessage();
+        $descrizioneErrore = "";
+        if (preg_match("/ERROR:\s*(.*)/i", $rawMessage, $matches)) {
+            $descrizioneErrore = trim($matches[1]);
+        } else {
+            $descrizioneErrore = $rawMessage;
+        }
+        $error = "Errore nella prenotazione: " . htmlspecialchars($descrizioneErrore);
     }
 }
 ?>
