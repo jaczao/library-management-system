@@ -51,19 +51,19 @@ INSERT INTO libro_autore (libro, autore) VALUES
 (12, 6); -- L’amica geniale - Elena Ferrante
 
 -- Popolamento della tabella Copia (distribuzione casuale sulle sedi)
-INSERT INTO copia (isbn, id_sede, disponibile) VALUES
-('9788806227022', 1, TRUE),
-('9788806227022', 2, TRUE),
-('9788804681963', 3, TRUE),
-('9780747532743', 4, TRUE),
-('9780451524935', 1, TRUE),
-('9788806210048', 2, TRUE),
-('9788806069882', 3, TRUE),
-('9788804491022', 4, TRUE),
-('9788817061624', 1, TRUE),
-('9780374528379', 2, TRUE),
-('9780141439556', 3, TRUE),
-('9788806218726', 4, TRUE);
+INSERT INTO copia (libro, sede, disponibile) VALUES
+(1, 1, TRUE),
+(2, 2, TRUE),
+(3, 3, TRUE),
+(4, 4, TRUE),
+(5, 1, TRUE),
+(6, 2, TRUE),
+(7, 3, TRUE),
+(8, 4, TRUE),
+(9, 1, TRUE),
+(10, 2, TRUE),
+(11, 3, TRUE),
+(12, 4, TRUE);
 
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;

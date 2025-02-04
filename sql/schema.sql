@@ -1,3 +1,18 @@
+-- Connettiti a un database diverso prima di eliminare quello attuale
+\c postgres
+
+-- Termina tutte le connessioni al database "biblioteca"
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'biblioteca';
+
+-- Elimina il database se esiste
+DROP DATABASE IF EXISTS biblioteca;
+
+-- Crea nuovamente il database
+CREATE DATABASE biblioteca;
+
+-- Connettiti al nuovo database
+\c biblioteca;
+
 -- Creazione di un tipo ENUM per la categoria dei lettori
 CREATE TYPE categoria_lettore AS ENUM ('base', 'premium');  --verifico se serve nelle funzioni o altro
 
