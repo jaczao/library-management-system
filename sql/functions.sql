@@ -137,7 +137,7 @@ BEGIN
         LIMIT 1;
         
         IF v_id_copia IS NULL THEN
-           RAISE EXCEPTION 'Nessuna copia disponibile per il libro in alcuna sede';
+           RAISE EXCEPTION 'Il libro non è disponibile in nessuna sede.';
         END IF;
     ELSE
         -- Sede scelta: cerca una copia disponibile in quella sede
@@ -152,7 +152,12 @@ BEGIN
             FROM copia c JOIN sede s ON c.sede = s.id_sede
             WHERE c.libro = p_id_libro AND c.disponibile = TRUE;
             
-            RAISE EXCEPTION 'Il libro non è disponibile nella sede scelta (%). Disponibile nelle sedi: %', p_id_sede, available_sedi;
+            IF available_sedi IS NULL THEN
+                RAISE EXCEPTION 'Il libro non è disponibile né in questa sede né in nessun altra.';
+            ELSE
+                RAISE EXCEPTION 'Il libro non è disponibile nella sede scelta. Disponibile nelle sedi: %', available_sedi;
+            END IF;
+
         END IF;
     END IF;
 

@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Usiamo il fetch in modalità numerica per avere indice 0
         $result = $stmtPrenota->fetch(PDO::FETCH_NUM);
         $prestito_id = $result[0] ?? '';
-        $message = "Prenotazione effettuata con successo. ID prestito: " . htmlspecialchars($prestito_id);
+        $message = "Prenotazione effettuata con successo.";
     } catch (PDOException $e) {
         // Estrae solo il messaggio d'errore utile, eliminando le parti tecniche
         $rawMessage = $e->getMessage();
