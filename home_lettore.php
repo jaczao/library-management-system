@@ -1,11 +1,14 @@
 <?php
-// STUB DI home_lettore.php
+// home_lettore.php
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'lettore') {
     header("Location: login.php?role=lettore");
     exit;
 }
+
+$nome = htmlspecialchars($_SESSION['user']['nome']);
 ?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -13,8 +16,16 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'lettore') {
     <title>Home Lettore - BiblioStudio</title>
 </head>
 <body>
-    <h1>Benvenuto, <?php echo htmlspecialchars($_SESSION['user']['nome']); ?></h1>
-    <p>Questa è la home page del lettore.</p>
-    <!-- Inserisci qui le funzionalità per la visualizzazione dei cataloghi, richiesta prestiti, ecc. -->
+    <h1>Benvenuto, <?php echo $nome; ?>!</h1>
+    <nav>
+        <ul>
+            <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
+            <li><a href="cerca_libri.php">Cerca Libri</a></li>
+            <li><a href="visualizza_prenotazioni.php">Visualizza Prenotazioni</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
+    </nav>
+    <p>Da qui potrai accedere a tutte le funzionalità messe a disposizione da BiblioStudio.</p>
 </body>
 </html>
+

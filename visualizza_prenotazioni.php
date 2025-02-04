@@ -1,0 +1,98 @@
+<?php
+// visualizza_prenotazioni.php
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'lettore') {
+    header("Location: login.php?role=lettore");
+    exit;
+}
+
+require_once 'config.php';
+
+$lettoreId = $_SESSION['user']['id_lettore'];
+
+// Recuperiamo le prenotazioni (prestiti) del lettore
+$sql = "SELECT p.id_prestito, p.data_inizio, p.data_scadenza, p.data_restituzione,
+               l.titolo, l.isbn
+        FROM prestito p
+        JOIN copia c ON p.copia = c.id_copia
+        JOIN libro l ON c.libro = l.id_libro
+        WHERE p.lettore = ?
+        ORDER BY p.data_inizio DESC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$lettoreId]);
+$prestiti = $stmt->fetchAll();
+?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizza Prenotazioni - BiblioStudio</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Le tue Prenotazioni</h1>
+    <nav>
+        <ul>
+            <li><a href="home_lettore.php">Home</a></li>
+            <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
+            <li><a href="cerca_libri.php">Cerca Libri</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
+    </nav>
+    
+    <?php if (empty($prestiti)): ?>
+        <p>Non hai nessuna prenotazione.</p>
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Prestito</th>
+                    <th>Titolo Libro</th>
+                    <th>ISBN</th>
+                    <th>Data Inizio</th>
+                    <th>Stato</th>
+                    <th>Data Restituzione / Scadenza</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($prestiti as $prestito): ?>
+                    <?php 
+                        // Se data_restituzione è valorizzata, il prestito è stato restituito.
+                        // Altrimenti il prestito è in corso e si mostra la data di scadenza.
+                        if (!empty($prestito['data_restituzione'])) {
+                            $stato = "Restituito";
+                            $dataInfo = date("d/m/Y", strtotime($prestito['data_restituzione']));
+                        } else {
+                            $stato = "In corso";
+                            $dataInfo = date("d/m/Y", strtotime($prestito['data_scadenza']));
+                        }
+                    ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($prestito['id_prestito']); ?></td>
+                        <td><?php echo htmlspecialchars($prestito['titolo']); ?></td>
+                        <td><?php echo htmlspecialchars($prestito['isbn']); ?></td>
+                        <td><?php echo date("d/m/Y", strtotime($prestito['data_inizio'])); ?></td>
+                        <td><?php echo $stato; ?></td>
+                        <td><?php echo $dataInfo; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+    
+</body>
+</html>
