@@ -137,7 +137,7 @@ BEGIN
         LIMIT 1;
         
         IF v_id_copia IS NULL THEN
-           RAISE EXCEPTION 'Nessuna copia disponibile per il libro % in nessuna sede', p_isbn;
+           RAISE EXCEPTION 'Nessuna copia disponibile per il libro in alcuna sede';
         END IF;
     ELSE
         -- Sede scelta: cerca una copia disponibile in quella sede

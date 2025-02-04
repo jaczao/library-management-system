@@ -54,11 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtPrenota = $pdo->prepare("SELECT assegna_prestito(?, ?)");
             $stmtPrenota->execute([$lettoreId, $id_libro]);
         }
-        $result = $stmtPrenota->fetch();
-        $prestito_id = $result[0];
-        $message = "Prenotazione effettuata con successo. ID prestito: " . htmlspecialchars($prestito_id);
+        // Usiamo il fetch in modalità numerica per avere indice 0
+        $result = $stmtPrenota->fetch(PDO::FETCH_NUM);
+        $prestito_id = $result[0] ?? '';
+        $message = "Prenotazione effettuata con successo. ID prestito: " . htmlspecialchars($prestito_id ?? '');
     } catch (PDOException $e) {
-        $error = "Errore nella prenotazione: " . htmlspecialchars($e->getMessage());
+        // Visualizziamo a schermo il messaggio dell'eccezione
+        $error = "Errore nella prenotazione: " . ($e->getMessage() ?? '');
     }
 }
 ?>
@@ -94,10 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <?php if ($message): ?>
-        <p class="message"><?php echo $message; ?></p>
+        <p class="message"><?php echo htmlspecialchars($message); ?></p>
     <?php endif; ?>
     <?php if ($error): ?>
-        <p class="error"><?php echo $error; ?></p>
+        <p class="error"><?php echo htmlspecialchars($error); ?></p>
     <?php endif; ?>
 
     <form method="post" action="dettaglio_libro.php?id=<?php echo urlencode($id_libro); ?>">
