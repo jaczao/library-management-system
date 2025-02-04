@@ -1,3 +1,7 @@
+-- Elimina tutti i dati dalle tabelle prima di fare l'insert
+TRUNCATE TABLE sede, autore, libro, libro_autore, copia, lettore, bibliotecario RESTART IDENTITY CASCADE;
+
+
 -- Popolamento della tabella Sede
 INSERT INTO sede (codice_sede, citta, indirizzo) VALUES
 ('SEDE001', 'Milano', 'Via Roma 10'),
@@ -61,14 +65,17 @@ INSERT INTO copia (isbn, id_sede, disponibile) VALUES
 ('9780141439556', 3, TRUE),
 ('9788806218726', 4, TRUE);
 
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- Popolamento della tabella Lettore
 INSERT INTO lettore (codice_fiscale, nome, cognome, email, password, categoria, ritardi) VALUES
-('RSSMRC80A01H501Z', 'Marco', 'Rossi', 'marco.rossi@email.com', '1234', 'base', 0),
-('BNCGLI85C41H501Y', 'Giulia', 'Bianchi', 'giulia.bianchi@email.com', '1234', 'premium', 1);
+('RSSMRC80A01H501Z', 'Marco', 'Rossi', 'marco.rossi@email.com', crypt('1234', gen_salt('bf')), 'base', 0),
+('BNCGLI85C41H501Y', 'Giulia', 'Bianchi', 'giulia.bianchi@email.com', crypt('1234', gen_salt('bf')), 'premium', 1);
 
 -- Popolamento della tabella Bibliotecario
 INSERT INTO bibliotecario (nome, cognome, email, password) VALUES
-('Luca', 'Verdi', 'luca.verdi@email.com', '1234'),
-('Anna', 'Esposito', 'anna.esposito@email.com', '1234');
+('Luca', 'Verdi', 'luca.verdi@email.com', crypt('1234', gen_salt('bf'))),
+('Anna', 'Esposito', 'anna.esposito@email.com', crypt('1234', gen_salt('bf')));
 
 -- Nessun prestito registrato inizialmente

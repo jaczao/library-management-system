@@ -1,9 +1,9 @@
 <?php
 // config.php
 $host = 'localhost';
-$db   = 'nome_database';
-$user = 'nome_utente';
-$pass = 'password';
+$db   = 'biblioteca';
+$user = 'postgres';
+$pass = 'postgres';
 $dsn = "pgsql:host=$host;dbname=$db";
 
 try {
