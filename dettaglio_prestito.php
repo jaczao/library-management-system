@@ -68,7 +68,7 @@ if (!$prestito) {
 <head>
     <meta charset="UTF-8">
     <title>Dettaglio Prestito - BiblioStudio</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="container">
