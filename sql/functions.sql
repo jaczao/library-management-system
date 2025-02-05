@@ -198,11 +198,14 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- 2. Un unico trigger che si attiva su prestito e copia
-CREATE TRIGGER trg_refresh_prestiti_copie
+-- 2. Primo trigger che si attiva su prestito
+CREATE TRIGGER trg_refresh_prestiti
 AFTER INSERT OR UPDATE OR DELETE ON prestito
-    OR INSERT OR UPDATE OR DELETE ON copia
 FOR EACH STATEMENT
 EXECUTE FUNCTION trg_refresh_sede_statistiche();
 
-
+-- 3. Secondo trigger che si attiva su  copia
+CREATE TRIGGER trg_refresh_copie
+AFTER INSERT OR UPDATE OR DELETE ON copia
+FOR EACH STATEMENT
+EXECUTE FUNCTION trg_refresh_sede_statistiche();
