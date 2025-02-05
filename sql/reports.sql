@@ -1,4 +1,6 @@
-CREATE OR REPLACE MATERIALIZED VIEW sede_statistiche AS
+DROP MATERIALIZED VIEW IF EXISTS sede_statistiche;
+
+CREATE MATERIALIZED VIEW sede_statistiche AS
 SELECT 
     s.codice_sede,
     COUNT(c.id_copia) AS totale_copie,

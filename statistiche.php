@@ -86,11 +86,11 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($ritardo['codice_sede']); ?></td>
                     <td><?php echo htmlspecialchars($ritardo['isbn']); ?></td>
                     <td><?php echo htmlspecialchars($ritardo['titolo']); ?></td>
-                    <td><?php echo htmlspecialchars($ritardo['autore_nome'] . ' ' . $ritardo['autore_cognome']); ?></td>
+                    <td><?php echo htmlspecialchars($ritardo['nome_autore'] . ' ' . $ritardo['cognome_autore']); ?></td>
                     <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($ritardo['data_inizio']))); ?></td>
                     <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($ritardo['data_scadenza']))); ?></td>
                     <td><?php echo htmlspecialchars($ritardo['codice_fiscale']); ?></td>
-                    <td><?php echo htmlspecialchars($ritardo['lettore_nome'] . ' ' . $ritardo['lettore_cognome']); ?></td>
+                    <td><?php echo htmlspecialchars($ritardo['nome_lettore'] . ' ' . $ritardo['cognome_lettore']); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

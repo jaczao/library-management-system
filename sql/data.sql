@@ -78,4 +78,10 @@ INSERT INTO bibliotecario (nome, cognome, email, password) VALUES
 ('Luca', 'Verdi', 'luca.verdi@email.com', crypt('1234', gen_salt('bf'))),
 ('Anna', 'Esposito', 'anna.esposito@email.com', crypt('1234', gen_salt('bf')));
 
--- Nessun prestito registrato inizialmente
+-- Prestiti già registrati
+INSERT INTO prestito (lettore, copia, data_inizio, data_scadenza, data_restituzione) VALUES
+(1, 10, '2024-01-01', '2024-02-01', NULL),
+(2, 5, '2024-02-01', '2024-03-01', NULL),
+(2, 4, '2024-02-01', '2024-03-01', '2024-02-02'),
+(2, 8, '2024-02-01', '2024-03-01', '2024-04-01');
+
