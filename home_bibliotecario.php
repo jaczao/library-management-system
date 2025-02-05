@@ -10,7 +10,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
 <head>
     <meta charset="UTF-8">
     <title>Home Bibliotecario - BiblioStudio</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="container">
@@ -19,7 +19,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
         <ul>
             <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
             <li><a href="cerca_lettore.php">Cerca Lettore</a></li>
-            <li><a href="cerca_libro.php">Cerca Libro</a></li>
+            <li><a href="cerca_libri.php">Cerca Libro</a></li>
             <li><a href="cerca_sede.php">Cerca Sede</a></li>
             <li><a href="elenco_prestiti.php">Elenco Prestiti</a></li>
             <li><a href="statistiche.php">Statistiche</a></li>

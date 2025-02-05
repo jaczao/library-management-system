@@ -1,9 +1,13 @@
 <?php
-session_start();
-if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'lettore') {
-    header("Location: login.php?role=lettore");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
     exit;
 }
+
+$role = $_SESSION['role'];
 
 require_once 'config.php';
 
@@ -24,7 +28,7 @@ if (isset($_GET['search'])) {
         $stmt = $pdo->prepare($sql);
         $likeSearch = "%" . $search . "%";
         $stmt->execute([$likeSearch, $likeSearch]);
-        $books = $stmt->fetchAll();
+        $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>
@@ -36,22 +40,21 @@ if (isset($_GET['search'])) {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="container">
+    <!-- Home Button: il link viene scelto in base al ruolo -->
+    <p>
+        <a href="<?php echo ($role === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">
+            Home
+        </a>
+    </p>
+    
     <h1>Cerca Libri</h1>
-    <nav>
-        <ul>
-            <li><a href="home_lettore.php">Home</a></li>
-            <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <li><a href="visualizza_prenotazioni.php">Visualizza Prenotazioni</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
-    </nav>
-
     <form method="get" action="cerca_libri.php">
         <label for="search">Inserisci ISBN o titolo:</label>
         <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>" required>
         <button type="submit">Cerca</button>
     </form>
-
+    
     <?php if (isset($_GET['search'])): ?>
         <h2>Risultati della ricerca</h2>
         <?php if (empty($books)): ?>
@@ -67,19 +70,16 @@ if (isset($_GET['search'])) {
                 </thead>
                 <tbody>
                     <?php foreach ($books as $book): ?>
-                        <tr>
-                            <td>
-                                <a href="dettaglio_libro.php?id=<?php echo urlencode($book['id_libro']); ?>">
-                                    <?php echo htmlspecialchars($book['titolo']); ?>
-                                </a>
-                            </td>
-                            <td><?php echo htmlspecialchars($book['isbn']); ?></td>
-                            <td><?php echo htmlspecialchars($book['autori']); ?></td>
-                        </tr>
+                    <tr onclick="window.location.href='dettaglio_libro.php?id=<?php echo urlencode($book['id_libro']); ?>'" style="cursor:pointer;">
+                        <td><?php echo htmlspecialchars($book['titolo']); ?></td>
+                        <td><?php echo htmlspecialchars($book['isbn']); ?></td>
+                        <td><?php echo htmlspecialchars($book['autori']); ?></td>
+                    </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         <?php endif; ?>
     <?php endif; ?>
+</div>
 </body>
 </html>
