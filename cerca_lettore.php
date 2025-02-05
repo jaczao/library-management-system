@@ -62,7 +62,7 @@ if (isset($_GET['search'])) {
                 </thead>
                 <tbody>
                     <?php foreach ($lettori as $lettore): ?>
-                    <tr onclick="window.location.href='dettaglio_lettore.php?id=<?php echo urlencode($lettore['id_lettore']); ?>'" style="cursor:pointer;">
+                    <tr onclick="window.location.href='profilo_lettore.php?id=<?php echo urlencode($lettore['id_lettore']); ?>'" style="cursor:pointer;">
                         <td><?php echo htmlspecialchars($lettore['codice_fiscale']); ?></td>
                         <td><?php echo htmlspecialchars($lettore['nome']); ?></td>
                         <td><?php echo htmlspecialchars($lettore['cognome']); ?></td>
