@@ -45,7 +45,7 @@ if (isset($_GET['search'])) {
     <p>
         <a href="<?php echo ($role === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">
             Home
-        </a>
+        </a> | <a href="aggiungi_nuovo_libro.php">Aggiungi Nuovo Libro</a>
     </p>
     
     <h1>Cerca Libri</h1>
