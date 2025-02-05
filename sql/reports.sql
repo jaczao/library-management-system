@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW sede_statistiche AS
+CREATE OR REPLACE MATERIALIZED VIEW sede_statistiche AS
 SELECT 
     s.codice_sede,
     COUNT(c.id_copia) AS totale_copie,
@@ -11,7 +11,7 @@ GROUP BY s.codice_sede;
 
 
 
-CREATE MATERIALIZED VIEW sede_ritardi AS
+CREATE OR REPLACE VIEW sede_ritardi AS
 SELECT 
     s.codice_sede,
     lib.isbn,

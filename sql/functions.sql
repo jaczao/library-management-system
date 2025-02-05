@@ -188,3 +188,21 @@ END;
 $$;
 
 
+
+-- 1. Funzione trigger che refresha direttamente la materialized view sede_statistiche
+CREATE OR REPLACE FUNCTION trg_refresh_sede_statistiche()
+RETURNS trigger AS $$
+BEGIN
+    REFRESH MATERIALIZED VIEW sede_statistiche;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+-- 2. Un unico trigger che si attiva su prestito e copia
+CREATE TRIGGER trg_refresh_prestiti_copie
+AFTER INSERT OR UPDATE OR DELETE ON prestito
+    OR INSERT OR UPDATE OR DELETE ON copia
+FOR EACH STATEMENT
+EXECUTE FUNCTION trg_refresh_sede_statistiche();
+
+
