@@ -11,20 +11,57 @@ require_once 'config.php';
 $message = "";
 $error = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Dati del libro
     $isbn = trim($_POST['isbn'] ?? '');
     $titolo = trim($_POST['titolo'] ?? '');
     $trama = trim($_POST['trama'] ?? '');
     $casa_editrice = trim($_POST['casa_editrice'] ?? '');
     
-    if (empty($isbn) || empty($titolo) || empty($trama) || empty($casa_editrice)) {
+    // Dati dell'autore
+    $nome_autore = trim($_POST['nome_autore'] ?? '');
+    $cognome_autore = trim($_POST['cognome_autore'] ?? '');
+    
+    if (empty($isbn) || empty($titolo) || empty($trama) || empty($casa_editrice) || empty($nome_autore) || empty($cognome_autore)) {
         $error = "Tutti i campi sono obbligatori.";
     } else {
         try {
-            $sql = "INSERT INTO libro (isbn, titolo, trama, casa_editrice) VALUES (?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$isbn, $titolo, $trama, $casa_editrice]);
+            $pdo->beginTransaction();
+            // Inserisce il nuovo libro
+            $sqlLibro = "INSERT INTO libro (isbn, titolo, trama, casa_editrice) VALUES (?, ?, ?, ?)
+                         RETURNING id_libro";
+            $stmtLibro = $pdo->prepare($sqlLibro);
+            $stmtLibro->execute([$isbn, $titolo, $trama, $casa_editrice]);
+            $id_libro = $stmtLibro->fetchColumn();
+            
+            // Gestione autore:
+            // Cerca autore esistente (case-insensitive)
+            $sqlAutore = "SELECT id_autore FROM autore WHERE LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?)";
+            $stmtAutore = $pdo->prepare($sqlAutore);
+            $stmtAutore->execute([$nome_autore, $cognome_autore]);
+            $autore = $stmtAutore->fetch(PDO::FETCH_ASSOC);
+            if ($autore) {
+                $id_autore = $autore['id_autore'];
+            } else {
+                // Se non esiste, crealo con valori predefiniti
+                $defaultDataNascita = '1900-01-01';
+                $defaultBiografia = 'N/A';
+                $sqlInsertAutore = "INSERT INTO autore (nome, cognome, data_nascita, biografia)
+                                    VALUES (?, ?, ?, ?)
+                                    RETURNING id_autore";
+                $stmtInsertAutore = $pdo->prepare($sqlInsertAutore);
+                $stmtInsertAutore->execute([$nome_autore, $cognome_autore, $defaultDataNascita, $defaultBiografia]);
+                $id_autore = $stmtInsertAutore->fetchColumn();
+            }
+            
+            // Crea l'associazione in libro_autore
+            $sqlAssoc = "INSERT INTO libro_autore (libro, autore) VALUES (?, ?)";
+            $stmtAssoc = $pdo->prepare($sqlAssoc);
+            $stmtAssoc->execute([$id_libro, $id_autore]);
+            
+            $pdo->commit();
             $message = "Nuovo libro aggiunto con successo.";
         } catch (PDOException $e) {
+            $pdo->rollBack();
             $error = "Errore nell'aggiunta del libro: " . htmlspecialchars($e->getMessage());
         }
     }
@@ -58,6 +95,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <label for="casa_editrice">Casa Editrice:</label>
         <input type="text" id="casa_editrice" name="casa_editrice" required>
+        
+        <h3>Autore</h3>
+        <label for="nome_autore">Nome:</label>
+        <input type="text" id="nome_autore" name="nome_autore" required>
+        
+        <label for="cognome_autore">Cognome:</label>
+        <input type="text" id="cognome_autore" name="cognome_autore" required>
         
         <button type="submit">Aggiungi Libro</button>
     </form>

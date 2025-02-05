@@ -35,13 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nome = trim($_POST['nome'] ?? '');
         $cognome = trim($_POST['cognome'] ?? '');
         $email = trim($_POST['email'] ?? '');
+        $categoria = trim($_POST['categoria'] ?? '');
         
-        if (empty($codice_fiscale) || empty($nome) || empty($cognome) || empty($email)) {
+        if (empty($codice_fiscale) || empty($nome) || empty($cognome) || empty($email) || empty($categoria)) {
             $error = "Tutti i campi sono obbligatori.";
         } else {
             try {
-                $stmtUpdate = $pdo->prepare("UPDATE lettore SET codice_fiscale = ?, nome = ?, cognome = ?, email = ? WHERE id_lettore = ?");
-                $stmtUpdate->execute([$codice_fiscale, $nome, $cognome, $email, $id_lettore]);
+                $stmtUpdate = $pdo->prepare("UPDATE lettore SET codice_fiscale = ?, nome = ?, cognome = ?, email = ?, categoria = ? WHERE id_lettore = ?");
+                $stmtUpdate->execute([$codice_fiscale, $nome, $cognome, $email, $categoria, $id_lettore]);
                 $message = "Profilo aggiornato con successo.";
             } catch (PDOException $e) {
                 $error = "Errore nell'aggiornamento del profilo: " . htmlspecialchars($e->getMessage());
@@ -89,6 +90,13 @@ if (!$lettore) {
         
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($lettore['email']); ?>" required>
+        
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" name="categoria" required>
+            <option value="">-- Seleziona categoria --</option>
+            <option value="base" <?php if ($lettore['categoria'] === 'base') echo 'selected'; ?>>Base</option>
+            <option value="premium" <?php if ($lettore['categoria'] === 'premium') echo 'selected'; ?>>Premium</option>
+        </select>
         
         <button type="submit" name="update_profile">Salva Modifiche</button>
     </form>
