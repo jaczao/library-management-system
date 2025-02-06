@@ -20,6 +20,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
             <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
             <li><a href="cerca_lettore.php">Cerca Lettore</a></li>
             <li><a href="cerca_libri.php">Cerca Libro</a></li>
+            <li><a href="cerca_autori.php">Cerca Autore</a></li>
             <li><a href="cerca_sede.php">Cerca Sede</a></li>
             <li><a href="elenco_prestiti.php">Elenco Prestiti</a></li>
             <li><a href="statistiche.php">Statistiche</a></li>
