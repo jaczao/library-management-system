@@ -20,6 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data_morte = trim($_POST['data_morte'] ?? '');
     $biografia = trim($_POST['biografia'] ?? '');
     
+    if (strtolower($data_morte) === "") {
+        $data_morte = null;
+    }
+    
     if (empty($nome) || empty($cognome) || empty($data_nascita) || empty($biografia)) {
         $error = "Nome, cognome, data di nascita e biografia sono obbligatori.";
     } else {
