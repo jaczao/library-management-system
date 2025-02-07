@@ -17,7 +17,8 @@ $nome = htmlspecialchars($_SESSION['user']['nome']);
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Benvenuto, <?php echo $nome; ?>!</h1>
+    <div class="container">
+    <h1>Home Lettore</h1>
     <nav>
         <ul>
             <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
@@ -26,7 +27,9 @@ $nome = htmlspecialchars($_SESSION['user']['nome']);
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
+    <p>Benvenuto, <?php echo htmlspecialchars($_SESSION['user']['nome']); ?>!</p>
     <p>Da qui puoi accedere a tutte le funzionalità messe a disposizione da BiblioStudio.</p>
+    </div>
 </body>
 </html>
 
