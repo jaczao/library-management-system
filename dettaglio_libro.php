@@ -31,7 +31,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $result = $stmtPrenota->fetch(PDO::FETCH_NUM);
             $message = "Prenotazione effettuata con successo.";
         } catch (PDOException $e) {
-            $error = "Errore nella prenotazione: " . htmlspecialchars($e->getMessage());
+            // Estraiamo solo il messaggio di errore utile dalla stringa di eccezione
+            $errorMsg = $e->getMessage();
+            $errorIndicator = "ERROR:";
+            $contextIndicator = "CONTEXT:";
+
+            // Cerca la posizione di "ERROR:" nel messaggio
+            $posError = strpos($errorMsg, $errorIndicator);
+            if ($posError !== false) {
+                // Escludo la parte iniziale fino a "ERROR:" e mi sposto oltre questa stringa
+                $errorMsg = substr($errorMsg, $posError + strlen($errorIndicator));
+                // Se presente, rimuovo anche la parte che segue "CONTEXT:"
+                $posContext = strpos($errorMsg, $contextIndicator);
+                if ($posContext !== false) {
+                    $errorMsg = substr($errorMsg, 0, $posContext);
+                }
+                $errorMsg = trim($errorMsg);
+            }
+            $error = "Errore nella prenotazione: " . htmlspecialchars($errorMsg);
         }
     }
     // Azione di aggiornamento copie per il bibliotecario
