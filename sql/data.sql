@@ -1,5 +1,5 @@
 -- Elimina tutti i dati dalle tabelle prima di fare l'insert
-TRUNCATE TABLE sede, autore, libro, libro_autore, copia, lettore, bibliotecario RESTART IDENTITY CASCADE;
+TRUNCATE TABLE sede, autore, libro, libro_autore, copia, lettore, bibliotecario, prestito RESTART IDENTITY CASCADE;
 
 
 -- Popolamento della tabella Sede
