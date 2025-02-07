@@ -176,8 +176,10 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
         <!-- Sezione per il bibliotecario: gestione del libro -->
         <div class="biblio-management">
             <!-- Link per modificare il libro -->
+            <div class="inline-links"> 
             <p><a href="modifica_libro.php?id=<?php echo $id_libro; ?>">Modifica libro</a></p>
-            
+            </div>
+
             <!-- Gestione delle copie per questo libro -->
             <h3>Gestione delle copie</h3>
             <?php
@@ -233,7 +235,9 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
         </div>
     <?php endif; ?>
     
+    <div class="inline-links">
     <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">Torna alla home</a>
+    </div>
 </div>
 </body>
 </html>

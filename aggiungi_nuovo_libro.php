@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><br>
         <button type="submit">Aggiungi Libro</button>
     </form>
-    <p><a href="cerca_libri.php">Torna alla ricerca libri</a></p>
+    <div class="inline-links"><p><a href="cerca_libri.php">Torna alla ricerca libri</a></p></div>
 </div>
 <script>
 document.getElementById('add_author').addEventListener('click', function(){

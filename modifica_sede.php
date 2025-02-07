@@ -73,7 +73,7 @@ if (!$sede) {
         <button type="submit">Salva Modifiche</button>
     </form>
     
-    <p><a href="dettaglio_sede.php?id=<?php echo $id_sede; ?>">Torna al Dettaglio Sede</a></p>
+    <div class="inline-links"><p><a href="dettaglio_sede.php?id=<?php echo $id_sede; ?>">Torna al Dettaglio Sede</a></p></div>
 </div>
 </body>
 </html>

@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><br>
         <button type="submit" name="update_book">Salva Modifiche</button>
     </form>
-    <p><a href="dettaglio_libro.php?id=<?php echo $id_libro; ?>">Torna al Dettaglio Libro</a></p>
+    <div class="inline-links"><p><a href="dettaglio_libro.php?id=<?php echo $id_libro; ?>">Torna al Dettaglio Libro</a></p></div>
 </div>
 <script>
 document.getElementById('add_author').addEventListener('click', function(){

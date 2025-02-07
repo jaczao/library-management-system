@@ -76,7 +76,7 @@ if (!$autore) {
         
         <button type="submit">Salva Modifiche</button>
     </form>
-    <p><a href="dettaglio_autore.php?id=<?php echo $id_autore; ?>">Torna al Dettaglio Autore</a></p>
+    <div class="inline-links"><p><a href="dettaglio_autore.php?id=<?php echo $id_autore; ?>">Torna al Dettaglio Autore</a></p></div>
 </div>
 </body>
 </html>

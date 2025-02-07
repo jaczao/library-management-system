@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <button type="submit">Crea Sede</button>
     </form>
-    <p><a href="cerca_sede.php">Torna alla ricerca sedi</a></p>
+    <div class="inline-links"><p><a href="cerca_sede.php">Torna alla ricerca sedi</a></p></div>
 </div>
 </body>
 </html>

@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <button type="submit">Crea Profilo Lettore</button>
     </form>
-    <p><a href="cerca_lettore.php">Torna alla ricerca lettori</a></p>
+    <div class="inline-links"><p><a href="cerca_lettore.php">Torna alla ricerca lettori</a></p></div>
 </div>
 </body>
 </html>

@@ -106,9 +106,11 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
   <p><strong>Data di morte:</strong> <?php echo htmlspecialchars($autore['data_morte'] ? $autore['data_morte'] : '-'); ?></p>
   <p><strong>Biografia:</strong><br><?php echo nl2br(htmlspecialchars($autore['biografia'])); ?></p>
   
+  <div class="inline-links">
   <p>
       <a href="modifica_autore.php?id=<?php echo $id_autore; ?>">Modifica Autore</a>
   </p>
+  </div>
   
   <!-- Form per aggiungere un libro a questo autore -->
   <h3>Aggiungi libro a questo autore</h3>
@@ -152,7 +154,7 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
       </ul>
   <?php endif; ?>
   
-  <p><a href="cerca_autori.php">Torna alla ricerca autori</a></p>
+  <div class="inline-links"><p><a href="cerca_autori.php">Torna alla ricerca autori</a></p></div>
 </div>
 </body>
 </html>

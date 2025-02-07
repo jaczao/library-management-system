@@ -88,9 +88,12 @@ $prestiti = $stmtPrestiti->fetchAll(PDO::FETCH_ASSOC);
     <p><strong>Città:</strong> <?php echo htmlspecialchars($sede['citta']); ?></p>
     <p><strong>Indirizzo:</strong> <?php echo htmlspecialchars($sede['indirizzo']); ?></p>
     
+    <div class="inline-links">
     <p>
         <a href="modifica_sede.php?id=<?php echo $id_sede; ?>">Modifica Sede</a>
     </p>
+    </div>
+    
     <!-- Form per eliminare la sede -->
     <form method="post" action="dettaglio_sede.php?id=<?php echo $id_sede; ?>" onsubmit="return confirm('Sei sicuro di voler eliminare questa sede? Verranno eliminate anche tutte le copie e i prestiti associati.');">
         <input type="hidden" name="action" value="elimina_sede">
@@ -140,7 +143,7 @@ $prestiti = $stmtPrestiti->fetchAll(PDO::FETCH_ASSOC);
         </table>
     <?php endif; ?>
     
-    <p><a href="cerca_sede.php">Torna alla ricerca sedi</a></p>
+    <div class="inline-links"><p><a href="cerca_sede.php">Torna alla ricerca sedi</a></p></div>
 </div>
 </body>
 </html>

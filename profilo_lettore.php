@@ -79,9 +79,11 @@ $prestiti = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <p><strong>Categoria:</strong> <?php echo htmlspecialchars($lettore['categoria']); ?></p>
     <p><strong>Ritardi:</strong> <?php echo htmlspecialchars($lettore['ritardi']); ?></p>
     
+    <div class="inline-links">
     <p>
         <a href="modifica_profilo_lettore.php?id=<?php echo $id_lettore; ?>">Modifica Profilo</a>
     </p>
+    </div>
     
     <form method="post" action="profilo_lettore.php?id=<?php echo $id_lettore; ?>" onsubmit="return confirm('Sei sicuro di voler eliminare questo profilo? Questa operazione eliminerà anche tutti i prestiti associati.');">
         <input type="hidden" name="action" value="elimina_profilo">
@@ -114,7 +116,7 @@ $prestiti = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </table>
     <?php endif; ?>
     
-    <p><a href="home_bibliotecario.php">Torna alla Home</a></p>
+    <div class="inline-links"><p><a href="home_bibliotecario.php">Torna alla Home</a></p></div>
 </div>
 </body>
 </html>
