@@ -26,7 +26,7 @@ $nome = htmlspecialchars($_SESSION['user']['nome']);
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
-    <p>Da qui potrai accedere a tutte le funzionalità messe a disposizione da BiblioStudio.</p>
+    <p>Da qui puoi accedere a tutte le funzionalità messe a disposizione da BiblioStudio.</p>
 </body>
 </html>
 

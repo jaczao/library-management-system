@@ -22,15 +22,15 @@ if (isset($_GET['remove_assoc'])) {
     $stmtCount->execute([$id_libro_remove]);
     $count = $stmtCount->fetchColumn();
     if ($count <= 1) {
-        $error = "Impossibile rimuovere l'associazione. Il libro deve avere almeno un autore.";
+        $error = "Impossibile rimuovere l'autore dal libro. Il libro deve avere almeno un autore.";
     } else {
         try {
             $sqlDelete = "DELETE FROM libro_autore WHERE libro = ? AND autore = ?";
             $stmtDelete = $pdo->prepare($sqlDelete);
             $stmtDelete->execute([$id_libro_remove, $id_autore]);
-            $message = "Associazione rimossa con successo.";
+            $message = "Autore rimosso con successo dal libro.";
         } catch (PDOException $e) {
-            $error = "Errore nella rimozione dell'associazione: " . htmlspecialchars($e->getMessage());
+            $error = "Errore nella rimozione dell'autore dal libro: " . htmlspecialchars($e->getMessage());
         }
     }
 }
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $stmtCheck = $pdo->prepare($sqlCheck);
         $stmtCheck->execute([$id_libro_da_aggiungere, $id_autore]);
         if ($stmtCheck->fetchColumn() > 0) {
-            $error = "Il libro è già associato a questo autore.";
+            $error = "L'autore è già fra gli autori di questo libro.";
         } else {
             try {
                 $sqlInsert = "INSERT INTO libro_autore (libro, autore) VALUES (?, ?)";
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 $stmtInsert->execute([$id_libro_da_aggiungere, $id_autore]);
                 $message = "Libro aggiunto a questo autore.";
             } catch (PDOException $e) {
-                $error = "Errore nell'associazione del libro: " . htmlspecialchars($e->getMessage());
+                $error = "Errore nell'associazione del libro all'autore: " . htmlspecialchars($e->getMessage());
             }
         }
     } else {
