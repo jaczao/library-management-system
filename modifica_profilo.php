@@ -127,6 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="container">
     <h1>Modifica Profilo</h1>
     
     <!-- Link per la modifica della password è qui integrato nel form,
@@ -178,5 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="inline-links">
         <a href="home_<?php echo $role; ?>.php">Torna alla home</a>
     </div>
+</div>
 </body>
 </html>

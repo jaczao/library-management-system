@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="container">
     <h1>Login - <?php echo ucfirst(htmlspecialchars($role)); ?></h1>
     <?php if (!empty($error)): ?>
         <p style="color:red;"><?php echo htmlspecialchars($error); ?></p>
@@ -80,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>
             <a href="index.php?role=<?php echo urlencode($role); ?>">Torna indietro</a>
         </p>
+    </div>
     </div>
 </body>
 </html>

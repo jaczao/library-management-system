@@ -32,6 +32,7 @@ $prestiti = $stmt->fetchAll();
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="container">
     <h1>Le tue Prenotazioni</h1>
     <nav>
         <ul>
@@ -81,6 +82,6 @@ $prestiti = $stmt->fetchAll();
             </tbody>
         </table>
     <?php endif; ?>
-    
+</div>
 </body>
 </html>
