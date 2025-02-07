@@ -12,18 +12,24 @@ require_once 'config.php';
 $search = "";
 $lettori = [];
 
-if (isset($_GET['search'])) {
+if (!isset($_GET['search']) || trim($_GET['search']) == "") {
+    // Nessun termine di ricerca: mostra tutti i lettori
+    $sql = "SELECT id_lettore, codice_fiscale, nome, cognome, email, categoria 
+            FROM lettore 
+            ORDER BY nome, cognome";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $lettori = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} else {
     $search = trim($_GET['search']);
-    if ($search !== "") {
-        $sql = "SELECT id_lettore, codice_fiscale, nome, cognome, email, categoria 
-                FROM lettore 
-                WHERE codice_fiscale ILIKE ? OR nome ILIKE ? OR cognome ILIKE ? OR email ILIKE ? 
-                ORDER BY nome, cognome";
-        $stmt = $pdo->prepare($sql);
-        $likeSearch = "%" . $search . "%";
-        $stmt->execute([$likeSearch, $likeSearch, $likeSearch, $likeSearch]);
-        $lettori = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $sql = "SELECT id_lettore, codice_fiscale, nome, cognome, email, categoria 
+            FROM lettore 
+            WHERE codice_fiscale ILIKE ? OR nome ILIKE ? OR cognome ILIKE ? OR email ILIKE ? 
+            ORDER BY nome, cognome";
+    $stmt = $pdo->prepare($sql);
+    $likeSearch = "%" . $search . "%";
+    $stmt->execute([$likeSearch, $likeSearch, $likeSearch, $likeSearch]);
+    $lettori = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
 <!DOCTYPE html>
@@ -42,37 +48,39 @@ if (isset($_GET['search'])) {
     </p>
     <form method="get" action="cerca_lettore.php">
         <label for="search">Inserisci codice fiscale, nome, cognome o email:</label>
-        <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>" required>
+        <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>">
         <button type="submit">Cerca</button>
     </form>
-    <?php if (isset($_GET['search'])): ?>
+    <?php if (!isset($_GET['search']) || trim($search) == ""): ?>
+        <h2>Elenco Completo dei Lettori</h2>
+    <?php else: ?>
         <h2>Risultati della ricerca</h2>
-        <?php if (empty($lettori)): ?>
-            <p>Nessun lettore trovato per "<?php echo htmlspecialchars($search); ?>".</p>
-        <?php else: ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Codice Fiscale</th>
-                        <th>Nome</th>
-                        <th>Cognome</th>
-                        <th>Email</th>
-                        <th>Categoria</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($lettori as $lettore): ?>
-                    <tr onclick="window.location.href='profilo_lettore.php?id=<?php echo urlencode($lettore['id_lettore']); ?>'" style="cursor:pointer;">
-                        <td><?php echo htmlspecialchars($lettore['codice_fiscale']); ?></td>
-                        <td><?php echo htmlspecialchars($lettore['nome']); ?></td>
-                        <td><?php echo htmlspecialchars($lettore['cognome']); ?></td>
-                        <td><?php echo htmlspecialchars($lettore['email']); ?></td>
-                        <td><?php echo htmlspecialchars($lettore['categoria']); ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif; ?>
+    <?php endif; ?>
+    <?php if (empty($lettori)): ?>
+        <p>Nessun lettore trovato.</p>
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Codice Fiscale</th>
+                    <th>Nome</th>
+                    <th>Cognome</th>
+                    <th>Email</th>
+                    <th>Categoria</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($lettori as $lettore): ?>
+                <tr onclick="window.location.href='profilo_lettore.php?id=<?php echo urlencode($lettore['id_lettore']); ?>'" style="cursor:pointer;">
+                    <td><?php echo htmlspecialchars($lettore['codice_fiscale']); ?></td>
+                    <td><?php echo htmlspecialchars($lettore['nome']); ?></td>
+                    <td><?php echo htmlspecialchars($lettore['cognome']); ?></td>
+                    <td><?php echo htmlspecialchars($lettore['email']); ?></td>
+                    <td><?php echo htmlspecialchars($lettore['categoria']); ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     <?php endif; ?>
 </div>
 </body>
