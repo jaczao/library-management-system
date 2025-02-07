@@ -73,11 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><br>
         <button type="submit">Accedi</button>
     </form>
-    <p>
-        <a href="forgot_password.php?role=<?php echo urlencode($role); ?>">Ho dimenticato la mia password</a>
-    </p>
-    <p>
-        <a href="index.php?role=<?php echo urlencode($role); ?>">Torna indietro</a>
-    </p>
+    <div class="inline-links">
+        <p>
+            <a href="forgot_password.php?role=<?php echo urlencode($role); ?>">Ho dimenticato la mia password</a>
+        </p>
+        <p>
+            <a href="index.php?role=<?php echo urlencode($role); ?>">Torna indietro</a>
+        </p>
+    </div>
 </body>
 </html>

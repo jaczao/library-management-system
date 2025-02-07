@@ -54,12 +54,12 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
     <h1>Cerca Libri</h1>
 
     <!-- Home Button: il link viene scelto in base al ruolo -->
-    <p>
+    <div class="inline-links">
         <a href="<?php echo ($role === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">Home</a>
         <?php if ($role === 'bibliotecario'): ?>
             | <a href="aggiungi_nuovo_libro.php">Aggiungi Nuovo Libro</a>
         <?php endif; ?>
-    </p>
+    </div>
     
     <form method="get" action="cerca_libri.php">
         <label for="search">Inserisci ISBN o titolo:</label>

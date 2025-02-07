@@ -106,7 +106,7 @@ if (!$lettore) {
         <button type="submit" name="reset_ritardi" onclick="return confirm('Sei sicuro di voler azzerare i ritardi?');">Azzera Ritardi</button>
     </form>
     
-    <p><a href="profilo_lettore.php?id=<?php echo $id_lettore; ?>">Torna al Profilo Lettore</a></p>
+    <div class="inline-links"><a href="profilo_lettore.php?id=<?php echo $id_lettore; ?>">Torna al Profilo Lettore</a></div>
 </div>
 </body>
 </html>

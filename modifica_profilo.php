@@ -175,8 +175,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Aggiorna Profilo</button>
     </form>
     
-    <p>
+    <div class="inline-links">
         <a href="home_<?php echo $role; ?>.php">Torna alla home</a>
-    </p>
+    </div>
 </body>
 </html>

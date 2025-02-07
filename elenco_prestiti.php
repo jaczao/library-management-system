@@ -50,7 +50,7 @@ $prestiti = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </nav>
     
     <!-- Switch per selezionare lo stato dei prestiti -->
-    <div class="switch">
+    <div class="inline-links">
         <a href="elenco_prestiti.php?status=in_corso" <?php if($status==='in_corso') echo 'style="font-weight:bold;"'; ?>>In Corso</a> |
         <a href="elenco_prestiti.php?status=non_in_corso" <?php if($status==='non_in_corso') echo 'style="font-weight:bold;"'; ?>>Conclusi</a>
     </div>

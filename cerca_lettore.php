@@ -42,10 +42,10 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 <body>
 <div class="container">
     <h1>Cerca Lettore</h1>
-    <p>
+    <div class="inline-links">
         <a href="home_bibliotecario.php">Home</a> | 
         <a href="crea_lettore.php">Crea Nuovo Profilo Lettore</a>
-    </p>
+</div>
     <form method="get" action="cerca_lettore.php">
         <label for="search">Inserisci codice fiscale, nome, cognome o email:</label>
         <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>">

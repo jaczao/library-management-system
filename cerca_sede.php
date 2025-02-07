@@ -41,10 +41,10 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 <body>
 <div class="container">
     <h1>Cerca Sede</h1>
-    <p>
+    <div class="inline-links">
         <a href="home_bibliotecario.php">Home</a> | 
         <a href="crea_sede.php">Crea Sede</a>
-    </p>
+    </div>
     <form method="get" action="cerca_sede.php">
         <label for="search">Inserisci codice sede, città o indirizzo:</label>
         <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>">
