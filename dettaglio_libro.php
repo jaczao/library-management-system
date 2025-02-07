@@ -132,7 +132,7 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
             Nessun autore associato.
         <?php else: ?>
             <?php foreach ($autori as $index => $autore): ?>
-                <a href="autore.php?id=<?php echo urlencode($autore['id_autore']); ?>">
+                <a href="dettaglio_autore.php?id=<?php echo urlencode($autore['id_autore']); ?>">
                     <?php echo htmlspecialchars($autore['nome'] . " " . $autore['cognome']); ?>
                 </a><?php if ($index < count($autori) - 1) echo ", "; ?>
             <?php endforeach; ?>
