@@ -13,30 +13,64 @@ $id_autore = intval($_GET['id']);
 $message = "";
 $error = "";
 
-// Gestione rimozione associazione (tramite GET parameter "remove_assoc")
-if (isset($_GET['remove_assoc'])) {
-    $id_libro_remove = intval($_GET['remove_assoc']);
-    // Verifica quanti autori ha questo libro
-    $sqlCount = "SELECT COUNT(*) FROM libro_autore WHERE libro = ?";
-    $stmtCount = $pdo->prepare($sqlCount);
-    $stmtCount->execute([$id_libro_remove]);
-    $count = $stmtCount->fetchColumn();
-    if ($count <= 1) {
-        $error = "Impossibile rimuovere l'autore dal libro. Il libro deve avere almeno un autore.";
+// Se è stato richiesto l'eliminazione (tramite GET) ed l'utente è bibliotecario, esegue il controllo e, se possibile, l'eliminazione.
+if (isset($_GET['delete']) && $_SESSION['role'] === 'bibliotecario') {
+    // Verifica se l'autore è l'unico autore di almeno un libro:
+    $sqlCheckSole = "SELECT COUNT(*) FROM libro_autore 
+                     WHERE autore = ? 
+                     AND libro IN (
+                        SELECT libro FROM libro_autore GROUP BY libro HAVING COUNT(*) = 1
+                     )";
+    $stmtCheckSole = $pdo->prepare($sqlCheckSole);
+    $stmtCheckSole->execute([$id_autore]);
+    $countSole = $stmtCheckSole->fetchColumn();
+
+    if ($countSole > 0) {
+        $error = "Non è possibile eliminare l'autore, perché è l'unico autore di almeno un libro.";
     } else {
         try {
-            $sqlDelete = "DELETE FROM libro_autore WHERE libro = ? AND autore = ?";
-            $stmtDelete = $pdo->prepare($sqlDelete);
-            $stmtDelete->execute([$id_libro_remove, $id_autore]);
-            $message = "Autore rimosso con successo dal libro.";
+            // Se esistono associazioni, le elimino prima (se non sono gestite tramite cascade)
+            $stmtDeleteAssoc = $pdo->prepare("DELETE FROM libro_autore WHERE autore = ?");
+            $stmtDeleteAssoc->execute([$id_autore]);
+            // Elimino l'autore
+            $stmtDeleteAutore = $pdo->prepare("DELETE FROM autore WHERE id_autore = ?");
+            $stmtDeleteAutore->execute([$id_autore]);
+            $message = "Autore eliminato con successo.";
+            // Dopo l'eliminazione, si può reindirizzare alla pagina di ricerca autori
+            header("Location: cerca_autori.php?message=" . urlencode($message));
+            exit;
         } catch (PDOException $e) {
-            $error = "Errore nella rimozione dell'autore dal libro: " . htmlspecialchars($e->getMessage());
+            $error = "Errore nell'eliminazione dell'autore: " . htmlspecialchars($e->getMessage());
         }
     }
 }
 
-// Gestione aggiunta associazione (tramite POST)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'aggiungi_libro') {
+// Gestione rimozione associazione (tramite GET parameter "remove_assoc") – solo per il bibliotecario
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario') {
+    if (isset($_GET['remove_assoc'])) {
+        $id_libro_remove = intval($_GET['remove_assoc']);
+        // Verifica quanti autori ha questo libro
+        $sqlCount = "SELECT COUNT(*) FROM libro_autore WHERE libro = ?";
+        $stmtCount = $pdo->prepare($sqlCount);
+        $stmtCount->execute([$id_libro_remove]);
+        $count = $stmtCount->fetchColumn();
+        if ($count <= 1) {
+            $error = "Impossibile rimuovere l'autore dal libro. Il libro deve avere almeno un autore.";
+        } else {
+            try {
+                $sqlDelete = "DELETE FROM libro_autore WHERE libro = ? AND autore = ?";
+                $stmtDelete = $pdo->prepare($sqlDelete);
+                $stmtDelete->execute([$id_libro_remove, $id_autore]);
+                $message = "Autore rimosso con successo dal libro.";
+            } catch (PDOException $e) {
+                $error = "Errore nella rimozione dell'autore dal libro: " . htmlspecialchars($e->getMessage());
+            }
+        }
+    }
+}
+
+// Gestione aggiunta associazione (tramite POST) – solo per il bibliotecario
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'aggiungi_libro' && $_SESSION['role'] === 'bibliotecario') {
     $id_libro_da_aggiungere = intval($_POST['id_libro'] ?? 0);
     if ($id_libro_da_aggiungere > 0) {
         // Verifica se l'associazione esiste già
@@ -107,28 +141,33 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
   <p><strong>Biografia:</strong><br><?php echo nl2br(htmlspecialchars($autore['biografia'])); ?></p>
   
   <div class="inline-links">
-  <p>
-      <a href="modifica_autore.php?id=<?php echo $id_autore; ?>">Modifica Autore</a>
-  </p>
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario'): ?>
+      <p>
+          <a href="modifica_autore.php?id=<?php echo $id_autore; ?>">Modifica Autore</a> | 
+          <a href="dettaglio_autore.php?id=<?php echo $id_autore; ?>&delete=1" onclick="return confirm('Sei sicuro di voler eliminare questo autore?');">Elimina Autore</a>
+      </p>
+    <?php endif; ?>
   </div>
   
-  <!-- Form per aggiungere un libro a questo autore -->
-  <h3>Aggiungi libro a questo autore</h3>
-  <form method="post" action="dettaglio_autore.php?id=<?php echo $id_autore; ?>">
-      <input type="hidden" name="action" value="aggiungi_libro">
-      <label for="id_libro">Seleziona un libro:</label>
-      <select name="id_libro" id="id_libro" required>
-          <option value="">-- Seleziona libro --</option>
-          <?php foreach ($tuttiLibri as $libro): ?>
-              <option value="<?php echo htmlspecialchars($libro['id_libro']); ?>">
-                  <?php echo htmlspecialchars($libro['titolo']); ?>
-              </option>
-          <?php endforeach; ?>
-      </select>
-      <button type="submit">Aggiungi libro a questo autore</button>
-  </form>
+  <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario'): ?>
+    <!-- Form per aggiungere un libro a questo autore -->
+    <h3>Aggiungi libro a questo autore</h3>
+    <form method="post" action="dettaglio_autore.php?id=<?php echo $id_autore; ?>">
+        <input type="hidden" name="action" value="aggiungi_libro">
+        <label for="id_libro">Seleziona un libro:</label>
+        <select name="id_libro" id="id_libro" required>
+            <option value="">-- Seleziona libro --</option>
+            <?php foreach ($tuttiLibri as $libro): ?>
+                <option value="<?php echo htmlspecialchars($libro['id_libro']); ?>">
+                    <?php echo htmlspecialchars($libro['titolo']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit">Aggiungi libro a questo autore</button>
+    </form>
+  <?php endif; ?>
   
-  <!-- Elenco dei libri associati all'autore con possibilità di rimozione -->
+  <!-- Elenco dei libri associati all'autore con possibilità di rimozione (se l'utente è bibliotecario) -->
   <h3>Libri scritti</h3>
   <?php if (empty($libriAssoc)): ?>
       <p>Nessun libro associato.</p>
@@ -140,12 +179,12 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
                       <?php echo htmlspecialchars($libro['titolo']); ?>
                   </a> (ISBN: <?php echo htmlspecialchars($libro['isbn']); ?>)
                   <?php
-                  // Verifica se il libro ha più di un autore
+                  // Se il libro ha più di un autore e l'utente è bibliotecario, mostra il link per rimuovere l'associazione
                   $sqlCount = "SELECT COUNT(*) FROM libro_autore WHERE libro = ?";
                   $stmtCount = $pdo->prepare($sqlCount);
                   $stmtCount->execute([$libro['id_libro']]);
                   $numAutori = $stmtCount->fetchColumn();
-                  if ($numAutori > 1):
+                  if ($numAutori > 1 && isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario'):
                   ?>
                       <a href="dettaglio_autore.php?id=<?php echo $id_autore; ?>&remove_assoc=<?php echo $libro['id_libro']; ?>" onclick="return confirm('Sei sicuro di voler rimuovere questo autore dal libro?');">[Rimuovi dagli autori del libro]</a>
                   <?php endif; ?>
@@ -154,7 +193,9 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
       </ul>
   <?php endif; ?>
   
-  <div class="inline-links"><p><a href="cerca_autori.php">Torna alla ricerca autori</a></p></div>
+  <div class="inline-links">
+      <p><a href="cerca_autori.php">Torna alla ricerca autori</a></p>
+  </div>
 </div>
 </body>
 </html>
