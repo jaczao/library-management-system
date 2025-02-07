@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $stmtPrenota->execute([$_SESSION['user']['id_lettore'], $id_libro]);
             }
             $result = $stmtPrenota->fetch(PDO::FETCH_NUM);
-            $message = "Prenotazione effettuata con successo. ID prestito: " . htmlspecialchars($result[0]);
+            $message = "Prenotazione effettuata con successo.";
         } catch (PDOException $e) {
             $error = "Errore nella prenotazione: " . htmlspecialchars($e->getMessage());
         }
