@@ -166,7 +166,7 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
                     $disponibili = ($row && $row['disponibili'] !== null) ? intval($row['disponibili']) : 0;
                 ?>
                     <option value="<?php echo htmlspecialchars($sede['id_sede']); ?>">
-                        <?php echo htmlspecialchars($sede['codice_sede'] . " - " . $sede['citta'] . " (" . $sede['indirizzo'] . ") - Copie: $totale, Disponibili: $disponibili"); ?>
+                        <?php echo htmlspecialchars($sede['codice_sede'] . " - " . $sede['citta'] . " (" . $sede['indirizzo'] . ") - Disponibili: $disponibili"); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
