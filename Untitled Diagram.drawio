@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15" version="26.0.11">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="2120" dy="1438" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="1004" dy="681" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -103,7 +103,7 @@
             <mxPoint x="675" y="889.79" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="nS3IW-vCjwx6fC8YLQsf-89" value="(1,n)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="nS3IW-vCjwx6fC8YLQsf-89" value="(0,n)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="103" y="466" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-90" value="(1,n)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -330,7 +330,7 @@
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="0-qM876O1-N-XNA0Vi3--4" value="&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;&lt;code&gt;●&amp;nbsp;&lt;/code&gt;&lt;span style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;id&lt;/span&gt;&lt;br style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code&gt;○&amp;nbsp;&lt;/code&gt;&lt;span style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;nome&lt;/span&gt;&lt;div style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;cognome&lt;/div&gt;&lt;/code&gt;&lt;/div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;data_nascita&lt;br&gt;&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;data_morte (0,1)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;biografia&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="0-qM876O1-N-XNA0Vi3--3">
+        <mxCell id="0-qM876O1-N-XNA0Vi3--4" value="&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;&lt;code&gt;●&amp;nbsp;&lt;/code&gt;&lt;span style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;id_autore&lt;/span&gt;&lt;br style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code&gt;○&amp;nbsp;&lt;/code&gt;&lt;span style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;nome&lt;/span&gt;&lt;div style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;cognome&lt;/div&gt;&lt;/code&gt;&lt;/div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;data_nascita&lt;br&gt;&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;data_morte (0,1)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;biografia&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="0-qM876O1-N-XNA0Vi3--3">
           <mxGeometry y="50" width="160" height="100" as="geometry" />
         </mxCell>
         <mxCell id="0-qM876O1-N-XNA0Vi3--5" value="Lettore" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -338,7 +338,7 @@
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="0-qM876O1-N-XNA0Vi3--6" value="&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;&lt;code&gt;●&amp;nbsp;&lt;/code&gt;&lt;span style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;id&lt;/span&gt;&lt;br style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code&gt;○&amp;nbsp;&lt;/code&gt;&lt;span style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;nome&lt;/span&gt;&lt;div style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;cognome&lt;/div&gt;&lt;div style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;email&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;password&lt;/div&gt;&lt;/div&gt;&lt;/code&gt;&lt;/div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;codice_fiscale&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;ritardi&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;categoria&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="0-qM876O1-N-XNA0Vi3--5">
+        <mxCell id="0-qM876O1-N-XNA0Vi3--6" value="&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;&lt;code&gt;●&amp;nbsp;&lt;/code&gt;&lt;span style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;id_lettore&lt;/span&gt;&lt;br style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code&gt;○&amp;nbsp;&lt;/code&gt;&lt;span style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;nome&lt;/span&gt;&lt;div style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;cognome&lt;/div&gt;&lt;div style=&quot;font-family: Helvetica; white-space: nowrap;&quot;&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;email&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;password&lt;/div&gt;&lt;/div&gt;&lt;/code&gt;&lt;/div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;codice_fiscale&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;ritardi&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;categoria&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="0-qM876O1-N-XNA0Vi3--5">
           <mxGeometry y="50" width="160" height="130" as="geometry" />
         </mxCell>
         <mxCell id="0-qM876O1-N-XNA0Vi3--7" value="Sede" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -396,7 +396,7 @@
             <mxPoint x="676" y="1739.79" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="0-qM876O1-N-XNA0Vi3--23" value="(1,n)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="0-qM876O1-N-XNA0Vi3--23" value="(0,n)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="105" y="1575" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="0-qM876O1-N-XNA0Vi3--24" value="(1,n)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
@@ -434,7 +434,7 @@
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="0-qM876O1-N-XNA0Vi3--42" value="&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;●&amp;nbsp;&lt;/code&gt;id&lt;br&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;nome&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;cognome&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;email&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;password&lt;/div&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="0-qM876O1-N-XNA0Vi3--41">
+        <mxCell id="0-qM876O1-N-XNA0Vi3--42" value="&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;●&amp;nbsp;&lt;/code&gt;id_bibliotecario&lt;br&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;nome&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;cognome&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;email&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;password&lt;/div&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="0-qM876O1-N-XNA0Vi3--41">
           <mxGeometry y="50" width="160" height="90" as="geometry" />
         </mxCell>
         <mxCell id="0-qM876O1-N-XNA0Vi3--51" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="0-qM876O1-N-XNA0Vi3--13" target="0-qM876O1-N-XNA0Vi3--4">
@@ -472,7 +472,7 @@
             <mxPoint x="541" y="1848" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="0-qM876O1-N-XNA0Vi3--68" value="(0,1)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="0-qM876O1-N-XNA0Vi3--68" value="(1,1)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="413" y="1629" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="0-qM876O1-N-XNA0Vi3--69" value="(1,1)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
