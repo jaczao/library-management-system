@@ -41,7 +41,7 @@
             <mxRectangle x="310" y="340" width="70" height="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="nS3IW-vCjwx6fC8YLQsf-43" value="&lt;code style=&quot;white-space: normal;&quot;&gt;●&amp;nbsp;&lt;/code&gt;id_persona&lt;br&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;nome&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;cognome&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="nS3IW-vCjwx6fC8YLQsf-42" vertex="1">
+        <mxCell id="nS3IW-vCjwx6fC8YLQsf-43" value="&lt;code style=&quot;white-space: normal;&quot;&gt;●&amp;nbsp;&lt;/code&gt;id&lt;br&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;nome&lt;div&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;cognome&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="nS3IW-vCjwx6fC8YLQsf-42" vertex="1">
           <mxGeometry y="50" width="160" height="70" as="geometry" />
         </mxCell>
         <mxCell id="nS3IW-vCjwx6fC8YLQsf-47" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" target="nS3IW-vCjwx6fC8YLQsf-43" edge="1">
