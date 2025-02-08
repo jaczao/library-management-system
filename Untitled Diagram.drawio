@@ -240,10 +240,10 @@
             <mxPoint x="270" y="510" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="nS3IW-vCjwx6fC8YLQsf-160" value="(T,O)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="nS3IW-vCjwx6fC8YLQsf-160" value="(T,E)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="491" y="375" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="nS3IW-vCjwx6fC8YLQsf-161" value="(T,O)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="nS3IW-vCjwx6fC8YLQsf-161" value="(T,E)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="295" y="196" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="khii3lkx6Q31bzzhSRxS-1" value="Prestito" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -260,10 +260,10 @@
         <mxCell id="khii3lkx6Q31bzzhSRxS-5" value="Associata a" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="445" y="980" width="100" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="khii3lkx6Q31bzzhSRxS-6" value="Associato a" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+        <mxCell id="khii3lkx6Q31bzzhSRxS-6" value="Chiede" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="610" y="680" width="100" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="khii3lkx6Q31bzzhSRxS-7" value="Associato a" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+        <mxCell id="khii3lkx6Q31bzzhSRxS-7" value="Chiede" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="395" y="680" width="100" height="50" as="geometry" />
         </mxCell>
         <mxCell id="khii3lkx6Q31bzzhSRxS-10" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="khii3lkx6Q31bzzhSRxS-7">
