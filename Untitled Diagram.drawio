@@ -366,7 +366,7 @@
         <mxCell id="0-qM876O1-N-XNA0Vi3--16" value="&lt;code style=&quot;white-space: normal;&quot;&gt;●&amp;nbsp;&lt;/code&gt;id_copia&lt;br&gt;&lt;code style=&quot;white-space: normal;&quot;&gt;○&amp;nbsp;&lt;/code&gt;disponibile" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="0-qM876O1-N-XNA0Vi3--15">
           <mxGeometry y="50" width="160" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="0-qM876O1-N-XNA0Vi3--17" value="Associata a" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+        <mxCell id="0-qM876O1-N-XNA0Vi3--17" value="Riferita a" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="214" y="1955" width="100" height="50" as="geometry" />
         </mxCell>
         <mxCell id="0-qM876O1-N-XNA0Vi3--18" value="Collocata in" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
