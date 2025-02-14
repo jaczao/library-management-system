@@ -51,7 +51,7 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 </head>
 <body>
 <div class="container">
-    <h1>Cerca Libri</h1>
+    <h1>Cerca Libro</h1>
 
     <!-- Home Button: il link viene scelto in base al ruolo -->
     <div class="inline-links">
