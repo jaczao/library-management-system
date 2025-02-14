@@ -194,8 +194,9 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
   <?php endif; ?>
   
   <div class="inline-links">
+        <br>
       <p>
-        <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">Home</a>
+        <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">Torna alla home</a>
       </p>
   </div>
 </div>
