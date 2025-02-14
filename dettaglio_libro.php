@@ -26,14 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $sede_id = (isset($_POST['sede']) && $_POST['sede'] !== "") ? intval($_POST['sede']) : null;
         try {
             if ($sede_id !== null) {
-                $stmtPrenota = $pdo->prepare("SELECT assegna_prestito(?, ?, ?)");
+                $stmtPrenota = $pdo->prepare("CALL assegna_prestito(?, ?, ?)");
                 $stmtPrenota->execute([$_SESSION['user']['id_lettore'], $id_libro, $sede_id]);
             } else {
-                $stmtPrenota = $pdo->prepare("SELECT assegna_prestito(?, ?)");
+                $stmtPrenota = $pdo->prepare("CALL assegna_prestito(?, ?)");
                 $stmtPrenota->execute([$_SESSION['user']['id_lettore'], $id_libro]);
             }
-            $result = $stmtPrenota->fetch(PDO::FETCH_NUM);
-            $message = "Prenotazione effettuata con successo.";
+            $message = "Prenotazione effettuata con successo.";            
         } catch (PDOException $e) {
             // Estraiamo solo il messaggio di errore utile dalla stringa di eccezione
             $errorMsg = $e->getMessage();

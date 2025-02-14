@@ -118,15 +118,15 @@ $$;
 
 
 
-CREATE OR REPLACE FUNCTION assegna_prestito( --posso mod in procedura se vedo che si puo
-    p_id_lettore INTEGER,          -- Codice fiscale del lettore
-    p_id_libro INTEGER,                    -- ISBN del libro richiesto
-    p_id_sede INTEGER DEFAULT NULL    -- Sede scelta (opzionale)
+CREATE OR REPLACE PROCEDURE assegna_prestito(
+    p_id_lettore INTEGER,
+    p_id_libro INTEGER,
+    p_id_sede INTEGER DEFAULT NULL
 )
-RETURNS INTEGER AS $$
+LANGUAGE plpgsql
+AS $$
 DECLARE
     v_id_copia INTEGER;
-    v_id_prestito INTEGER;
     available_sedi TEXT;
 BEGIN
     IF p_id_sede IS NULL THEN
@@ -157,21 +157,18 @@ BEGIN
             ELSE
                 RAISE EXCEPTION 'Il libro non è disponibile nella sede scelta. Disponibile nelle sedi: %', available_sedi;
             END IF;
-
         END IF;
     END IF;
 
-    -- Inserimento del prestito:
+    -- Inserimento del prestito
     INSERT INTO prestito (lettore, copia)
-    VALUES (p_id_lettore, v_id_copia)
-    RETURNING id_prestito INTO v_id_prestito;
+    VALUES (p_id_lettore, v_id_copia);
     
     -- Aggiornamento della disponibilità della copia assegnata
     UPDATE copia SET disponibile = FALSE WHERE id_copia = v_id_copia;
-    
-    RETURN v_id_prestito;
 END;
-$$ LANGUAGE plpgsql;
+$$;
+
 
 
 
