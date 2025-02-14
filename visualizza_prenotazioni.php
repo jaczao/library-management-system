@@ -50,34 +50,35 @@ $prestiti = $stmt->fetchAll();
         <table>
             <thead>
                 <tr>
-                    <th>ID Prestito</th>
                     <th>Titolo Libro</th>
                     <th>ISBN</th>
-                    <th>Data Inizio</th>
                     <th>Stato</th>
-                    <th>Data Restituzione / Scadenza</th>
+                    <th>Data Inizio</th>
+                    <th>Data Scadenza</th>
+                    <th>Data Restituzione</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($prestiti as $prestito): ?>
                     <?php 
-                        // Se data_restituzione è valorizzata, il prestito è stato restituito.
-                        // Altrimenti il prestito è in corso e si mostra la data di scadenza.
+                        // Determina lo stato del prestito e formatta le date
+                        $dataInizio = date("d/m/Y", strtotime($prestito['data_inizio']));
+                        $dataScadenza = date("d/m/Y", strtotime($prestito['data_scadenza']));
                         if (!empty($prestito['data_restituzione'])) {
                             $stato = "Restituito";
-                            $dataInfo = date("d/m/Y", strtotime($prestito['data_restituzione']));
+                            $dataRestituzione = date("d/m/Y", strtotime($prestito['data_restituzione']));
                         } else {
                             $stato = "In corso";
-                            $dataInfo = date("d/m/Y", strtotime($prestito['data_scadenza']));
+                            $dataRestituzione = "-";
                         }
                     ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($prestito['id_prestito']); ?></td>
                         <td><?php echo htmlspecialchars($prestito['titolo']); ?></td>
                         <td><?php echo htmlspecialchars($prestito['isbn']); ?></td>
-                        <td><?php echo date("d/m/Y", strtotime($prestito['data_inizio'])); ?></td>
                         <td><?php echo $stato; ?></td>
-                        <td><?php echo $dataInfo; ?></td>
+                        <td><?php echo $dataInizio; ?></td>
+                        <td><?php echo $dataScadenza; ?></td>
+                        <td><?php echo $dataRestituzione; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
