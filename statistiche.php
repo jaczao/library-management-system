@@ -45,7 +45,7 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
                 <tr>
                     <th>Codice Sede</th>
                     <th>Totale Copie</th>
-                    <th>Totale Libri</th>
+                    <th>Totale ISBN</th>
                     <th>Prestiti in Corso</th>
                 </tr>
             </thead>
@@ -63,7 +63,7 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
     
     <!-- Sezione Ritardi per Sede -->
-    <h2>Prestiti in Ritardo per Sede</h2>
+    <h2>Report dei Ritardi</h2>
     <?php if (count($sediRitardi) === 0): ?>
         <p>Nessun prestito in ritardo.</p>
     <?php else: ?>

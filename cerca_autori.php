@@ -36,7 +36,7 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 </head>
 <body>
 <div class="container">
-    <h1>Cerca Autori</h1>
+    <h1>Cerca Autore</h1>
     <div class="inline-links">
         <a href="home_bibliotecario.php">Home</a>
     </div>
