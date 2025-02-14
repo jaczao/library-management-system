@@ -38,7 +38,8 @@ $prestiti = $stmt->fetchAll();
         <ul>
             <li><a href="home_lettore.php">Home</a></li>
             <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <li><a href="cerca_libri.php">Cerca Libri</a></li>
+            <li><a href="cerca_libri.php">Cerca Libro</a></li>
+            <li><a href="cerca_autori.php">Cerca Autore</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>

@@ -3,6 +3,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'config.php';
+if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
+    header("Location: login.php?role=bibliotecario");
+    exit;
+}
 
 if (!isset($_GET['id'])) {
     echo "Autore non specificato.";
