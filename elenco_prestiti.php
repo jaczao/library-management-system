@@ -45,7 +45,8 @@ $prestiti = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <ul>
             <li><a href="home_bibliotecario.php">Home</a></li>
             <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <!-- Altri link saranno aggiunti in seguito -->
+            <li><a href="statistiche.php">Statistiche</a></li>
+            <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
     
