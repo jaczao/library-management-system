@@ -10,7 +10,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
 <head>
     <meta charset="UTF-8">
     <title>Home Bibliotecario - BiblioStudio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/../css/style.css">
 </head>
 <body>
 <div class="container">

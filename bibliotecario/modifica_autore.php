@@ -55,7 +55,7 @@ if (!$autore) {
 <head>
     <meta charset="UTF-8">
     <title>Modifica Autore - BiblioStudio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/../css/style.css">
 </head>
 <body>
 <div class="container">

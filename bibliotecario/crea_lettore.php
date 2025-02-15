@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Crea Nuovo Profilo Lettore - BiblioStudio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/../css/style.css">
 </head>
 <body>
 <div class="container">

@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Modifica Libro - <?php echo htmlspecialchars($libro['titolo']); ?></title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/../css/style.css">
     <style>
       .autore-group { margin-bottom: 10px; }
       .autore-group input { width: 45%; display: inline-block; }

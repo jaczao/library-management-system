@@ -36,7 +36,7 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 <head>
     <meta charset="UTF-8">
     <title>Cerca Sede - BiblioStudio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/../css/style.css">
 </head>
 <body>
 <div class="container">

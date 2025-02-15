@@ -14,7 +14,7 @@ $nome = htmlspecialchars($_SESSION['user']['nome']);
 <head>
     <meta charset="UTF-8">
     <title>Home Lettore - BiblioStudio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/../css/style.css">
 </head>
 <body>
     <div class="container">

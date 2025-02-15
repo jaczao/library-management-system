@@ -29,7 +29,7 @@ $prestiti = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Visualizza Prenotazioni - BiblioStudio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/../css/style.css">
 </head>
 <body>
 <div class="container">
