@@ -24,7 +24,7 @@ $nome = htmlspecialchars($_SESSION['user']['nome']);
             <li><a href="/../modifica_profilo.php">Modifica Profilo</a></li>
             <li><a href="/../cerca_libri.php">Cerca Libro</a></li>
             <li><a href="/../cerca_autori.php">Cerca Autore</a></li>
-            <li><a href="visualizza_prenotazioni.php">Visualizza Prenotazioni</a></li>
+            <li><a href="visualizza_prestiti.php">Visualizza Prenotazioni</a></li>
             <li><a href="/../logout.php">Logout</a></li>
         </ul>
     </nav>

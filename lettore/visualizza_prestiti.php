@@ -10,7 +10,7 @@ require_once __DIR__ . '/../config.php';
 
 $lettoreId = $_SESSION['user']['id_lettore'];
 
-// Recuperiamo le prenotazioni (prestiti) del lettore
+// Recuperiamo i prestiti del lettore
 $sql = "SELECT p.id_prestito, p.data_inizio, p.data_scadenza, p.data_restituzione,
                l.titolo, l.isbn
         FROM prestito p
@@ -28,12 +28,12 @@ $prestiti = $stmt->fetchAll();
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Visualizza Prenotazioni - BiblioStudio</title>
+    <title>Visualizza Prestiti - BiblioStudio</title>
     <link rel="stylesheet" href="/../css/style.css">
 </head>
 <body>
 <div class="container">
-    <h1>Le tue Prenotazioni</h1>
+    <h1>I tuoi Prestiti</h1>
     <nav>
         <ul>
             <li><a href="home_lettore.php">Home</a></li>
@@ -45,7 +45,7 @@ $prestiti = $stmt->fetchAll();
     </nav>
     
     <?php if (empty($prestiti)): ?>
-        <p>Non hai nessuna prenotazione.</p>
+        <p>Non c'è nessun prestito.</p>
     <?php else: ?>
         <table>
             <thead>
