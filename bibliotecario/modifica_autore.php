@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once __DIR__ . '/../config.php';
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
-    header("Location: login.php?role=bibliotecario");
+    header("Location: /login.php?role=bibliotecario");
     exit;
 }
 

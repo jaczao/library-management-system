@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
-    header("Location: login.php?role=bibliotecario");
+    header("Location: /login.php?role=bibliotecario");
     exit;
 }
 
