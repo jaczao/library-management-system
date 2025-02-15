@@ -66,7 +66,7 @@ if (!$autore) {
     <?php if ($error): ?>
         <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-    <form method="post" action="bibliotecario/modifica_autore.php?id=<?php echo $id_autore; ?>">
+    <form method="post" action="modifica_autore.php?id=<?php echo $id_autore; ?>">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($autore['nome']); ?>" required>
         
@@ -84,7 +84,7 @@ if (!$autore) {
         
         <button type="submit">Salva Modifiche</button>
     </form>
-    <div class="inline-links"><p><a href="dettaglio_autore.php?id=<?php echo $id_autore; ?>">Torna al Dettaglio Autore</a></p></div>
+    <div class="inline-links"><p><a href="/../dettaglio_autore.php?id=<?php echo $id_autore; ?>">Torna al Dettaglio Autore</a></p></div>
 </div>
 </body>
 </html>

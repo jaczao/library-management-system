@@ -17,14 +17,14 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
     <h1>Home Bibliotecario</h1>
     <nav>
         <ul>
-            <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <li><a href="bibliotecario/cerca_lettore.php">Cerca Lettore</a></li>
-            <li><a href="cerca_libri.php">Cerca Libro</a></li>
-            <li><a href="cerca_autori.php">Cerca Autore</a></li>
-            <li><a href="bibliotecario/cerca_sede.php">Cerca Sede</a></li>
-            <li><a href="bibliotecario/elenco_prestiti.php">Elenco Prestiti</a></li>
-            <li><a href="bibliotecario/statistiche.php">Statistiche</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="/../modifica_profilo.php">Modifica Profilo</a></li>
+            <li><a href="cerca_lettore.php">Cerca Lettore</a></li>
+            <li><a href="/../cerca_libri.php">Cerca Libro</a></li>
+            <li><a href="/../cerca_autori.php">Cerca Autore</a></li>
+            <li><a href="cerca_sede.php">Cerca Sede</a></li>
+            <li><a href="elenco_prestiti.php">Elenco Prestiti</a></li>
+            <li><a href="statistiche.php">Statistiche</a></li>
+            <li><a href="/../logout.php">Logout</a></li>
         </ul>
     </nav>
     <p>Benvenuto, <?php echo htmlspecialchars($_SESSION['user']['nome']); ?>!</p>

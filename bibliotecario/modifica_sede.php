@@ -60,7 +60,7 @@ if (!$sede) {
         <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     
-    <form method="post" action="bibliotecario/modifica_sede.php?id=<?php echo $id_sede; ?>">
+    <form method="post" action="modifica_sede.php?id=<?php echo $id_sede; ?>">
         <label for="codice_sede">Codice Sede:</label>
         <input type="text" id="codice_sede" name="codice_sede" value="<?php echo htmlspecialchars($sede['codice_sede']); ?>" required>
         
@@ -73,7 +73,7 @@ if (!$sede) {
         <button type="submit">Salva Modifiche</button>
     </form>
     
-    <div class="inline-links"><p><a href="bibliotecario/dettaglio_sede.php?id=<?php echo $id_sede; ?>">Torna al Dettaglio Sede</a></p></div>
+    <div class="inline-links"><p><a href="dettaglio_sede.php?id=<?php echo $id_sede; ?>">Torna al Dettaglio Sede</a></p></div>
 </div>
 </body>
 </html>

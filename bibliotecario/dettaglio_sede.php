@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $stmtSede = $pdo->prepare("DELETE FROM sede WHERE id_sede = ?");
         $stmtSede->execute([$id_sede]);
         $pdo->commit();
-        header("Location: bibliotecario/cerca_sede.php?message=" . urlencode("Sede eliminata con successo."));
+        header("Location: cerca_sede.php?message=" . urlencode("Sede eliminata con successo."));
         exit;
     } catch (PDOException $e) {
         $pdo->rollBack();
@@ -90,12 +90,12 @@ $prestiti = $stmtPrestiti->fetchAll(PDO::FETCH_ASSOC);
     
     <div class="inline-links">
     <p>
-        <a href="bibliotecario/modifica_sede.php?id=<?php echo $id_sede; ?>">Modifica Sede</a>
+        <a href="modifica_sede.php?id=<?php echo $id_sede; ?>">Modifica Sede</a>
     </p>
     </div>
     
     <!-- Form per eliminare la sede -->
-    <form method="post" action="bibliotecario/dettaglio_sede.php?id=<?php echo $id_sede; ?>" onsubmit="return confirm('Sei sicuro di voler eliminare questa sede? Verranno eliminate anche tutte le copie e i prestiti associati.');">
+    <form method="post" action="dettaglio_sede.php?id=<?php echo $id_sede; ?>" onsubmit="return confirm('Sei sicuro di voler eliminare questa sede? Verranno eliminate anche tutte le copie e i prestiti associati.');">
         <input type="hidden" name="action" value="elimina_sede">
         <button type="submit">Elimina Sede</button>
     </form>
@@ -107,7 +107,7 @@ $prestiti = $stmtPrestiti->fetchAll(PDO::FETCH_ASSOC);
         <ul>
             <?php foreach ($libri as $libro): ?>
                 <li>
-                    <a href="dettaglio_libro.php?id=<?php echo urlencode($libro['id_libro']); ?>">
+                    <a href="/../dettaglio_libro.php?id=<?php echo urlencode($libro['id_libro']); ?>">
                         <?php echo htmlspecialchars($libro['titolo']); ?>
                     </a> (ISBN: <?php echo htmlspecialchars($libro['isbn']); ?>)
                 </li>
@@ -131,7 +131,7 @@ $prestiti = $stmtPrestiti->fetchAll(PDO::FETCH_ASSOC);
             </thead>
             <tbody>
                 <?php foreach ($prestiti as $prestito): ?>
-                    <tr onclick="window.location.href='bibliotecario/dettaglio_prestito.php?id=<?php echo urlencode($prestito['id_prestito']); ?>'" style="cursor:pointer;">
+                    <tr onclick="window.location.href='dettaglio_prestito.php?id=<?php echo urlencode($prestito['id_prestito']); ?>'" style="cursor:pointer;">
                         <td><?php echo htmlspecialchars($prestito['id_prestito']); ?></td>
                         <td><?php echo htmlspecialchars($prestito['libro_titolo']); ?></td>
                         <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($prestito['data_inizio']))); ?></td>
@@ -143,7 +143,7 @@ $prestiti = $stmtPrestiti->fetchAll(PDO::FETCH_ASSOC);
         </table>
     <?php endif; ?>
     
-    <div class="inline-links"><p><a href="bibliotecario/cerca_sede.php">Torna alla ricerca sedi</a></p></div>
+    <div class="inline-links"><p><a href="cerca_sede.php">Torna alla ricerca sedi</a></p></div>
 </div>
 </body>
 </html>

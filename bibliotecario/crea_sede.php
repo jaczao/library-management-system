@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if (!empty($error)): ?>
         <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-    <form method="post" action="bibliotecario/crea_sede.php">
+    <form method="post" action="crea_sede.php">
         <label for="codice_sede">Codice Sede:</label>
         <input type="text" id="codice_sede" name="codice_sede" required>
         
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <button type="submit">Crea Sede</button>
     </form>
-    <div class="inline-links"><p><a href="bibliotecario/cerca_sede.php">Torna alla ricerca sedi</a></p></div>
+    <div class="inline-links"><p><a href="cerca_sede.php">Torna alla ricerca sedi</a></p></div>
 </div>
 </body>
 </html>

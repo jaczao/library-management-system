@@ -43,17 +43,17 @@ $prestiti = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Menu di navigazione -->
     <nav>
         <ul>
-            <li><a href="bibliotecario/home_bibliotecario.php">Home</a></li>
-            <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <li><a href="bibliotecario/statistiche.php">Statistiche</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="home_bibliotecario.php">Home</a></li>
+            <li><a href="/../modifica_profilo.php">Modifica Profilo</a></li>
+            <li><a href="statistiche.php">Statistiche</a></li>
+            <li><a href="/../logout.php">Logout</a></li>
         </ul>
     </nav>
     
     <!-- Switch per selezionare lo stato dei prestiti -->
     <div class="inline-links">
-        <a href="bibliotecario/elenco_prestiti.php?status=in_corso" <?php if($status==='in_corso') echo 'style="font-weight:bold;"'; ?>>In Corso</a> |
-        <a href="bibliotecario/elenco_prestiti.php?status=non_in_corso" <?php if($status==='non_in_corso') echo 'style="font-weight:bold;"'; ?>>Conclusi</a>
+        <a href="elenco_prestiti.php?status=in_corso" <?php if($status==='in_corso') echo 'style="font-weight:bold;"'; ?>>In Corso</a> |
+        <a href="elenco_prestiti.php?status=non_in_corso" <?php if($status==='non_in_corso') echo 'style="font-weight:bold;"'; ?>>Conclusi</a>
     </div>
     
     <?php if (count($prestiti) == 0): ?>
@@ -72,7 +72,7 @@ $prestiti = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </thead>
         <tbody>
             <?php foreach($prestiti as $p): ?>
-            <tr onclick="window.location.href='bibliotecario/dettaglio_prestito.php?id=<?php echo $p['id_prestito']; ?>'" style="cursor:pointer;">
+            <tr onclick="window.location.href='dettaglio_prestito.php?id=<?php echo $p['id_prestito']; ?>'" style="cursor:pointer;">
                 <td><?php echo htmlspecialchars($p['id_prestito']); ?></td>
                 <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($p['data_inizio']))); ?></td>
                 <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($p['data_scadenza']))); ?></td>

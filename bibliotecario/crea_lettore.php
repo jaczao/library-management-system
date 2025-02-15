@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if (!empty($error)): ?>
         <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-    <form method="post" action="bibliotecario/crea_lettore.php">
+    <form method="post" action="crea_lettore.php">
         <label for="codice_fiscale">Codice Fiscale:</label>
         <input type="text" id="codice_fiscale" name="codice_fiscale" required>
         
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <button type="submit">Crea Profilo Lettore</button>
     </form>
-    <div class="inline-links"><p><a href="bibliotecario/cerca_lettore.php">Torna alla ricerca lettori</a></p></div>
+    <div class="inline-links"><p><a href="cerca_lettore.php">Torna alla ricerca lettori</a></p></div>
 </div>
 </body>
 </html>

@@ -97,12 +97,12 @@ if (!$prestito) {
 
     <!-- Se il prestito è ancora in corso, mostra le opzioni per segnarne la restituzione e prorogarlo -->
     <?php if (!$prestito['data_restituzione']): ?>
-    <form method="post" action="bibliotecario/dettaglio_prestito.php?id=<?php echo $id_prestito; ?>">
+    <form method="post" action="dettaglio_prestito.php?id=<?php echo $id_prestito; ?>">
         <input type="hidden" name="action" value="restituisci">
         <button type="submit">Segna restituzione</button>
     </form>
     
-    <form method="post" action="bibliotecario/dettaglio_prestito.php?id=<?php echo $id_prestito; ?>">
+    <form method="post" action="dettaglio_prestito.php?id=<?php echo $id_prestito; ?>">
         <input type="hidden" name="action" value="proroga">
         <label for="new_scadenza">Nuova data di scadenza:</label>
         <input type="date" name="new_scadenza" id="new_scadenza" required>
@@ -110,7 +110,7 @@ if (!$prestito) {
     </form>
     <?php endif; ?>
 
-    <a href="bibliotecario/elenco_prestiti.php">Torna all'elenco dei prestiti</a>
+    <a href="elenco_prestiti.php">Torna all'elenco dei prestiti</a>
 </div>
 </body>
 </html>

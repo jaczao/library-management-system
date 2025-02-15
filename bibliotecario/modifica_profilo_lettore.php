@@ -78,7 +78,7 @@ if (!$lettore) {
         <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     
-    <form method="post" action="bibliotecario/modifica_profilo_lettore.php?id=<?php echo $id_lettore; ?>">
+    <form method="post" action="modifica_profilo_lettore.php?id=<?php echo $id_lettore; ?>">
         <label for="codice_fiscale">Codice Fiscale:</label>
         <input type="text" id="codice_fiscale" name="codice_fiscale" value="<?php echo htmlspecialchars($lettore['codice_fiscale']); ?>" required>
         
@@ -102,11 +102,11 @@ if (!$lettore) {
     </form>
     
     <h2>Ritardi: <?php echo htmlspecialchars($lettore['ritardi']); ?></h2>
-    <form method="post" action="bibliotecario/modifica_profilo_lettore.php?id=<?php echo $id_lettore; ?>">
+    <form method="post" action="modifica_profilo_lettore.php?id=<?php echo $id_lettore; ?>">
         <button type="submit" name="reset_ritardi" onclick="return confirm('Sei sicuro di voler azzerare i ritardi?');">Azzera Ritardi</button>
     </form>
     
-    <div class="inline-links"><a href="bibliotecario/profilo_lettore.php?id=<?php echo $id_lettore; ?>">Torna al Profilo Lettore</a></div>
+    <div class="inline-links"><a href="profilo_lettore.php?id=<?php echo $id_lettore; ?>">Torna al Profilo Lettore</a></div>
 </div>
 </body>
 </html>

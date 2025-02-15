@@ -43,10 +43,10 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 <div class="container">
     <h1>Cerca Lettore</h1>
     <div class="inline-links">
-        <a href="bibliotecario/home_bibliotecario.php">Home</a> | 
-        <a href="bibliotecario/crea_lettore.php">Crea Nuovo Profilo Lettore</a>
+        <a href="home_bibliotecario.php">Home</a> | 
+        <a href="crea_lettore.php">Crea Nuovo Profilo Lettore</a>
 </div>
-    <form method="get" action="bibliotecario/cerca_lettore.php">
+    <form method="get" action="cerca_lettore.php">
         <label for="search">Inserisci codice fiscale, nome, cognome o email:</label>
         <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>">
         <button type="submit">Cerca</button>
@@ -71,7 +71,7 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
             </thead>
             <tbody>
                 <?php foreach ($lettori as $lettore): ?>
-                <tr onclick="window.location.href='bibliotecario/profilo_lettore.php?id=<?php echo urlencode($lettore['id_lettore']); ?>'" style="cursor:pointer;">
+                <tr onclick="window.location.href='profilo_lettore.php?id=<?php echo urlencode($lettore['id_lettore']); ?>'" style="cursor:pointer;">
                     <td><?php echo htmlspecialchars($lettore['codice_fiscale']); ?></td>
                     <td><?php echo htmlspecialchars($lettore['nome']); ?></td>
                     <td><?php echo htmlspecialchars($lettore['cognome']); ?></td>

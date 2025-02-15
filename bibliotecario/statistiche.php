@@ -28,10 +28,10 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
     <h1>Statistiche della Biblioteca</h1>
     <nav>
         <ul>
-            <li><a href="bibliotecario/home_bibliotecario.php">Home</a></li>
-            <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <li><a href="bibliotecario/elenco_prestiti.php">Elenco Prestiti</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="home_bibliotecario.php">Home</a></li>
+            <li><a href="/../modifica_profilo.php">Modifica Profilo</a></li>
+            <li><a href="elenco_prestiti.php">Elenco Prestiti</a></li>
+            <li><a href="/../logout.php">Logout</a></li>
         </ul>
     </nav>
     
