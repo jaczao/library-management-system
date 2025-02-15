@@ -6,7 +6,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
     header("Location: login.php?role=bibliotecario");
     exit;
 }
-require_once 'config.php';
+require_once __DIR__ . '/../config.php';
 
 $search = "";
 $sedi = [];
@@ -42,10 +42,10 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 <div class="container">
     <h1>Cerca Sede</h1>
     <div class="inline-links">
-        <a href="home_bibliotecario.php">Home</a> | 
-        <a href="crea_sede.php">Crea Sede</a>
+        <a href="bibliotecario/home_bibliotecario.php">Home</a> | 
+        <a href="bibliotecario/crea_sede.php">Crea Sede</a>
     </div>
-    <form method="get" action="cerca_sede.php">
+    <form method="get" action="bibliotecario/cerca_sede.php">
         <label for="search">Inserisci codice sede, città o indirizzo:</label>
         <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>">
         <button type="submit">Cerca</button>
@@ -70,7 +70,7 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
             </thead>
             <tbody>
                 <?php foreach ($sedi as $sede): ?>
-                    <tr onclick="window.location.href='dettaglio_sede.php?id=<?php echo urlencode($sede['id_sede']); ?>'" style="cursor:pointer;">
+                    <tr onclick="window.location.href='bibliotecario/dettaglio_sede.php?id=<?php echo urlencode($sede['id_sede']); ?>'" style="cursor:pointer;">
                         <td><?php echo htmlspecialchars($sede['codice_sede']); ?></td>
                         <td><?php echo htmlspecialchars($sede['citta']); ?></td>
                         <td><?php echo htmlspecialchars($sede['indirizzo']); ?></td>

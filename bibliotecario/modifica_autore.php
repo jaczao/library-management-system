@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once 'config.php';
+require_once __DIR__ . '/../config.php';
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
     header("Location: login.php?role=bibliotecario");
     exit;
@@ -66,7 +66,7 @@ if (!$autore) {
     <?php if ($error): ?>
         <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-    <form method="post" action="modifica_autore.php?id=<?php echo $id_autore; ?>">
+    <form method="post" action="bibliotecario/modifica_autore.php?id=<?php echo $id_autore; ?>">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($autore['nome']); ?>" required>
         

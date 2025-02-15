@@ -4,7 +4,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
     header("Location: login.php?role=bibliotecario");
     exit;
 }
-require_once 'config.php';
+require_once __DIR__ . '/../config.php';
 
 // Recupera le statistiche per ogni sede dalla vista sede_statistiche
 $sqlStats = "SELECT * FROM sede_statistiche ORDER BY codice_sede";
@@ -28,9 +28,9 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
     <h1>Statistiche della Biblioteca</h1>
     <nav>
         <ul>
-            <li><a href="home_bibliotecario.php">Home</a></li>
+            <li><a href="bibliotecario/home_bibliotecario.php">Home</a></li>
             <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <li><a href="elenco_prestiti.php">Elenco Prestiti</a></li>
+            <li><a href="bibliotecario/elenco_prestiti.php">Elenco Prestiti</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>

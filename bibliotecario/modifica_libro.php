@@ -6,7 +6,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
     header("Location: login.php?role=bibliotecario");
     exit;
 }
-require_once 'config.php';
+require_once __DIR__ . '/../config.php';
 
 if (!isset($_GET['id'])) {
     echo "Libro non specificato.";
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if ($error): ?>
         <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-    <form method="post" action="modifica_libro.php?id=<?php echo $id_libro; ?>">
+    <form method="post" action="bibliotecario/modifica_libro.php?id=<?php echo $id_libro; ?>">
         <label for="isbn">ISBN:</label>
         <input type="text" id="isbn" name="isbn" value="<?php echo htmlspecialchars($libro['isbn']); ?>" required>
         
