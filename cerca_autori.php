@@ -73,8 +73,8 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
                     <tr onclick="window.location.href='dettaglio_autore.php?id=<?php echo urlencode($autore['id_autore']); ?>'" style="cursor:pointer;">
                         <td><?php echo htmlspecialchars($autore['nome']); ?></td>
                         <td><?php echo htmlspecialchars($autore['cognome']); ?></td>
-                        <td><?php echo htmlspecialchars($autore['data_nascita']); ?></td>
-                        <td><?php echo htmlspecialchars($autore['data_morte'] ? $autore['data_morte'] : '-'); ?></td>
+                        <td><?php echo htmlspecialchars(date("d-m-Y", strtotime($autore['data_nascita']))); ?></td>
+                        <td> <?php echo $autore['data_morte'] ? htmlspecialchars(date("d-m-Y", strtotime($autore['data_morte']))) : '-'; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

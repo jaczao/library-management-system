@@ -140,8 +140,10 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
   <?php endif; ?>
   
   <h2><?php echo htmlspecialchars($autore['nome'] . " " . $autore['cognome']); ?></h2>
-  <p><strong>Data di nascita:</strong> <?php echo htmlspecialchars($autore['data_nascita']); ?></p>
-  <p><strong>Data di morte:</strong> <?php echo htmlspecialchars($autore['data_morte'] ? $autore['data_morte'] : '-'); ?></p>
+  <p><strong>Data di nascita:</strong> <?php echo htmlspecialchars(date("d-m-Y", strtotime($autore['data_nascita']))); ?></p>
+    <p><strong>Data di morte:</strong> 
+        <?php echo $autore['data_morte'] ? htmlspecialchars(date("d-m-Y", strtotime($autore['data_morte']))) : '-'; ?>
+    </p>
   <p><strong>Biografia:</strong><br><?php echo nl2br(htmlspecialchars($autore['biografia'])); ?></p>
   
   <div class="inline-links">
