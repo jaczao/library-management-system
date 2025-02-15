@@ -1,5 +1,5 @@
 <?php
-// config.php
+
 $host = 'localhost';
 $db   = 'biblioteca';
 $user = 'postgres';

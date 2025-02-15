@@ -147,7 +147,7 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
   <div class="inline-links">
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario'): ?>
       <p>
-          <a href="modifica_autore.php?id=<?php echo $id_autore; ?>">Modifica Autore</a> | 
+          <a href="bibliotecario/modifica_autore.php?id=<?php echo $id_autore; ?>">Modifica Autore</a> | 
           <a href="dettaglio_autore.php?id=<?php echo $id_autore; ?>&delete=1" onclick="return confirm('Sei sicuro di voler eliminare questo autore?');">Elimina Autore</a>
       </p>
     <?php endif; ?>
@@ -200,7 +200,7 @@ $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);
   <div class="inline-links">
         <br>
       <p>
-        <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">Torna alla home</a>
+        <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'bibliotecario/home_bibliotecario.php' : 'lettore/home_lettore.php'; ?>">Torna alla home</a>
       </p>
   </div>
 </div>

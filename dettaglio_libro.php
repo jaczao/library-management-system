@@ -197,7 +197,7 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
         <div class="biblio-management">
             <!-- Link per modificare il libro -->
             <div class="inline-links"> 
-            <p><a href="modifica_libro.php?id=<?php echo $id_libro; ?>">Modifica libro</a></p>
+            <p><a href="bibliotecario/modifica_libro.php?id=<?php echo $id_libro; ?>">Modifica libro</a></p>
             </div>
 
             <!-- Gestione delle copie per questo libro -->
@@ -256,7 +256,7 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
     
     <div class="inline-links">
-    <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">Torna alla home</a>
+    <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'bibliotecario/home_bibliotecario.php' : 'lettore/home_lettore.php'; ?>">Torna alla home</a>
     </div>
 </div>
 </body>

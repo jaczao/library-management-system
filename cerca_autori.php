@@ -44,7 +44,7 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 <div class="container">
     <h1>Cerca Autore</h1>
     <div class="inline-links">
-        <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">Home</a>
+        <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'bibliotecario/home_bibliotecario.php' : 'lettore/home_lettore.php'; ?>">Home</a>
     </div>
     <form method="get" action="cerca_autori.php">
         <label for="search">Inserisci nome o cognome:</label>

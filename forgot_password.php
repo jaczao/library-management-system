@@ -1,5 +1,5 @@
 <?php
-// forgot_password.php
+
 $role = isset($_GET['role']) ? $_GET['role'] : '';
 ?>
 <!DOCTYPE html>

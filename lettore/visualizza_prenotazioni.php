@@ -1,12 +1,12 @@
 <?php
-// visualizza_prenotazioni.php
+
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'lettore') {
     header("Location: login.php?role=lettore");
     exit;
 }
 
-require_once 'config.php';
+require_once __DIR__ . '/../config.php';
 
 $lettoreId = $_SESSION['user']['id_lettore'];
 
@@ -37,10 +37,10 @@ $prestiti = $stmt->fetchAll();
     <nav>
         <ul>
             <li><a href="home_lettore.php">Home</a></li>
-            <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <li><a href="cerca_libri.php">Cerca Libro</a></li>
-            <li><a href="cerca_autori.php">Cerca Autore</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="/../modifica_profilo.php">Modifica Profilo</a></li>
+            <li><a href="/../cerca_libri.php">Cerca Libro</a></li>
+            <li><a href="/../cerca_autori.php">Cerca Autore</a></li>
+            <li><a href="/../logout.php">Logout</a></li>
         </ul>
     </nav>
     

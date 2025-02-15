@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     
     <div class="inline-links">
-        <a href="home_<?php echo $role; ?>.php">Torna alla home</a>
+    <a href="<?php echo ($_SESSION['role'] === 'bibliotecario') ? 'bibliotecario/home_bibliotecario.php' : 'lettore/home_lettore.php'; ?>">Torna alla home</a>
     </div>
 </div>
 </body>

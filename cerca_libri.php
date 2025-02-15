@@ -55,9 +55,9 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 
     <!-- Home Button: il link viene scelto in base al ruolo -->
     <div class="inline-links">
-        <a href="<?php echo ($role === 'bibliotecario') ? 'home_bibliotecario.php' : 'home_lettore.php'; ?>">Home</a>
+        <a href="<?php echo ($role === 'bibliotecario') ? 'bibliotecario/home_bibliotecario.php' : 'lettore/home_lettore.php'; ?>">Home</a>
         <?php if ($role === 'bibliotecario'): ?>
-            | <a href="aggiungi_nuovo_libro.php">Aggiungi Nuovo Libro</a>
+            | <a href="bibliotecario/aggiungi_nuovo_libro.php">Aggiungi Nuovo Libro</a>
         <?php endif; ?>
     </div>
     

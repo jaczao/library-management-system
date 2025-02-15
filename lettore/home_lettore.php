@@ -1,5 +1,5 @@
 <?php
-// home_lettore.php
+
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'lettore') {
     header("Location: login.php?role=lettore");
@@ -21,11 +21,11 @@ $nome = htmlspecialchars($_SESSION['user']['nome']);
     <h1>Home Lettore</h1>
     <nav>
         <ul>
-            <li><a href="modifica_profilo.php">Modifica Profilo</a></li>
-            <li><a href="cerca_libri.php">Cerca Libro</a></li>
-            <li><a href="cerca_autori.php">Cerca Autore</a></li>
+            <li><a href="/../modifica_profilo.php">Modifica Profilo</a></li>
+            <li><a href="/../cerca_libri.php">Cerca Libro</a></li>
+            <li><a href="/../cerca_autori.php">Cerca Autore</a></li>
             <li><a href="visualizza_prenotazioni.php">Visualizza Prenotazioni</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="/../logout.php">Logout</a></li>
         </ul>
     </nav>
     <p>Benvenuto, <?php echo htmlspecialchars($_SESSION['user']['nome']); ?>!</p>

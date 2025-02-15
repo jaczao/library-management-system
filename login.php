@@ -1,5 +1,5 @@
 <?php
-// login.php
+
 session_start();
 
 // Verifica che il ruolo sia passato come parametro
@@ -38,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Redirect in base al ruolo
                 if ($role === 'bibliotecario') {
-                    header("Location: home_bibliotecario.php");
+                    header("Location: bibliotecario/home_bibliotecario.php");
                 } else {
-                    header("Location: home_lettore.php");
+                    header("Location: lettore/home_lettore.php");
                 }
                 exit;
             } else {
