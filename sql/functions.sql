@@ -100,12 +100,12 @@ BEGIN
      WHERE id_prestito = p_id;
      
     IF current_scadenza IS NULL THEN
-        RAISE EXCEPTION 'Prestito % non trovato', p_id;
+        RAISE EXCEPTION 'Prestito non trovato';
     END IF;
     
     -- Se il prestito è già in ritardo, non è consentita la proroga
     IF CURRENT_DATE > current_scadenza THEN
-        RAISE EXCEPTION 'Il prestito % è già in ritardo e non può essere prorogato', p_id;
+        RAISE EXCEPTION 'Il prestito è già in ritardo e non può essere prorogato';
     END IF;
     
     -- Aggiorna la data di scadenza con il nuovo valore

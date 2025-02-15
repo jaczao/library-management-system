@@ -43,6 +43,7 @@ $prestiti = $stmt->fetchAll();
             <li><a href="/../logout.php">Logout</a></li>
         </ul>
     </nav>
+    <br>
     
     <?php if (empty($prestiti)): ?>
         <p>Non c'è nessun prestito.</p>

@@ -29,19 +29,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
     } elseif ($_POST['action'] === 'proroga') {
         $new_scadenza = $_POST['new_scadenza'];
-        // Verifica che la data sia valida e futura
+        // Verifica che la data sia valida
         if (strtotime($new_scadenza) === false) {
             $error = "Data non valida.";
-        } elseif (strtotime($new_scadenza) <= strtotime(date('Y-m-d'))) {
-            $error = "La nuova scadenza deve essere una data futura.";
         } else {
-            try {
-                // Chiamata alla procedura proroga_prestito
-                $stmt = $pdo->prepare("CALL proroga_prestito(?, ?)");
-                $stmt->execute([$id_prestito, $new_scadenza]);
-                $message = "Prestito prorogato con successo.";
-            } catch (PDOException $e) {
-                $error = "Errore nella proroga del prestito.";
+            // Recupera la data di scadenza attuale del prestito
+            $sqlCurrent = "SELECT data_scadenza FROM prestito WHERE id_prestito = ?";
+            $stmtCurrent = $pdo->prepare($sqlCurrent);
+            $stmtCurrent->execute([$id_prestito]);
+            $currentData = $stmtCurrent->fetch(PDO::FETCH_ASSOC);
+            if (!$currentData) {
+                $error = "Prestito non trovato.";
+            } else {
+                $currentScadenza = $currentData['data_scadenza'];
+                if (strtotime($new_scadenza) <= strtotime($currentScadenza)) {
+                    $error = "La nuova scadenza deve essere successiva alla data di scadenza attuale (" . date("d/m/Y", strtotime($currentScadenza)) . ").";
+                } else {
+                    try {
+                        // Chiamata alla procedura proroga_prestito
+                        $stmt = $pdo->prepare("CALL proroga_prestito(?, ?)");
+                        $stmt->execute([$id_prestito, $new_scadenza]);
+                        $message = "Prestito prorogato con successo.";
+                    } catch (PDOException $e) {
+                        // Estrae solo il messaggio d'errore utile, rimuovendo la parte SQLSTATE e simili
+                        $rawMessage = $e->getMessage();
+                        if (preg_match('/ERROR:\s*(.*)/i', $rawMessage, $matches)) {
+                            $error = trim($matches[1]);
+                        } else {
+                            $error = $rawMessage;
+                        }
+                    }
+                    
+                }
             }
         }
     }
