@@ -51,19 +51,19 @@ INSERT INTO libro_autore (libro, autore) VALUES
 (12, 6); -- L’amica geniale - Elena Ferrante
 
 -- Popolamento della tabella Copia (distribuzione casuale sulle sedi)
-INSERT INTO copia (libro, sede, disponibile) VALUES
-(1, 1, TRUE),
-(2, 2, TRUE),
-(3, 3, TRUE),
-(4, 4, TRUE),
-(5, 1, TRUE),
-(6, 2, TRUE),
-(7, 3, TRUE),
-(8, 4, TRUE),
-(9, 1, TRUE),
-(10, 2, TRUE),
-(11, 3, TRUE),
-(12, 4, TRUE);
+INSERT INTO copia (libro, sede) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 1),
+(6, 2),
+(7, 3),
+(8, 4),
+(9, 1),
+(10, 2),
+(11, 3),
+(12, 4);
 
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
@@ -79,11 +79,11 @@ INSERT INTO bibliotecario (nome, cognome, email, password) VALUES
 ('Anna', 'Esposito', 'anna.esposito@email.com', crypt('1234', gen_salt('bf')));
 
 -- Prestiti già registrati
-INSERT INTO prestito (lettore, copia, data_inizio, data_scadenza, data_restituzione) VALUES
-(1, 10, '2024-01-01', '2024-02-01', NULL),
-(2, 5, '2024-02-01', '2024-03-01', NULL),
-(2, 4, '2024-02-01', '2024-05-01', NULL),
-(2, 8, '2024-02-01', '2024-03-01', NULL);
+INSERT INTO prestito (lettore, copia, data_inizio, data_scadenza) VALUES
+(1, 10, '2024-01-01', '2024-02-01'),
+(2, 5, '2024-02-01', '2024-03-01'),
+(2, 4, '2024-02-01', '2024-05-01'),
+(2, 8, '2024-02-01', '2024-03-01');
 
 UPDATE prestito SET data_restituzione = '2024-04-01' WHERE id_prestito = 3 OR id_prestito = 4;
 
