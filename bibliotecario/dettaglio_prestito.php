@@ -129,7 +129,7 @@ if (!$prestito) {
     </form>
     <?php endif; ?>
 
-    <a href="elenco_prestiti.php">Torna all'elenco dei prestiti</a>
+    <div class="inline-links"><p><a href="home_bibliotecario.php">Torna alla home</a></p></div>
 </div>
 </body>
 </html>

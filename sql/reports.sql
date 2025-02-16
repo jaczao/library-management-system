@@ -18,8 +18,7 @@ SELECT
     s.codice_sede,
     lib.isbn,
     lib.titolo,
-    aut.nome as nome_autore,
-    aut.cognome as cognome_autore,
+    p.id_prestito,
     p.data_inizio,
     p.data_scadenza,
     lett.codice_fiscale,
@@ -29,8 +28,6 @@ FROM prestito p
 JOIN copia c ON p.copia = c.id_copia
 JOIN sede s ON c.sede = s.id_sede
 JOIN libro lib ON c.libro = lib.id_libro
-JOIN libro_autore la ON la.libro = lib.id_libro
-JOIN autore aut ON aut.id_autore = la.autore
 JOIN lettore lett ON p.lettore = lett.id_lettore
 WHERE p.data_restituzione IS NULL
   AND CURRENT_DATE > p.data_scadenza;

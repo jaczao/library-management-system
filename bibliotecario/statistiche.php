@@ -40,12 +40,13 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
     <?php if (count($sediStats) === 0): ?>
         <p>Nessuna statistica disponibile.</p>
     <?php else: ?>
+        <div class="table-container">
         <table>
             <thead>
                 <tr>
                     <th>Codice Sede</th>
                     <th>Totale Copie</th>
-                    <th>Totale ISBN</th>
+                    <th>Totale Libri</th>
                     <th>Prestiti in Corso</th>
                 </tr>
             </thead>
@@ -60,6 +61,7 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
     <?php endif; ?>
     
     <!-- Sezione Ritardi per Sede -->
@@ -67,34 +69,36 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
     <?php if (count($sediRitardi) === 0): ?>
         <p>Nessun prestito in ritardo.</p>
     <?php else: ?>
+        <div class="table-container">
         <table>
             <thead>
                 <tr>
                     <th>Codice Sede</th>
                     <th>ISBN</th>
                     <th>Titolo</th>
-                    <th>Autore</th>
+                    <th>Id Prestito</th>
                     <th>Data Inizio</th>
                     <th>Data Scadenza</th>
+                    <th>Nome Lettore</th>
                     <th>Codice Fiscale Lettore</th>
-                    <th>Lettore</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($sediRitardi as $ritardo): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($ritardo['codice_sede']); ?></td>
-                    <td><?php echo htmlspecialchars($ritardo['isbn']); ?></td>
-                    <td><?php echo htmlspecialchars($ritardo['titolo']); ?></td>
-                    <td><?php echo htmlspecialchars($ritardo['nome_autore'] . ' ' . $ritardo['cognome_autore']); ?></td>
-                    <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($ritardo['data_inizio']))); ?></td>
-                    <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($ritardo['data_scadenza']))); ?></td>
-                    <td><?php echo htmlspecialchars($ritardo['codice_fiscale']); ?></td>
-                    <td><?php echo htmlspecialchars($ritardo['nome_lettore'] . ' ' . $ritardo['cognome_lettore']); ?></td>
-                </tr>
+                    <tr onclick="window.location.href='dettaglio_prestito.php?id=<?php echo urlencode($ritardo['id_prestito']); ?>'" style="cursor:pointer;">
+                        <td><?php echo htmlspecialchars($ritardo['codice_sede']); ?></td>
+                        <td><?php echo htmlspecialchars($ritardo['isbn']); ?></td>
+                        <td><?php echo htmlspecialchars($ritardo['titolo']); ?></td>
+                        <td><?php echo htmlspecialchars($ritardo['id_prestito']); ?></td>
+                        <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($ritardo['data_inizio']))); ?></td>
+                        <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($ritardo['data_scadenza']))); ?></td>
+                        <td><?php echo htmlspecialchars($ritardo['nome_lettore'] . ' ' . $ritardo['cognome_lettore']); ?></td>
+                        <td><?php echo htmlspecialchars($ritardo['codice_fiscale']); ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
     <?php endif; ?>
 </div>
 </body>
