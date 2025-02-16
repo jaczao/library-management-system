@@ -37,7 +37,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Trigger BEFORE INSERT sulla tabella prestito
-CREATE TRIGGER trg_check_prestito
+CREATE TRIGGER trg_controlla_condizioni_prestito
 BEFORE INSERT ON prestito
 FOR EACH ROW EXECUTE FUNCTION controlla_condizioni_prestito();
 
