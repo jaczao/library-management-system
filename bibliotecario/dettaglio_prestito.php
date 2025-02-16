@@ -42,25 +42,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $error = "Prestito non trovato.";
             } else {
                 $currentScadenza = $currentData['data_scadenza'];
-                if (strtotime($new_scadenza) <= strtotime($currentScadenza)) {
-                    $error = "La nuova scadenza deve essere successiva alla data di scadenza attuale (" . date("d/m/Y", strtotime($currentScadenza)) . ").";
-                } else {
-                    try {
-                        // Chiamata alla procedura proroga_prestito
-                        $stmt = $pdo->prepare("CALL proroga_prestito(?, ?)");
-                        $stmt->execute([$id_prestito, $new_scadenza]);
-                        $message = "Prestito prorogato con successo.";
-                    } catch (PDOException $e) {
-                        // Estrae solo il messaggio d'errore utile, rimuovendo la parte SQLSTATE e simili
-                        $rawMessage = $e->getMessage();
-                        if (preg_match('/ERROR:\s*(.*)/i', $rawMessage, $matches)) {
-                            $error = trim($matches[1]);
-                        } else {
-                            $error = $rawMessage;
-                        }
+                
+                try {
+                    // Chiamata alla procedura proroga_prestito
+                    $stmt = $pdo->prepare("CALL proroga_prestito(?, ?)");
+                    $stmt->execute([$id_prestito, $new_scadenza]);
+                    $message = "Prestito prorogato con successo.";
+                } catch (PDOException $e) {
+                    // Estrae solo il messaggio d'errore utile, rimuovendo la parte SQLSTATE e simili
+                    $rawMessage = $e->getMessage();
+                    if (preg_match('/ERROR:\s*(.*)/i', $rawMessage, $matches)) {
+                        $error = trim($matches[1]);
+                    } else {
+                        $error = $rawMessage;
                     }
-                    
                 }
+                            
             }
         }
     }

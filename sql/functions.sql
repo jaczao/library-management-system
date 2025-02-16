@@ -107,13 +107,18 @@ BEGIN
         RAISE EXCEPTION 'Il prestito è già in ritardo e non può essere prorogato';
     END IF;
     
+    -- Se la nuova data non è successiva all'attuale data di scadenza, solleva un'eccezione
+    IF p_new_scadenza <= current_scadenza THEN
+        RAISE EXCEPTION 'La nuova scadenza deve essere successiva all’attuale data di scadenza';
+    END IF;
+    
     -- Aggiorna la data di scadenza con il nuovo valore
     UPDATE prestito
        SET data_scadenza = p_new_scadenza
-     WHERE id_prestito = p_id;  
-     
+     WHERE id_prestito = p_id;
 END;
 $$;
+
 
 
 
@@ -196,10 +201,10 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trg_refresh_prestiti
 AFTER INSERT OR UPDATE OR DELETE ON prestito
 FOR EACH STATEMENT
-EXECUTE FUNCTION trg_refresh_sede_statistiche();
+EXECUTE FUNCTION refresh_sede_statistiche();
 
 -- Trigger che si attiva con azione su copia
 CREATE TRIGGER trg_refresh_copie
 AFTER INSERT OR UPDATE OR DELETE ON copia
 FOR EACH STATEMENT
-EXECUTE FUNCTION trg_refresh_sede_statistiche();
+EXECUTE FUNCTION refresh_sede_statistiche();
