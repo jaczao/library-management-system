@@ -29,14 +29,13 @@ BEGIN
     SELECT disponibile INTO available FROM copia WHERE id_copia = NEW.copia;
 
     IF NOT available THEN
-        RAISE EXCEPTION 'La copia % non è disponibile', NEW.copia;  --checko se giusto fare che disponibilita la vedo proprio su copia
+        RAISE EXCEPTION 'La copia % non è disponibile', NEW.copia;
     END IF;
     
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
--- Trigger BEFORE INSERT sulla tabella prestito
 CREATE TRIGGER trg_controlla_condizioni_prestito
 BEFORE INSERT ON prestito
 FOR EACH ROW EXECUTE FUNCTION controlla_condizioni_prestito();
@@ -111,7 +110,7 @@ BEGIN
     -- Aggiorna la data di scadenza con il nuovo valore
     UPDATE prestito
        SET data_scadenza = p_new_scadenza
-     WHERE id_prestito = p_id;  --posso aggiungere alla fine COMMIT;
+     WHERE id_prestito = p_id;  
      
 END;
 $$;
@@ -130,7 +129,7 @@ DECLARE
     available_sedi TEXT;
 BEGIN
     IF p_id_sede IS NULL THEN
-        -- Nessuna sede scelta: seleziona a caso una copia disponibile del libro
+        -- Nessuna sede scelta: seleziona una copia disponibile in qualunque sede
         SELECT id_copia INTO v_id_copia
         FROM copia
         WHERE libro = p_id_libro AND disponibile = TRUE
@@ -171,7 +170,6 @@ $$;
 
 
 
-
 CREATE OR REPLACE PROCEDURE azzera_ritardi(lettore_target INTEGER)
 LANGUAGE plpgsql
 AS $$
@@ -180,14 +178,13 @@ BEGIN
        SET ritardi = 0
      WHERE id_lettore = lettore_target;
      
-    -- Se necessario, COMMIT;
 END;
 $$;
 
 
 
--- 1. Funzione trigger che refresha direttamente la materialized view sede_statistiche
-CREATE OR REPLACE FUNCTION trg_refresh_sede_statistiche()
+-- Funzione che refresha la materialized view sede_statistiche
+CREATE OR REPLACE FUNCTION refresh_sede_statistiche()
 RETURNS trigger AS $$
 BEGIN
     REFRESH MATERIALIZED VIEW sede_statistiche;
@@ -195,13 +192,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- 2. Primo trigger che si attiva su prestito
+-- Trigger che si attiva con azione su prestito
 CREATE TRIGGER trg_refresh_prestiti
 AFTER INSERT OR UPDATE OR DELETE ON prestito
 FOR EACH STATEMENT
 EXECUTE FUNCTION trg_refresh_sede_statistiche();
 
--- 3. Secondo trigger che si attiva su  copia
+-- Trigger che si attiva con azione su copia
 CREATE TRIGGER trg_refresh_copie
 AFTER INSERT OR UPDATE OR DELETE ON copia
 FOR EACH STATEMENT
