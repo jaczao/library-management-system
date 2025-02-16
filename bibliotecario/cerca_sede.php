@@ -12,7 +12,7 @@ $search = "";
 $sedi = [];
 
 if (!isset($_GET['search']) || trim($_GET['search']) == "") {
-    // Nessun termine di ricerca: mostra tutte le sedi
+    // Nessun termine di ricerca: mostro tutte le sedi
     $sql = "SELECT id_sede, codice_sede, citta, indirizzo 
             FROM sede 
             ORDER BY citta, codice_sede";

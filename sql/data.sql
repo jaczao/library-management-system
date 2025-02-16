@@ -1,4 +1,4 @@
--- Elimina tutti i dati dalle tabelle prima di fare l'insert
+-- Elimino tutti i dati dalle tabelle prima di fare gli insert
 TRUNCATE TABLE sede, autore, libro, libro_autore, copia, lettore, bibliotecario, prestito RESTART IDENTITY CASCADE;
 
 
@@ -35,7 +35,7 @@ INSERT INTO libro (isbn, titolo, trama, casa_editrice) VALUES
 ('9788806218726', 'I promessi sposi', 'Un romanzo storico ambientato nel Seicento.', 'Einaudi'),
 ('9788869183157', 'L’amica geniale', 'Il primo volume di una saga napoletana.', 'Edizioni E/O');
 
--- Popolamento della tabella LibroAutore (Associazione libri-autori con corrispondenza corretta)
+-- Popolamento della tabella LibroAutore
 INSERT INTO libro_autore (libro, autore) VALUES
 (1, 1),  -- Il nome della rosa - Umberto Eco
 (2, 2),  -- Il barone rampante - Italo Calvino
@@ -50,7 +50,7 @@ INSERT INTO libro_autore (libro, autore) VALUES
 (11, 8), -- I promessi sposi - Alessandro Manzoni
 (12, 6); -- L’amica geniale - Elena Ferrante
 
--- Popolamento della tabella Copia (distribuzione casuale sulle sedi)
+-- Popolamento della tabella Copia
 INSERT INTO copia (libro, sede) VALUES
 (1, 1),
 (2, 2),

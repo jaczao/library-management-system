@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $trama = trim($_POST['trama'] ?? '');
     $casa_editrice = trim($_POST['casa_editrice'] ?? '');
     
-    // Dati degli autori: l'utente li inserisce uno per uno (dinamicamente)
+    // Dati degli autori: l'utente li inserisce uno per uno
     $nome_autori = $_POST['nome_autore'] ?? [];
     $cognome_autori = $_POST['cognome_autore'] ?? [];
     
@@ -36,15 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             $pdo->beginTransaction();
-            // Inserisce il nuovo libro e recupera l'id
+            // Inserisco il nuovo libro e recupero l'id
             $sqlLibro = "INSERT INTO libro (isbn, titolo, trama, casa_editrice) VALUES (?, ?, ?, ?)
                          RETURNING id_libro";
             $stmtLibro = $pdo->prepare($sqlLibro);
             $stmtLibro->execute([$isbn, $titolo, $trama, $casa_editrice]);
             $id_libro = $stmtLibro->fetchColumn();
             
-            // Per ogni autore inserito, controlla se esiste (case-insensitive)
-            // Se non esiste, crealo; poi crea l'associazione nella tabella libro_autore
+            // Per ogni autore inserito, controllo se esiste (case-insensitive)
+            // Se non esiste, lo creo; poi creo l'associazione nella tabella libro_autore
             foreach ($autori_inseriti as $a) {
                 $sqlCheck = "SELECT id_autore FROM autore WHERE LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?)";
                 $stmtCheck = $pdo->prepare($sqlCheck);
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmtInsertAutore->execute([$a['nome'], $a['cognome'], $defaultDataNascita, $defaultBiografia]);
                     $id_autore = $stmtInsertAutore->fetchColumn();
                 }
-                // Crea l'associazione nella tabella libro_autore
+                // Creo l'associazione nella tabella libro_autore
                 $sqlAssoc = "INSERT INTO libro_autore (libro, autore) VALUES (?, ?)";
                 $stmtAssoc = $pdo->prepare($sqlAssoc);
                 $stmtAssoc->execute([$id_libro, $id_autore]);
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <h3>Autori</h3>
         <div id="autori_container">
-            <!-- Inizialmente nessun campo autori; l'utente li aggiunge uno alla volta -->
+            <!-- Inizialmente nessun campo autori, l'utente li aggiunge uno alla volta -->
         </div>
         <button type="button" id="add_author">Aggiungi Autore</button>
         <br><br>

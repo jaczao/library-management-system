@@ -7,9 +7,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
 
 require_once __DIR__ . '/../config.php';
 
-// Selezione dello stato: "in_corso" (prestiti attivi, data_restituzione IS NULL)
-// oppure "non_in_corso" (prestiti completati, data_restituzione IS NOT NULL)
-// Il parametro GET "status" determina la visualizzazione; default "in_corso"
+// Selezione dello stato: "in_corso" oppure "non_in_corso"
 $status = isset($_GET['status']) ? $_GET['status'] : 'in_corso';
 if ($status === 'non_in_corso') {
     $condition = "p.data_restituzione IS NOT NULL";
@@ -17,7 +15,7 @@ if ($status === 'non_in_corso') {
     $condition = "p.data_restituzione IS NULL";
 }
 
-// Query per recuperare l'elenco dei prestiti, ordinati dal più recente al meno recente
+// Recupero l'elenco dei prestiti, ordinati dal più recente al meno recente
 $sql = "SELECT p.id_prestito, p.data_inizio, p.data_scadenza, p.data_restituzione,
         l.nome AS lettore_nome, l.cognome AS lettore_cognome, 
         b.titolo AS libro_titolo

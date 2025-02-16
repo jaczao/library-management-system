@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// (Il resto del file rimane invariato; vedi il file precedente per il recupero di sede, libri e prestiti)
+
 $stmt = $pdo->prepare("SELECT * FROM sede WHERE id_sede = ?");
 $stmt->execute([$id_sede]);
 $sede = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -46,7 +46,7 @@ if (!$sede) {
     exit;
 }
 
-// Recupera i libri associati alla sede
+// Recupero i libri associati alla sede
 $sqlLibri = "SELECT DISTINCT b.id_libro, b.titolo, b.isbn
              FROM copia c
              JOIN libro b ON c.libro = b.id_libro
@@ -55,7 +55,7 @@ $stmtLibri = $pdo->prepare($sqlLibri);
 $stmtLibri->execute([$id_sede]);
 $libri = $stmtLibri->fetchAll(PDO::FETCH_ASSOC);
 
-// Recupera i prestiti associati alla sede (tramite le copie)
+// Recupero i prestiti associati alla sede
 $sqlPrestiti = "SELECT p.id_prestito, p.data_inizio, p.data_scadenza, p.data_restituzione, 
                 b.titolo AS libro_titolo
                 FROM prestito p

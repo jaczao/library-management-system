@@ -17,7 +17,7 @@ $id_libro = intval($_GET['id']);
 $message = "";
 $error = "";
 
-// Recupera i dati correnti del libro
+// Recupero i dati correnti del libro
 $sql = "SELECT l.id_libro, l.isbn, l.titolo, l.trama, l.casa_editrice
         FROM libro l
         WHERE l.id_libro = ?";
@@ -29,7 +29,7 @@ if (!$libro) {
     exit;
 }
 
-// Recupera gli autori attualmente associati (assumiamo che possano essere più di uno)
+// Recupero gli autori attualmente associati (assumo che possano essere più di uno)
 $sqlAutori = "SELECT a.id_autore, a.nome, a.cognome
               FROM autore a
               JOIN libro_autore la ON a.id_autore = la.autore
@@ -44,11 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $trama = trim($_POST['trama'] ?? '');
     $casa_editrice = trim($_POST['casa_editrice'] ?? '');
     
-    // Gli autori arrivano come array
+    // Gli autori li ho come array
     $nome_autori = $_POST['nome_autore'] ?? [];
     $cognome_autori = $_POST['cognome_autore'] ?? [];
     
-    // Costruisci l'array degli autori inseriti (solo coppie non vuote)
+    // Costruisco l'array degli autori inseriti (solo coppie non vuote)
     $autori_inseriti = [];
     $count = count($nome_autori);
     for ($i = 0; $i < $count; $i++) {
@@ -65,16 +65,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $pdo->beginTransaction();
             
-            // Aggiorna il libro
+            // Aggiorno il libro
             $sqlUpdate = "UPDATE libro SET isbn = ?, titolo = ?, trama = ?, casa_editrice = ? WHERE id_libro = ?";
             $stmtUpdate = $pdo->prepare($sqlUpdate);
             $stmtUpdate->execute([$isbn, $titolo, $trama, $casa_editrice, $id_libro]);
             
-            // Elimina tutte le associazioni precedenti
+            // Elimino tutte le associazioni precedenti
             $stmtDeleteAssoc = $pdo->prepare("DELETE FROM libro_autore WHERE libro = ?");
             $stmtDeleteAssoc->execute([$id_libro]);
             
-            // Per ogni autore inserito, controlla se esiste (case-insensitive); altrimenti lo crea, poi crea l'associazione
+            // Per ogni autore inserito, controllo se esiste (case-insensitive); altrimenti lo creo e poi creo l'associazione
             foreach ($autori_inseriti as $a) {
                 $sqlCheck = "SELECT id_autore FROM autore WHERE LOWER(nome) = LOWER(?) AND LOWER(cognome) = LOWER(?)";
                 $stmtCheck = $pdo->prepare($sqlCheck);
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmtInsert->execute([$a['nome'], $a['cognome'], $defaultDataNascita, $defaultBiografia]);
                     $id_autore = $stmtInsert->fetchColumn();
                 }
-                // Crea l'associazione
+                // Creo l'associazione
                 $sqlAssoc = "INSERT INTO libro_autore (libro, autore) VALUES (?, ?)";
                 $stmtAssoc = $pdo->prepare($sqlAssoc);
                 $stmtAssoc->execute([$id_libro, $id_autore]);
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    // Ricarica i dati aggiornati
+    // Ricarico i dati aggiornati
     $stmt->execute([$id_libro]);
     $libro = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmtAutori->execute([$id_libro]);

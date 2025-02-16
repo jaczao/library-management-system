@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Recupera i dati aggiornati del profilo del lettore
+// Recupero i dati aggiornati del profilo del lettore
 $stmt = $pdo->prepare("SELECT * FROM lettore WHERE id_lettore = ?");
 $stmt->execute([$id_lettore]);
 $lettore = $stmt->fetch(PDO::FETCH_ASSOC);

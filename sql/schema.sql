@@ -1,24 +1,22 @@
--- Connettiti a un database diverso prima di eliminare quello attuale
+-- Mi connetto a un database diverso prima di eliminare quello attuale
 \c postgres
 
--- Termina tutte le connessioni al database "biblioteca"
+-- Termino tutte le connessioni al database "biblioteca"
 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'biblioteca';
 
--- Elimina il database se esiste
+-- Elimino il database se esiste
 DROP DATABASE IF EXISTS biblioteca;
 
--- Crea nuovamente il database
+-- Creo nuovamente il database
 CREATE DATABASE biblioteca;
 
--- Connettiti al nuovo database
+-- Mi connetto al nuovo database
 \c biblioteca;
 
--- Creazione di un tipo ENUM per la categoria dei lettori
-CREATE TYPE categoria_lettore AS ENUM ('base', 'premium');  --verifico se serve nelle funzioni o altro
+-- Creo un tipo ENUM per la categoria dei lettori
+CREATE TYPE categoria_lettore AS ENUM ('base', 'premium');
 
------------------------------------------------------------
--- Tabella delle Sedi della Biblioteca
------------------------------------------------------------
+
 CREATE TABLE sede (
     id_sede serial PRIMARY KEY,
     codice_sede VARCHAR(50) UNIQUE NOT NULL,
@@ -26,9 +24,7 @@ CREATE TABLE sede (
     indirizzo VARCHAR(200) NOT NULL
 );
 
------------------------------------------------------------
--- Tabella degli Autori
------------------------------------------------------------
+
 CREATE TABLE autore (
     id_autore serial PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -38,9 +34,7 @@ CREATE TABLE autore (
     biografia TEXT NOT NULL
 );
 
------------------------------------------------------------
--- Tabella dei Libri
------------------------------------------------------------
+
 CREATE TABLE libro (
     id_libro serial PRIMARY KEY, 
     isbn VARCHAR(13) UNIQUE NOT NULL,
@@ -49,9 +43,7 @@ CREATE TABLE libro (
     casa_editrice VARCHAR(100) NOT NULL
 );
 
------------------------------------------------------------
--- Tabella di Associazione tra Libri e Autori (relazione molti-a-molti)
------------------------------------------------------------
+
 CREATE TABLE libro_autore (
     libro INTEGER NOT NULL,
     autore INTEGER NOT NULL,
@@ -60,21 +52,17 @@ CREATE TABLE libro_autore (
     FOREIGN KEY (autore) REFERENCES autore(id_autore)
 );
 
------------------------------------------------------------
--- Tabella delle Copie
------------------------------------------------------------
+
 CREATE TABLE copia (
     id_copia serial PRIMARY KEY,
     libro INTEGER NOT NULL,
     sede INTEGER NOT NULL,
-    disponibile BOOLEAN NOT NULL DEFAULT TRUE, --verifico se not null o meno in base alle funzioni
+    disponibile BOOLEAN NOT NULL DEFAULT TRUE, 
     FOREIGN KEY (libro) REFERENCES libro(id_libro),
     FOREIGN KEY (sede) REFERENCES sede(id_sede)
 );
 
------------------------------------------------------------
--- Tabella dei Lettori
------------------------------------------------------------
+
 CREATE TABLE lettore (
     id_lettore serial PRIMARY KEY,
     codice_fiscale VARCHAR(20) UNIQUE NOT NULL,
@@ -83,12 +71,10 @@ CREATE TABLE lettore (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     categoria categoria_lettore NOT NULL,
-    ritardi INTEGER NOT NULL DEFAULT 0 --verifico se not null o meno in base alle funzioni
+    ritardi INTEGER NOT NULL DEFAULT 0 
 );
 
------------------------------------------------------------
--- Tabella dei Bibliotecari
------------------------------------------------------------
+
 CREATE TABLE bibliotecario (
     id_bibliotecario serial PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -97,9 +83,7 @@ CREATE TABLE bibliotecario (
     password VARCHAR(100) NOT NULL
 );
 
------------------------------------------------------------
--- Tabella dei Prestiti
------------------------------------------------------------
+
 CREATE TABLE prestito (
     id_prestito serial PRIMARY KEY,
     lettore INTEGER NOT NULL,

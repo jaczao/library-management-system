@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Verifica che l'utente loggato sia un bibliotecario
+
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
     header("Location: /login.php?role=bibliotecario");
     exit;
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'bibliotecario') {
 
 require_once __DIR__ . '/../config.php';
 
-// Il bibliotecario visualizza il profilo di un lettore selezionato tramite parametro GET
+// Il bibliotecario visualizza il profilo del lettore selezionato
 if (!isset($_GET['id'])) {
     echo "Lettore non specificato.";
     exit;
@@ -24,10 +24,10 @@ $error = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'elimina_profilo') {
     try {
         $pdo->beginTransaction();
-        // Elimina tutti i prestiti relativi al lettore
+        // Elimino tutti i prestiti relativi al lettore
         $stmt = $pdo->prepare("DELETE FROM prestito WHERE lettore = ?");
         $stmt->execute([$id_lettore]);
-        // Elimina il profilo del lettore
+        // Elimino il profilo del lettore
         $stmt = $pdo->prepare("DELETE FROM lettore WHERE id_lettore = ?");
         $stmt->execute([$id_lettore]);
         $pdo->commit();
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Recupera le informazioni del lettore
+// Recupero le informazioni del lettore
 $stmt = $pdo->prepare("SELECT * FROM lettore WHERE id_lettore = ?");
 $stmt->execute([$id_lettore]);
 $lettore = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +48,7 @@ if (!$lettore) {
     exit;
 }
 
-// Recupera tutti i prestiti del lettore (sia in corso che non) ordinati dal più recente
+// Recupero tutti i prestiti del lettore (sia in corso che non) ordinati dal più recente
 $stmt = $pdo->prepare("SELECT * FROM prestito WHERE lettore = ? ORDER BY data_inizio DESC");
 $stmt->execute([$id_lettore]);
 $prestiti = $stmt->fetchAll(PDO::FETCH_ASSOC);

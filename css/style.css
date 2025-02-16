@@ -1,4 +1,3 @@
-/* Importa un font moderno */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
 * {
@@ -14,10 +13,9 @@ body {
   padding: 20px;
 }
 
-/* Contenitore principale: ora più largo */
 .container {
   width: 90%;
-  max-width: 1200px;  /* utilizza più spazio sullo schermo */
+  max-width: 1200px;  
   margin: 20px auto;
   background: #fff;
   padding: 20px 30px;
@@ -25,7 +23,7 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Headings */
+
 h1 {
   color: #0056b3;
   margin-bottom: 15px;
@@ -38,7 +36,7 @@ h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
-/* Navigazione: utilizzo di flex per i link affiancati */
+
 nav ul {
   list-style: none;
   padding: 0;
@@ -64,7 +62,7 @@ nav ul li a:hover {
   background-color: #003d80;
 }
 
-/* Inline links per separatori (ad es. LINK | LINK) */
+
 .inline-links a {
   display: inline;
   margin: 0 5px;
@@ -76,7 +74,7 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Pulsanti: assicuriamo che il testo sia centrato e non sbordi */
+
 button {
   display: inline-block;
   padding: 10px 20px;
@@ -87,7 +85,7 @@ button {
   cursor: pointer;
   font-size: 16px;
   text-align: center;
-  white-space: nowrap;  /* evita che il testo vada a capo */
+  white-space: nowrap;  
   overflow: hidden;
   text-overflow: ellipsis;
   transition: background-color 0.3s ease, padding 0.3s ease;
@@ -97,7 +95,6 @@ button:hover {
   background-color: #e67300;
 }
 
-/* Tabelle: responsive e senza overflow */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -118,7 +115,6 @@ table th {
   color: #fff;
 }
 
-/* Form: spaziatura ridotta tra i campi */
 form {
   margin: 15px 0;
 }
@@ -138,13 +134,12 @@ form textarea {
   width: 100%;
   max-width: 500px;
   padding: 8px 10px;
-  margin-bottom: 8px; /* spaziatura ridotta */
+  margin-bottom: 8px; 
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
 }
 
-/* Alerts */
 .alert {
   padding: 10px;
   margin: 15px 0;
@@ -163,22 +158,18 @@ form textarea {
   color: #fff;
 }
 
-/* Paragrafi: margini per separare le sezioni */
 p {
   margin: 10px 0;
 }
 
-/* Sezioni: separazione fra blocchi di contenuto */
 .section {
   margin: 20px 0;
 }
 
-/* Riduzione dello spazio extra nei gruppi di input (per es. nei gruppi dinamici degli autori) */
 .autore-group {
   margin-bottom: 8px;
 }
 
-/* Responsive: adattamento per schermi piccoli */
 @media (max-width: 768px) {
   .container {
     padding: 15px;

@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Recupera i dati correnti della sede
+// Recupero i dati correnti della sede
 $stmt = $pdo->prepare("SELECT * FROM sede WHERE id_sede = ?");
 $stmt->execute([$id_sede]);
 $sede = $stmt->fetch(PDO::FETCH_ASSOC);

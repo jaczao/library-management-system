@@ -13,7 +13,7 @@ $search = "";
 $lettori = [];
 
 if (!isset($_GET['search']) || trim($_GET['search']) == "") {
-    // Nessun termine di ricerca: mostra tutti i lettori
+    // Nessun termine di ricerca: mostro tutti i lettori
     $sql = "SELECT id_lettore, codice_fiscale, nome, cognome, email, categoria 
             FROM lettore 
             ORDER BY nome, cognome";

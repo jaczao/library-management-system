@@ -20,7 +20,7 @@ $error = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'restituisci') {
         try {
-            // Aggiorna il prestito impostando data_restituzione alla data corrente
+            // Aggiorno il prestito impostando data_restituzione alla data corrente
             $stmt = $pdo->prepare("UPDATE prestito SET data_restituzione = CURRENT_DATE WHERE id_prestito = ?");
             $stmt->execute([$id_prestito]);
             $message = "Prestito aggiornato: copia restituita.";
@@ -29,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
     } elseif ($_POST['action'] === 'proroga') {
         $new_scadenza = $_POST['new_scadenza'];
-        // Verifica che la data sia valida
+        // Verifico che la data sia valida
         if (strtotime($new_scadenza) === false) {
             $error = "Data non valida.";
         } else {
-            // Recupera la data di scadenza attuale del prestito
+            // Recupero la data di scadenza attuale del prestito
             $sqlCurrent = "SELECT data_scadenza FROM prestito WHERE id_prestito = ?";
             $stmtCurrent = $pdo->prepare($sqlCurrent);
             $stmtCurrent->execute([$id_prestito]);
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     $stmt->execute([$id_prestito, $new_scadenza]);
                     $message = "Prestito prorogato con successo.";
                 } catch (PDOException $e) {
-                    // Estrae solo il messaggio d'errore utile, rimuovendo la parte SQLSTATE e simili
+                    // Estraggo solo il messaggio d'errore utile, rimuovendo il resto
                     $rawMessage = $e->getMessage();
                     if (preg_match('/ERROR:\s*(.*)/i', $rawMessage, $matches)) {
                         $error = trim($matches[1]);
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
 }
 
-// Recupera le informazioni aggiornate del prestito
+// Recupero le informazioni aggiornate del prestito
 $sql = "SELECT p.*, l.nome AS lettore_nome, l.cognome AS lettore_cognome,
        b.titolo AS libro_titolo, b.isbn, b.casa_editrice, b.trama
         FROM prestito p
@@ -111,7 +111,7 @@ if (!$prestito) {
     <p><strong>Casa Editrice:</strong> <?php echo htmlspecialchars($prestito['casa_editrice']); ?></p>
     <p><strong>Trama:</strong><br><?php echo nl2br(htmlspecialchars($prestito['trama'])); ?></p>
 
-    <!-- Se il prestito è ancora in corso, mostra le opzioni per segnarne la restituzione e prorogarlo -->
+    <!-- Se il prestito è ancora in corso, mostro le opzioni per segnarne la restituzione e per prorogarlo -->
     <?php if (!$prestito['data_restituzione']): ?>
     <form method="post" action="dettaglio_prestito.php?id=<?php echo $id_prestito; ?>">
         <input type="hidden" name="action" value="restituisci">
