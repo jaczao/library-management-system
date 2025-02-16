@@ -66,8 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $row = $stmtCopie->fetch(PDO::FETCH_ASSOC);
         $totale_corrente = $row ? intval($row['totale']) : 0;
 
-        // Recupera il numero di copie disponibili (cioè non in prestito) per questo libro e sede
-        $sqlDisponibili = "SELECT COUNT(*) AS disponibili FROM copia WHERE libro = ? AND sede = ? AND disponibile = TRUE";
+        // Recupera il numero di copie disponibili e NON referenziate (non associate a un prestito)
+        $sqlDisponibili = "SELECT COUNT(*) AS disponibili 
+                        FROM copia 
+                        WHERE libro = ? AND sede = ? AND disponibile = TRUE 
+                            AND id_copia NOT IN (SELECT copia FROM prestito)";
         $stmtDisp = $pdo->prepare($sqlDisponibili);
         $stmtDisp->execute([$id_libro, $id_sede]);
         $rowDisp = $stmtDisp->fetch(PDO::FETCH_ASSOC);
@@ -85,15 +88,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             } elseif ($nuovo_totale < $totale_corrente) {
                 // Calcola quante copie si intende rimuovere
                 $da_rimuovere = $totale_corrente - $nuovo_totale;
-                // Controlla che non si rimuovano più copie di quelle disponibili
+                // Verifica che non si rimuovano più copie di quelle disponibili (non referenziate)
                 if ($da_rimuovere > $copie_disponibili) {
-                    $error = "Errore: non puoi rimuovere $da_rimuovere copie perché solo $copie_disponibili sono disponibili.";
+                    $error = "Errore: non puoi rimuovere $da_rimuovere copia/e perché solo $copie_disponibili sono rimovibili (non associate ad alcun prestito).";
                 } else {
-                    $stmtDelete = $pdo->prepare("DELETE FROM copia WHERE id_copia IN (
-                        SELECT id_copia FROM copia 
-                        WHERE libro = ? AND sede = ? AND disponibile = TRUE
-                        LIMIT ?
-                    )");
+                    // Utilizza una CTE per eliminare solo copie non referenziate
+                    $sqlDelete = "WITH to_delete AS (
+                                    SELECT id_copia FROM copia
+                                    WHERE libro = ? AND sede = ? AND disponibile = TRUE
+                                        AND id_copia NOT IN (SELECT copia FROM prestito)
+                                    LIMIT ?
+                                )
+                                DELETE FROM copia
+                                WHERE id_copia IN (SELECT id_copia FROM to_delete)";
+                    $stmtDelete = $pdo->prepare($sqlDelete);
                     $stmtDelete->execute([$id_libro, $id_sede, $da_rimuovere]);
                     $message = "Aggiornamento copie: rimosse $da_rimuovere copie.";
                 }
@@ -104,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $error = "Errore nell'aggiornamento delle copie: " . htmlspecialchars($e->getMessage());
         }
     }
+
 }
 
 // Recupera i dettagli del libro (senza aggregare gli autori, per gestirli separatamente)
