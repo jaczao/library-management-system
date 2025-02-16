@@ -46,7 +46,7 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
                 <tr>
                     <th>Codice Sede</th>
                     <th>Totale Copie</th>
-                    <th>Totale Libri</th>
+                    <th>Totale ISBN</th>
                     <th>Prestiti in Corso</th>
                 </tr>
             </thead>
@@ -55,7 +55,7 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
                 <tr>
                     <td><?php echo htmlspecialchars($stat['codice_sede']); ?></td>
                     <td><?php echo htmlspecialchars($stat['totale_copie']); ?></td>
-                    <td><?php echo htmlspecialchars($stat['totale_libri']); ?></td>
+                    <td><?php echo htmlspecialchars($stat['totale_isbn']); ?></td>
                     <td><?php echo htmlspecialchars($stat['prestiti_in_corso']); ?></td>
                 </tr>
                 <?php endforeach; ?>

@@ -4,7 +4,7 @@ CREATE MATERIALIZED VIEW sede_statistiche AS
 SELECT 
     s.codice_sede,
     COUNT(c.id_copia) AS totale_copie,
-    COUNT(DISTINCT c.libro) AS totale_libri,
+    COUNT(DISTINCT c.libro) AS totale_isbn,
     SUM(CASE WHEN p.id_prestito IS NOT NULL AND p.data_restituzione IS NULL THEN 1 ELSE 0 END) AS prestiti_in_corso
 FROM sede s
 LEFT JOIN copia c ON s.id_sede = c.sede
