@@ -17,9 +17,9 @@ $id_autore = intval($_GET['id']);
 $message = "";
 $error = "";
 
-// Se è stato richiesto l'eliminazione (tramite GET) ed l'utente è bibliotecario, esegue il controllo e, se possibile, l'eliminazione.
+// Se è stata richiesta l'eliminazione (e l'utente è bibliotecario) eseguo il controllo e, se possibile, l'eliminazione.
 if (isset($_GET['delete']) && $_SESSION['role'] === 'bibliotecario') {
-    // Verifica se l'autore è l'unico autore di almeno un libro:
+    // Verifico se l'autore è l'unico autore di almeno un libro
     $sqlCheckSole = "SELECT COUNT(*) FROM libro_autore 
                      WHERE autore = ? 
                      AND libro IN (
@@ -33,14 +33,14 @@ if (isset($_GET['delete']) && $_SESSION['role'] === 'bibliotecario') {
         $error = "Non è possibile eliminare l'autore, perché è l'unico autore di almeno un libro.";
     } else {
         try {
-            // Se esistono associazioni, le elimino prima (se non sono gestite tramite cascade)
+            // Se esistono associazioni, le elimino prima
             $stmtDeleteAssoc = $pdo->prepare("DELETE FROM libro_autore WHERE autore = ?");
             $stmtDeleteAssoc->execute([$id_autore]);
             // Elimino l'autore
             $stmtDeleteAutore = $pdo->prepare("DELETE FROM autore WHERE id_autore = ?");
             $stmtDeleteAutore->execute([$id_autore]);
             $message = "Autore eliminato con successo.";
-            // Dopo l'eliminazione, si può reindirizzare alla pagina di ricerca autori
+            // Dopo l'eliminazione, reindirizzo alla pagina di ricerca autori
             header("Location: cerca_autori.php?message=" . urlencode($message));
             exit;
         } catch (PDOException $e) {
@@ -49,7 +49,7 @@ if (isset($_GET['delete']) && $_SESSION['role'] === 'bibliotecario') {
     }
 }
 
-// Gestione rimozione associazione (tramite GET parameter "remove_assoc") – solo per il bibliotecario
+// Gestione rimozione associazione (solo per il bibliotecario)
 if (isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario') {
     if (isset($_GET['remove_assoc'])) {
         $id_libro_remove = intval($_GET['remove_assoc']);
@@ -73,7 +73,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'bibliotecario') {
     }
 }
 
-// Gestione aggiunta associazione (tramite POST) – solo per il bibliotecario
+// Gestione aggiunta associazione (solo per il bibliotecario)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'aggiungi_libro' && $_SESSION['role'] === 'bibliotecario') {
     $id_libro_da_aggiungere = intval($_POST['id_libro'] ?? 0);
     if ($id_libro_da_aggiungere > 0) {
@@ -117,7 +117,7 @@ $stmtLibri = $pdo->prepare($sqlLibri);
 $stmtLibri->execute([$id_autore]);
 $libriAssoc = $stmtLibri->fetchAll(PDO::FETCH_ASSOC);
 
-// Recupera tutti i libri della biblioteca per il dropdown
+// Recupera tutti i libri della biblioteca per il dropdown menu
 $sqlTuttiLibri = "SELECT id_libro, titolo FROM libro ORDER BY titolo";
 $stmtTuttiLibri = $pdo->query($sqlTuttiLibri);
 $tuttiLibri = $stmtTuttiLibri->fetchAll(PDO::FETCH_ASSOC);

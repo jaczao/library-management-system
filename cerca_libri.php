@@ -53,7 +53,6 @@ if (!isset($_GET['search']) || trim($_GET['search']) == "") {
 <div class="container">
     <h1>Cerca Libro</h1>
 
-    <!-- Home Button: il link viene scelto in base al ruolo -->
     <div class="inline-links">
         <a href="<?php echo ($role === 'bibliotecario') ? 'bibliotecario/home_bibliotecario.php' : 'lettore/home_lettore.php'; ?>">Home</a>
         <?php if ($role === 'bibliotecario'): ?>

@@ -2,38 +2,36 @@
 session_start();
 require_once 'config.php';
 
-// Verifica se l'utente è loggato
 if (!isset($_SESSION['user']) || !isset($_SESSION['role'])) {
     header("Location: index.php");
     exit;
 }
 
-$role = $_SESSION['role']; // 'lettore' oppure 'bibliotecario'
+$role = $_SESSION['role']; 
 
-// Inizializziamo le variabili con i dati correnti
 if ($role === 'lettore') {
     // Campi per il lettore
     $id = $_SESSION['user']['id_lettore'];
     $codiceFiscale = $_SESSION['user']['codice_fiscale'];
 } else {
-    // Campi per il bibliotecario (non esiste il campo codice fiscale)
+    // Campi per il bibliotecario
     $id = $_SESSION['user']['id_bibliotecario'];
 }
 
 $nome     = $_SESSION['user']['nome'];
 $cognome  = $_SESSION['user']['cognome'];
 $email    = $_SESSION['user']['email'];
-// Le password non vengono mostrate nel form, per ragioni di sicurezza.
+// Le password non vengono mostrate nel form, per ragioni di sicurezza
 $errors = [];
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recuperiamo i valori inviati dal form
+    // Recupero i valori inviati dal form
     $nome     = trim($_POST['nome'] ?? '');
     $cognome  = trim($_POST['cognome'] ?? '');
     $email    = trim($_POST['email'] ?? '');
     
-    // Per i lettori, recuperiamo anche il codice fiscale
+    // Per i lettori, recupero anche il codice fiscale
     if ($role === 'lettore') {
         $codiceFiscale = trim($_POST['codice_fiscale'] ?? '');
     }
@@ -56,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Il codice fiscale è obbligatorio.";
     }
     
-    // Se l'utente vuole aggiornare la password, controlliamo che i due campi coincidano
+    // Se l'utente vuole aggiornare la password, controllo che i due campi coincidano
     $updatePassword = false;
     if (!empty($password) || !empty($confirmPassword)) {
         if ($password !== $confirmPassword) {
@@ -68,11 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    // Se non ci sono errori procediamo con l'update
+    // Se non ci sono errori procedo con l'update
     if (empty($errors)) {
         try {
             if ($role === 'lettore') {
-                // Prepariamo l'update per i lettori
+                // Preparo l'update per i lettori
                 if ($updatePassword) {
                     $sql = "UPDATE lettore 
                             SET nome = ?, cognome = ?, codice_fiscale = ?, email = ?, password = ?
@@ -86,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$nome, $cognome, $codiceFiscale, $email, $id]);
                 }
-                // Recupera i dati aggiornati
+                // Recupero i dati aggiornati
                 $stmt = $pdo->prepare("SELECT * FROM lettore WHERE id_lettore = ?");
                 $stmt->execute([$id]);
                 $_SESSION['user'] = $stmt->fetch();
@@ -104,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$nome, $cognome, $email, $id]);
                 }
-                // Recupera i dati aggiornati
+                // Recupero i dati aggiornati
                 $stmt = $pdo->prepare("SELECT * FROM bibliotecario WHERE id_bibliotecario = ?");
                 $stmt->execute([$id]);
                 $_SESSION['user'] = $stmt->fetch();
@@ -112,7 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $success = "Profilo aggiornato con successo.";
         } catch (PDOException $e) {
-            // Se si verifica un errore (ad esempio per un duplicato di email) lo gestiamo qui
             $errors[] = "Errore durante l'aggiornamento: " . $e->getMessage();
         }
     }
@@ -130,8 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container">
     <h1>Modifica Profilo</h1>
     
-    <!-- Link per la modifica della password è qui integrato nel form,
-         mentre la pagina completa permette la modifica di tutti i campi. -->
     <?php
     if (!empty($errors)) {
         echo '<ul style="color:red;">';
@@ -164,7 +159,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
         <br><br>
         
-        <!-- I campi password sono lasciati vuoti, come da requisito -->
         <label for="password">Nuova Password:</label>
         <input type="password" id="password" name="password">
         <br><br>

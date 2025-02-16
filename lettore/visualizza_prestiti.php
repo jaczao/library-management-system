@@ -10,7 +10,7 @@ require_once __DIR__ . '/../config.php';
 
 $lettoreId = $_SESSION['user']['id_lettore'];
 
-// Recuperiamo i prestiti del lettore
+// Recupero i prestiti del lettore
 $sql = "SELECT p.id_prestito, p.data_inizio, p.data_scadenza, p.data_restituzione,
                l.titolo, l.isbn
         FROM prestito p
@@ -62,7 +62,7 @@ $prestiti = $stmt->fetchAll();
             <tbody>
                 <?php foreach ($prestiti as $prestito): ?>
                     <?php 
-                        // Determina lo stato del prestito e formatta le date
+                        // Determino lo stato del prestito e formatto le date
                         $dataInizio = date("d/m/Y", strtotime($prestito['data_inizio']));
                         $dataScadenza = date("d/m/Y", strtotime($prestito['data_scadenza']));
                         if (!empty($prestito['data_restituzione'])) {

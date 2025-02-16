@@ -2,7 +2,6 @@
 
 session_start();
 
-// Verifica che il ruolo sia passato come parametro
 $role = isset($_GET['role']) ? $_GET['role'] : '';
 if (!in_array($role, ['bibliotecario', 'lettore'])) {
     header("Location: index.php");
@@ -14,25 +13,21 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once 'config.php';
     
-    // Recupera ed effettua il trim dei dati inviati
     $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
     if (empty($email) || empty($password)) {
         $error = "Email e password sono obbligatorie.";
     } else {
-        // Scegli la tabella in base al ruolo
+        // Scelgo la tabella in base al ruolo
         $table = ($role === 'bibliotecario') ? 'bibliotecario' : 'lettore';
 
-        // Prepariamo la query per prevenire SQL injection
         $stmt = $pdo->prepare("SELECT * FROM $table WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
         if ($user) {
-            // Utilizziamo password_verify per confrontare la password in maniera sicura
             if (password_verify($password, $user['password'])) {
-                // Login avvenuto con successo: creiamo le variabili di sessione
                 $_SESSION['user'] = $user;
                 $_SESSION['role'] = $role;
 

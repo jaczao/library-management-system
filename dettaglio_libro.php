@@ -17,7 +17,7 @@ $id_libro = intval($_GET['id']);
 $message = "";
 $error = "";
 
-// Gestione delle azioni in POST
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'];
 
@@ -34,12 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
             $message = "Prenotazione effettuata con successo.";            
         } catch (PDOException $e) {
-            // Estraiamo solo il messaggio di errore utile dalla stringa di eccezione
+            // Estraggo solo il messaggio di errore utile dalla stringa di eccezione
             $errorMsg = $e->getMessage();
             $errorIndicator = "ERROR:";
             $contextIndicator = "CONTEXT:";
 
-            // Cerca la posizione di "ERROR:" nel messaggio
+            // Cerco la posizione di "ERROR:" nel messaggio
             $posError = strpos($errorMsg, $errorIndicator);
             if ($posError !== false) {
                 // Escludo la parte iniziale fino a "ERROR:" e mi sposto oltre questa stringa
@@ -59,14 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $id_sede = intval($_POST['id_sede']);
         $nuovo_totale = intval($_POST['nuovo_totale']);
 
-        // Recupera il totale attuale di copie per questo libro e sede
+        // Recupero il totale attuale di copie per questo libro e sede
         $sqlCopie = "SELECT COUNT(*) AS totale FROM copia WHERE libro = ? AND sede = ?";
         $stmtCopie = $pdo->prepare($sqlCopie);
         $stmtCopie->execute([$id_libro, $id_sede]);
         $row = $stmtCopie->fetch(PDO::FETCH_ASSOC);
         $totale_corrente = $row ? intval($row['totale']) : 0;
 
-        // Recupera il numero di copie disponibili e NON referenziate (non associate a un prestito)
+        // Recupero il numero di copie disponibili e non associate a un prestito
         $sqlDisponibili = "SELECT COUNT(*) AS disponibili 
                         FROM copia 
                         WHERE libro = ? AND sede = ? AND disponibile = TRUE 
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
         try {
             if ($nuovo_totale > $totale_corrente) {
-                // Aggiungi copie: inserisci (nuovo_totale - totale_corrente) nuove copie
+                // Aggiungo copie: inserisco (nuovo_totale - totale_corrente) nuove copie
                 $da_aggiungere = $nuovo_totale - $totale_corrente;
                 $stmtInsert = $pdo->prepare("INSERT INTO copia (libro, sede, disponibile) VALUES (?, ?, TRUE)");
                 for ($i = 0; $i < $da_aggiungere; $i++) {
@@ -86,13 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 }
                 $message = "Aggiornamento copie: aggiunte $da_aggiungere copie.";
             } elseif ($nuovo_totale < $totale_corrente) {
-                // Calcola quante copie si intende rimuovere
+                // Calcolo quante copie si intende rimuovere
                 $da_rimuovere = $totale_corrente - $nuovo_totale;
-                // Verifica che non si rimuovano più copie di quelle disponibili (non referenziate)
+                // Verifico che non si rimuovano più copie di quelle disponibili (non referenziate)
                 if ($da_rimuovere > $copie_disponibili) {
                     $error = "Errore: non puoi rimuovere $da_rimuovere copia/e perché solo $copie_disponibili sono rimovibili (non associate ad alcun prestito).";
                 } else {
-                    // Utilizza una CTE per eliminare solo copie non referenziate
+                    // Elimino solo copie non referenziate
                     $sqlDelete = "WITH to_delete AS (
                                     SELECT id_copia FROM copia
                                     WHERE libro = ? AND sede = ? AND disponibile = TRUE
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 }
 
-// Recupera i dettagli del libro (senza aggregare gli autori, per gestirli separatamente)
+// Recupero i dettagli del libro
 $sqlLibro = "SELECT id_libro, isbn, titolo, trama, casa_editrice FROM libro WHERE id_libro = ?";
 $stmtLibro = $pdo->prepare($sqlLibro);
 $stmtLibro->execute([$id_libro]);
@@ -125,7 +125,7 @@ if (!$libro) {
     exit;
 }
 
-// Recupera gli autori associati al libro (come record separati)
+// Recupero gli autori associati al libro
 $sqlAutori = "SELECT a.id_autore, a.nome, a.cognome
               FROM autore a
               JOIN libro_autore la ON a.id_autore = la.autore
@@ -176,14 +176,14 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
             <select name="sede" id="sede">
                 <option value="">-- Nessuna sede scelta --</option>
                 <?php
-                // Recupera tutte le sedi, anche quelle senza copie per questo libro
+                // Recupero tutte le sedi, anche quelle senza copie per questo libro
                 $sqlSedi = "SELECT s.id_sede, s.codice_sede, s.citta, s.indirizzo 
                             FROM sede s
                             ORDER BY s.citta, s.codice_sede";
                 $stmtSedi = $pdo->query($sqlSedi);
                 $sedi = $stmtSedi->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($sedi as $sede):
-                    // Conta le copie per questo libro in questa sede
+                    // Conto le copie per questo libro in questa sede
                     $sqlCopie = "SELECT COUNT(*) AS totale, 
                                         SUM(CASE WHEN c.disponibile THEN 1 ELSE 0 END) AS disponibili
                                  FROM copia c
@@ -212,7 +212,7 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
             <!-- Gestione delle copie per questo libro -->
             <h3>Gestione delle copie</h3>
             <?php
-            // Recupera tutte le sedi, anche quelle senza copie per questo libro
+            // Recupero tutte le sedi, anche quelle senza copie per questo libro
             $sqlSedi = "SELECT s.id_sede, s.codice_sede, s.citta, s.indirizzo 
                         FROM sede s
                         ORDER BY s.citta, s.codice_sede";
@@ -233,7 +233,7 @@ $autori = $stmtAutori->fetchAll(PDO::FETCH_ASSOC);
                     </thead>
                     <tbody>
                     <?php foreach ($sedi as $sede): 
-                        // Calcola il numero di copie per questa sede per il libro corrente
+                        // Calcolo il numero di copie per questa sede per il libro corrente
                         $sqlCopie = "SELECT COUNT(*) AS totale, 
                                             SUM(CASE WHEN c.disponibile THEN 1 ELSE 0 END) AS disponibili
                                      FROM copia c
