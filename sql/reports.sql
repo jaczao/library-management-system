@@ -1,21 +1,28 @@
 DROP MATERIALIZED VIEW IF EXISTS sede_statistiche;
+DROP VIEW IF EXISTS sede_ritardi;
+
+
 
 CREATE MATERIALIZED VIEW sede_statistiche AS
 SELECT 
     s.codice_sede,
+    s.citta,
+    s.indirizzo,
     COUNT(c.id_copia) AS totale_copie,
     COUNT(DISTINCT c.libro) AS totale_isbn,
     SUM(CASE WHEN p.id_prestito IS NOT NULL AND p.data_restituzione IS NULL THEN 1 ELSE 0 END) AS prestiti_in_corso
 FROM sede s
 LEFT JOIN copia c ON s.id_sede = c.sede
 LEFT JOIN prestito p ON c.id_copia = p.copia
-GROUP BY s.codice_sede;
+GROUP BY s.codice_sede, s.citta, s.indirizzo;
 
 
 
 CREATE OR REPLACE VIEW sede_ritardi AS
 SELECT 
     s.codice_sede,
+    s.citta,
+    s.indirizzo,
     lib.isbn,
     lib.titolo,
     p.id_prestito,

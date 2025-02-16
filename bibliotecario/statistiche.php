@@ -45,6 +45,8 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
             <thead>
                 <tr>
                     <th>Codice Sede</th>
+                    <th>Città Sede</th>
+                    <th>Indirizzo Sede</th>
                     <th>Totale Copie</th>
                     <th>Totale ISBN</th>
                     <th>Prestiti in Corso</th>
@@ -54,6 +56,8 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($sediStats as $stat): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($stat['codice_sede']); ?></td>
+                    <td><?php echo htmlspecialchars($stat['citta']); ?></td>
+                    <td><?php echo htmlspecialchars($stat['indirizzo']); ?></td>
                     <td><?php echo htmlspecialchars($stat['totale_copie']); ?></td>
                     <td><?php echo htmlspecialchars($stat['totale_isbn']); ?></td>
                     <td><?php echo htmlspecialchars($stat['prestiti_in_corso']); ?></td>
@@ -74,6 +78,8 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
             <thead>
                 <tr>
                     <th>Codice Sede</th>
+                    <th>Città Sede</th>
+                    <th>Indirizzo Sede</th>
                     <th>ISBN</th>
                     <th>Titolo</th>
                     <th>Id Prestito</th>
@@ -87,6 +93,8 @@ $sediRitardi = $stmtRitardi->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($sediRitardi as $ritardo): ?>
                     <tr onclick="window.location.href='dettaglio_prestito.php?id=<?php echo urlencode($ritardo['id_prestito']); ?>'" style="cursor:pointer;">
                         <td><?php echo htmlspecialchars($ritardo['codice_sede']); ?></td>
+                        <td><?php echo htmlspecialchars($ritardo['citta']); ?></td>
+                        <td><?php echo htmlspecialchars($ritardo['indirizzo']); ?></td>
                         <td><?php echo htmlspecialchars($ritardo['isbn']); ?></td>
                         <td><?php echo htmlspecialchars($ritardo['titolo']); ?></td>
                         <td><?php echo htmlspecialchars($ritardo['id_prestito']); ?></td>
