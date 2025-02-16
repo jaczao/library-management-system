@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION check_prestito_conditions()
+CREATE OR REPLACE FUNCTION controlla_condizioni_prestito()
 RETURNS TRIGGER AS $$
 DECLARE
     cnt_ritardi INTEGER;
@@ -39,11 +39,11 @@ $$ LANGUAGE plpgsql;
 -- Trigger BEFORE INSERT sulla tabella prestito
 CREATE TRIGGER trg_check_prestito
 BEFORE INSERT ON prestito
-FOR EACH ROW EXECUTE FUNCTION check_prestito_conditions();
+FOR EACH ROW EXECUTE FUNCTION controlla_condizioni_prestito();
 
 
 
-CREATE OR REPLACE FUNCTION mark_copia_unavailable()
+CREATE OR REPLACE FUNCTION segna_copia_non_disponibile()
 RETURNS TRIGGER AS $$
 BEGIN
     UPDATE copia 
@@ -53,13 +53,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_mark_copia_unavailable
+CREATE TRIGGER trg_segna_copia_non_disponibile
 AFTER INSERT ON prestito
-FOR EACH ROW EXECUTE FUNCTION mark_copia_unavailable();
+FOR EACH ROW EXECUTE FUNCTION segna_copia_non_disponibile();
 
 
 
-CREATE OR REPLACE FUNCTION process_restituzione()
+CREATE OR REPLACE FUNCTION processa_restituzione()
 RETURNS TRIGGER AS $$
 DECLARE
     actual_return DATE;
@@ -82,9 +82,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_process_restituzione
+CREATE TRIGGER trg_processa_restituzione
 AFTER UPDATE ON prestito
-FOR EACH ROW EXECUTE FUNCTION process_restituzione();
+FOR EACH ROW EXECUTE FUNCTION processa_restituzione();
 
 
 
