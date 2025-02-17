@@ -5,7 +5,32 @@
 -- Dumped from database version 17.2
 -- Dumped by pg_dump version 17.2
 
--- Started on 2025-02-17 16:21:56 CET
+-- Started on 2025-02-17 17:16:55 CET
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE IF EXISTS biblioteca;
+--
+-- TOC entry 3755 (class 1262 OID 20605)
+-- Name: biblioteca; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE biblioteca WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'C';
+
+
+ALTER DATABASE biblioteca OWNER TO postgres;
+
+\connect biblioteca
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -28,7 +53,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 
 
 --
--- TOC entry 3755 (class 0 OID 0)
+-- TOC entry 3756 (class 0 OID 0)
 -- Dependencies: 2
 -- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: 
 --
@@ -316,7 +341,7 @@ CREATE SEQUENCE public.autore_id_autore_seq
 ALTER SEQUENCE public.autore_id_autore_seq OWNER TO postgres;
 
 --
--- TOC entry 3756 (class 0 OID 0)
+-- TOC entry 3757 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: autore_id_autore_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -357,7 +382,7 @@ CREATE SEQUENCE public.bibliotecario_id_bibliotecario_seq
 ALTER SEQUENCE public.bibliotecario_id_bibliotecario_seq OWNER TO postgres;
 
 --
--- TOC entry 3757 (class 0 OID 0)
+-- TOC entry 3758 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: bibliotecario_id_bibliotecario_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -397,7 +422,7 @@ CREATE SEQUENCE public.copia_id_copia_seq
 ALTER SEQUENCE public.copia_id_copia_seq OWNER TO postgres;
 
 --
--- TOC entry 3758 (class 0 OID 0)
+-- TOC entry 3759 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: copia_id_copia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -441,7 +466,7 @@ CREATE SEQUENCE public.lettore_id_lettore_seq
 ALTER SEQUENCE public.lettore_id_lettore_seq OWNER TO postgres;
 
 --
--- TOC entry 3759 (class 0 OID 0)
+-- TOC entry 3760 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: lettore_id_lettore_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -495,7 +520,7 @@ CREATE SEQUENCE public.libro_id_libro_seq
 ALTER SEQUENCE public.libro_id_libro_seq OWNER TO postgres;
 
 --
--- TOC entry 3760 (class 0 OID 0)
+-- TOC entry 3761 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: libro_id_libro_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -537,7 +562,7 @@ CREATE SEQUENCE public.prestito_id_prestito_seq
 ALTER SEQUENCE public.prestito_id_prestito_seq OWNER TO postgres;
 
 --
--- TOC entry 3761 (class 0 OID 0)
+-- TOC entry 3762 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: prestito_id_prestito_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -577,7 +602,7 @@ CREATE SEQUENCE public.sede_id_sede_seq
 ALTER SEQUENCE public.sede_id_sede_seq OWNER TO postgres;
 
 --
--- TOC entry 3762 (class 0 OID 0)
+-- TOC entry 3763 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: sede_id_sede_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -638,7 +663,7 @@ CREATE MATERIALIZED VIEW public.sede_statistiche AS
 ALTER MATERIALIZED VIEW public.sede_statistiche OWNER TO postgres;
 
 --
--- TOC entry 3540 (class 2604 OID 20624)
+-- TOC entry 3540 (class 2604 OID 20928)
 -- Name: autore id_autore; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -646,7 +671,7 @@ ALTER TABLE ONLY public.autore ALTER COLUMN id_autore SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3546 (class 2604 OID 20689)
+-- TOC entry 3546 (class 2604 OID 20929)
 -- Name: bibliotecario id_bibliotecario; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -654,7 +679,7 @@ ALTER TABLE ONLY public.bibliotecario ALTER COLUMN id_bibliotecario SET DEFAULT 
 
 
 --
--- TOC entry 3542 (class 2604 OID 20659)
+-- TOC entry 3542 (class 2604 OID 20930)
 -- Name: copia id_copia; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -662,7 +687,7 @@ ALTER TABLE ONLY public.copia ALTER COLUMN id_copia SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3544 (class 2604 OID 20677)
+-- TOC entry 3544 (class 2604 OID 20931)
 -- Name: lettore id_lettore; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -670,7 +695,7 @@ ALTER TABLE ONLY public.lettore ALTER COLUMN id_lettore SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 3541 (class 2604 OID 20633)
+-- TOC entry 3541 (class 2604 OID 20932)
 -- Name: libro id_libro; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -678,7 +703,7 @@ ALTER TABLE ONLY public.libro ALTER COLUMN id_libro SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3547 (class 2604 OID 20698)
+-- TOC entry 3547 (class 2604 OID 20933)
 -- Name: prestito id_prestito; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -686,7 +711,7 @@ ALTER TABLE ONLY public.prestito ALTER COLUMN id_prestito SET DEFAULT nextval('p
 
 
 --
--- TOC entry 3539 (class 2604 OID 20615)
+-- TOC entry 3539 (class 2604 OID 20934)
 -- Name: sede id_sede; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -699,16 +724,14 @@ ALTER TABLE ONLY public.sede ALTER COLUMN id_sede SET DEFAULT nextval('public.se
 -- Data for Name: autore; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.autore (id_autore, nome, cognome, data_nascita, data_morte, biografia) FROM stdin;
-1	Umberto	Eco	1932-01-05	2016-02-19	Scrittore, filosofo e semiologo italiano.
-2	Italo	Calvino	1923-10-15	1985-09-19	Scrittore italiano, autore de "Il barone rampante".
-3	J.K.	Rowling	1965-07-31	\N	Scrittrice britannica, autrice di Harry Potter.
-4	George	Orwell	1903-06-25	1950-01-21	Scrittore britannico, autore di 1984 e La fattoria degli animali.
-5	Jane	Austen	1775-12-16	1817-07-18	Scrittrice britannica famosa per "Orgoglio e Pregiudizio".
-6	Elena	Ferrante	1940-12-16	\N	Autrice italiana della saga "L’amica geniale".
-7	F. Scott	Fitzgerald	1896-09-24	1940-12-21	Scrittore americano, autore de "Il grande Gatsby".
-8	Alessandro	Manzoni	1785-03-07	1873-05-22	Autore del romanzo storico "I Promessi Sposi".
-\.
+INSERT INTO public.autore VALUES (1, 'Umberto', 'Eco', '1932-01-05', '2016-02-19', 'Scrittore, filosofo e semiologo italiano.') ON CONFLICT DO NOTHING;
+INSERT INTO public.autore VALUES (2, 'Italo', 'Calvino', '1923-10-15', '1985-09-19', 'Scrittore italiano, autore de "Il barone rampante".') ON CONFLICT DO NOTHING;
+INSERT INTO public.autore VALUES (3, 'J.K.', 'Rowling', '1965-07-31', NULL, 'Scrittrice britannica, autrice di Harry Potter.') ON CONFLICT DO NOTHING;
+INSERT INTO public.autore VALUES (4, 'George', 'Orwell', '1903-06-25', '1950-01-21', 'Scrittore britannico, autore di 1984 e La fattoria degli animali.') ON CONFLICT DO NOTHING;
+INSERT INTO public.autore VALUES (5, 'Jane', 'Austen', '1775-12-16', '1817-07-18', 'Scrittrice britannica famosa per "Orgoglio e Pregiudizio".') ON CONFLICT DO NOTHING;
+INSERT INTO public.autore VALUES (6, 'Elena', 'Ferrante', '1940-12-16', NULL, 'Autrice italiana della saga "L’amica geniale".') ON CONFLICT DO NOTHING;
+INSERT INTO public.autore VALUES (7, 'F. Scott', 'Fitzgerald', '1896-09-24', '1940-12-21', 'Scrittore americano, autore de "Il grande Gatsby".') ON CONFLICT DO NOTHING;
+INSERT INTO public.autore VALUES (8, 'Alessandro', 'Manzoni', '1785-03-07', '1873-05-22', 'Autore del romanzo storico "I Promessi Sposi".') ON CONFLICT DO NOTHING;
 
 
 --
@@ -717,10 +740,8 @@ COPY public.autore (id_autore, nome, cognome, data_nascita, data_morte, biografi
 -- Data for Name: bibliotecario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.bibliotecario (id_bibliotecario, nome, cognome, email, password) FROM stdin;
-1	Luca	Verdi	luca.verdi@email.com	$2a$06$RMBhpoybf3QUqzsBXvuAduaVaj61Lwg/TM.f8ph0ny9TWXOsEkGXG
-2	Anna	Esposito	anna.esposito@email.com	$2a$06$UDvrBgQEP7BZVL7n4lnusOregq5kJ2/UjQMuOFDrMx8n62T4Lb/DW
-\.
+INSERT INTO public.bibliotecario VALUES (1, 'Luca', 'Verdi', 'luca.verdi@email.com', '$2a$06$JO5QL/rDmRMyS93xhlZCMO/hVeWhEec3Qfay6yJXbUGRP1iAHrNKq') ON CONFLICT DO NOTHING;
+INSERT INTO public.bibliotecario VALUES (2, 'Anna', 'Esposito', 'anna.esposito@email.com', '$2a$06$JLiOVe.gCqdO89jaQcUVp.5L1tpHQI/eSH743Mx7lecQ.YvKfeOpK') ON CONFLICT DO NOTHING;
 
 
 --
@@ -729,20 +750,18 @@ COPY public.bibliotecario (id_bibliotecario, nome, cognome, email, password) FRO
 -- Data for Name: copia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.copia (id_copia, libro, sede, disponibile) FROM stdin;
-1	1	1	t
-2	2	2	t
-3	3	3	t
-6	6	2	t
-7	7	3	t
-9	9	1	t
-11	11	3	t
-12	12	4	t
-10	10	2	f
-5	5	1	f
-4	4	4	t
-8	8	4	t
-\.
+INSERT INTO public.copia VALUES (1, 1, 1, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (2, 2, 2, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (3, 3, 3, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (6, 6, 2, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (7, 7, 3, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (9, 9, 1, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (11, 11, 3, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (12, 12, 4, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (10, 10, 2, false) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (5, 5, 1, false) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (4, 4, 4, true) ON CONFLICT DO NOTHING;
+INSERT INTO public.copia VALUES (8, 8, 4, true) ON CONFLICT DO NOTHING;
 
 
 --
@@ -751,10 +770,8 @@ COPY public.copia (id_copia, libro, sede, disponibile) FROM stdin;
 -- Data for Name: lettore; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.lettore (id_lettore, codice_fiscale, nome, cognome, email, password, categoria, ritardi) FROM stdin;
-1	RSSMRC80A01H501Z	Marco	Rossi	marco.rossi@email.com	$2a$06$YItQJYBjTfNRX5ylC4hFwOEIs1xCwhM01UACt6LGl8kQcqpO1EP22	base	0
-2	BNCGLI85C41H501Y	Giulia	Bianchi	giulia.bianchi@email.com	$2a$06$LW4kF/4.GM9VyRzM2sKIoudKULjIs7jGmgDZH4W4m7PsWrdrFFulG	premium	2
-\.
+INSERT INTO public.lettore VALUES (1, 'RSSMRC80A01H501Z', 'Marco', 'Rossi', 'marco.rossi@email.com', '$2a$06$IA2sfV33NjHYNknN3bE5JeVr3ygX8iqYi5DN4/prbNRDV1pddBJ3C', 'base', 0) ON CONFLICT DO NOTHING;
+INSERT INTO public.lettore VALUES (2, 'BNCGLI85C41H501Y', 'Giulia', 'Bianchi', 'giulia.bianchi@email.com', '$2a$06$5kTxVgGjhpP/s5bcfRPEzOjCLXNCtrWra52Lzbr.7erDfOmlsnPCW', 'premium', 2) ON CONFLICT DO NOTHING;
 
 
 --
@@ -763,20 +780,18 @@ COPY public.lettore (id_lettore, codice_fiscale, nome, cognome, email, password,
 -- Data for Name: libro; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.libro (id_libro, isbn, titolo, trama, casa_editrice) FROM stdin;
-1	9788806227022	Il nome della rosa	Un giallo medievale ambientato in un monastero.	Bompiani
-2	9788804681963	Il barone rampante	Un ragazzo che vive sugli alberi per protesta.	Mondadori
-3	9780747532743	Harry Potter e la pietra filosofale	Il primo libro della saga di Harry Potter.	Bloomsbury
-4	9780451524935	1984	Un romanzo distopico sulla società del controllo.	Penguin
-5	9788806210048	Se una notte d’inverno un viaggiatore	Un libro che racconta più storie interrotte.	Einaudi
-6	9788806069882	Le città invisibili	Un viaggio immaginario tra città fantastiche.	Einaudi
-7	9788804491022	Marcovaldo	Storie di un uomo semplice in una città moderna.	Einaudi
-8	9788817061624	La coscienza di Zeno	Un romanzo di introspezione psicologica.	Feltrinelli
-9	9780374528379	Il grande Gatsby	Un classico della letteratura americana.	Scribner
-10	9780141439556	Orgoglio e pregiudizio	Una storia d’amore e orgoglio nella società inglese.	Penguin
-11	9788806218726	I promessi sposi	Un romanzo storico ambientato nel Seicento.	Einaudi
-12	9788869183157	L’amica geniale	Il primo volume di una saga napoletana.	Edizioni E/O
-\.
+INSERT INTO public.libro VALUES (1, '9788806227022', 'Il nome della rosa', 'Un giallo medievale ambientato in un monastero.', 'Bompiani') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (2, '9788804681963', 'Il barone rampante', 'Un ragazzo che vive sugli alberi per protesta.', 'Mondadori') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (3, '9780747532743', 'Harry Potter e la pietra filosofale', 'Il primo libro della saga di Harry Potter.', 'Bloomsbury') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (4, '9780451524935', '1984', 'Un romanzo distopico sulla società del controllo.', 'Penguin') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (5, '9788806210048', 'Se una notte d’inverno un viaggiatore', 'Un libro che racconta più storie interrotte.', 'Einaudi') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (6, '9788806069882', 'Le città invisibili', 'Un viaggio immaginario tra città fantastiche.', 'Einaudi') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (7, '9788804491022', 'Marcovaldo', 'Storie di un uomo semplice in una città moderna.', 'Einaudi') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (8, '9788817061624', 'La coscienza di Zeno', 'Un romanzo di introspezione psicologica.', 'Feltrinelli') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (9, '9780374528379', 'Il grande Gatsby', 'Un classico della letteratura americana.', 'Scribner') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (10, '9780141439556', 'Orgoglio e pregiudizio', 'Una storia d’amore e orgoglio nella società inglese.', 'Penguin') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (11, '9788806218726', 'I promessi sposi', 'Un romanzo storico ambientato nel Seicento.', 'Einaudi') ON CONFLICT DO NOTHING;
+INSERT INTO public.libro VALUES (12, '9788869183157', 'L’amica geniale', 'Il primo volume di una saga napoletana.', 'Edizioni E/O') ON CONFLICT DO NOTHING;
 
 
 --
@@ -785,20 +800,18 @@ COPY public.libro (id_libro, isbn, titolo, trama, casa_editrice) FROM stdin;
 -- Data for Name: libro_autore; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.libro_autore (libro, autore) FROM stdin;
-1	1
-2	2
-3	3
-4	4
-5	2
-6	2
-7	2
-8	1
-9	7
-10	5
-11	8
-12	6
-\.
+INSERT INTO public.libro_autore VALUES (1, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (2, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (3, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (4, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (5, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (6, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (7, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (8, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (9, 7) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (10, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (11, 8) ON CONFLICT DO NOTHING;
+INSERT INTO public.libro_autore VALUES (12, 6) ON CONFLICT DO NOTHING;
 
 
 --
@@ -807,12 +820,10 @@ COPY public.libro_autore (libro, autore) FROM stdin;
 -- Data for Name: prestito; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.prestito (id_prestito, lettore, copia, data_inizio, data_scadenza, data_restituzione) FROM stdin;
-1	1	10	2024-01-01	2024-02-01	\N
-2	2	5	2024-02-01	2024-03-01	\N
-3	2	4	2024-02-01	2024-05-01	2024-04-01
-4	2	8	2024-02-01	2024-03-01	2024-04-01
-\.
+INSERT INTO public.prestito VALUES (1, 1, 10, '2024-01-01', '2024-02-01', NULL) ON CONFLICT DO NOTHING;
+INSERT INTO public.prestito VALUES (2, 2, 5, '2024-02-01', '2024-03-01', NULL) ON CONFLICT DO NOTHING;
+INSERT INTO public.prestito VALUES (3, 2, 4, '2024-02-01', '2024-05-01', '2024-04-01') ON CONFLICT DO NOTHING;
+INSERT INTO public.prestito VALUES (4, 2, 8, '2024-02-01', '2024-03-01', '2024-04-01') ON CONFLICT DO NOTHING;
 
 
 --
@@ -821,16 +832,14 @@ COPY public.prestito (id_prestito, lettore, copia, data_inizio, data_scadenza, d
 -- Data for Name: sede; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.sede (id_sede, codice_sede, citta, indirizzo) FROM stdin;
-1	SEDE001	Milano	Via Roma 10
-2	SEDE002	Roma	Piazza Venezia 5
-3	SEDE003	Firenze	Via Tornabuoni 15
-4	SEDE004	Napoli	Via Toledo 20
-\.
+INSERT INTO public.sede VALUES (1, 'SEDE001', 'Milano', 'Via Roma 10') ON CONFLICT DO NOTHING;
+INSERT INTO public.sede VALUES (2, 'SEDE002', 'Roma', 'Piazza Venezia 5') ON CONFLICT DO NOTHING;
+INSERT INTO public.sede VALUES (3, 'SEDE003', 'Firenze', 'Via Tornabuoni 15') ON CONFLICT DO NOTHING;
+INSERT INTO public.sede VALUES (4, 'SEDE004', 'Napoli', 'Via Toledo 20') ON CONFLICT DO NOTHING;
 
 
 --
--- TOC entry 3763 (class 0 OID 0)
+-- TOC entry 3764 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: autore_id_autore_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -839,7 +848,7 @@ SELECT pg_catalog.setval('public.autore_id_autore_seq', 8, true);
 
 
 --
--- TOC entry 3764 (class 0 OID 0)
+-- TOC entry 3765 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: bibliotecario_id_bibliotecario_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -848,7 +857,7 @@ SELECT pg_catalog.setval('public.bibliotecario_id_bibliotecario_seq', 2, true);
 
 
 --
--- TOC entry 3765 (class 0 OID 0)
+-- TOC entry 3766 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: copia_id_copia_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -857,7 +866,7 @@ SELECT pg_catalog.setval('public.copia_id_copia_seq', 12, true);
 
 
 --
--- TOC entry 3766 (class 0 OID 0)
+-- TOC entry 3767 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: lettore_id_lettore_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -866,7 +875,7 @@ SELECT pg_catalog.setval('public.lettore_id_lettore_seq', 2, true);
 
 
 --
--- TOC entry 3767 (class 0 OID 0)
+-- TOC entry 3768 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: libro_id_libro_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -875,7 +884,7 @@ SELECT pg_catalog.setval('public.libro_id_libro_seq', 12, true);
 
 
 --
--- TOC entry 3768 (class 0 OID 0)
+-- TOC entry 3769 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: prestito_id_prestito_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -884,7 +893,7 @@ SELECT pg_catalog.setval('public.prestito_id_prestito_seq', 4, true);
 
 
 --
--- TOC entry 3769 (class 0 OID 0)
+-- TOC entry 3770 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: sede_id_sede_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1112,7 +1121,7 @@ ALTER TABLE ONLY public.prestito
 REFRESH MATERIALIZED VIEW public.sede_statistiche;
 
 
--- Completed on 2025-02-17 16:21:56 CET
+-- Completed on 2025-02-17 17:16:55 CET
 
 --
 -- PostgreSQL database dump complete
